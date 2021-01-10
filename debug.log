@@ -1,0 +1,8 @@
+[1119/083646.255:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1121/213910.171:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1122/014136.779:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\User\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\fc4e3414-078d-4fad-829b-be2be158be48: The system cannot find the path specified. (0x3)
+[1122/122815.203:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1212/103729.048:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1212/130410.134:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1212/130410.190:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\User\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\61a3a725-b209-495c-bb02-ac9ee9acfa77: The system cannot find the path specified. (0x3)
+[0107/131345.439:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
