@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Hero from './Hero'
 import Team from './Team'
 import Info from './Info'
 import Workflow from './Workflow'
-import { useAuth } from '../Context/AuthContext';
-import { useHistory } from 'react-router-dom'
 import Plan from './Plan'
 import Footer from './Footer'
 
 function Homepage() {
-    const { currentUser } = useAuth()
-    const history = useHistory()
-    useEffect(() => {
-        if (currentUser) {
-            // history.push(`/dashboard/${currentUser.uid}`)
-        }
-    })
     return (
         <div id="homepage">
             <section id="hero">

@@ -16,7 +16,7 @@ const ListModal = ({ val, option1, option2, deleteItem, show, toggle, present })
     const moveCard = () => {
         setshowMove(current => !current)
     }
-    const saveEdits = () => {
+    // const saveEdits = () => {
         // let text = document.getElementById('text').value
         // db.collection('boards').doc(id).get().then(doc => {
         //    setedits(doc.data().todo)
@@ -26,12 +26,12 @@ const ListModal = ({ val, option1, option2, deleteItem, show, toggle, present })
         // db.collection('boards').doc(id).update({
         //     todo : edits
         // })
-    }
+    // }
     return (
         <div className="listModal" style={styles}>
             <div className="listContent">
                 <textarea rows="6" defaultValue={val} id="text"></textarea>
-                <button onClick={saveEdits}>Save</button>
+                {/* <button onClick={saveEdits}>Save</button> */}
                 <button onClick={toggle}>Cancel</button>
             </div>
             <div className="listOption">

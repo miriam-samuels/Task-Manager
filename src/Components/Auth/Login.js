@@ -21,7 +21,7 @@ function LoginForm() {
 
     useEffect(() => {
         if (currentUser) {
-            history.push(`/dashboard/${currentUser.uid}`)
+            // history.push(`/dashboard/${currentUser.uid}`)
         }
     })
 
