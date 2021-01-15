@@ -170,6 +170,31 @@ $color4 : rgb(196, 196, 196);
 .planWords button{
   @include submit-button($color1,200px);
 }
+#footer{
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  margin-top: 2em;
+}
+#footer select{
+  @include input;
+  width:200px;
+  margin: auto;
+}
+#footer ul li{
+  display: inline-block;
+  margin: 10px;
+  padding:10px;
+  font-size: 18px;
+}
+#footer img{
+  width: 280px;
+}
+#footer p{
+  padding: 2em 0;
+  margin: 0;
+  font-size: 14px;
+}
 /* 
 ==========================
         LOGIN

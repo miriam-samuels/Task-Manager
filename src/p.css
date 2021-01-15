@@ -1,0 +1,460 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+button,span,li{
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+.app{
+  height: 100vh;
+}
+/* 
+==========================
+        LOGIN
+==========================
+ */
+ 
+ 
+ #page1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+#login{
+  width: 85%;
+  margin:30px auto;
+  text-align: center;
+}
+#login img{
+  width: 150px;
+}
+#login .login{
+  border-bottom: 1px solid gray;
+  padding-bottom: 20px;
+}
+#login .login input,#login .login button{
+  width: calc(100% - 30px);
+  display: block;
+  margin: 20px 0;
+  padding: 15px;
+  font-size: 15px;
+  color: gray;
+  font-weight: bold;
+}
+#login .login input{
+  background-color: #f8f8f8;
+  border: 1px solid #D8D8D8;
+}
+#login .login button,#login select{
+  width: 100%;
+  border: none;
+  background-color: white;
+  box-shadow: 2px 2px 6px 2px #D8D8D8;
+}
+#login .login button[type="submit"]{
+  background-color: rgb(54, 206, 54);
+  color: #FFF;
+}
+#login div{
+  margin: 20px 0;
+}
+#login div span{
+  margin:0 6px ;
+  color: blue;
+  font-size: 13px;
+}
+#login select{
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+  font-size: 15px;
+  color: gray;
+}
+/* 
+=============================
+      DASHBOARD
+=============================
+ */
+ /* 
+=============================
+      MENU BAR
+=============================
+ */
+ #menubar{
+   background-color: rgb(63, 63, 175);
+   height: 70px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ #menubar .first{
+   width:35%;
+ }
+ #menubar .second{
+  width:30%;
+   text-align: center;
+  }
+#menubar .third{
+  width:35%;
+  text-align: right;
+}
+#menubar div .icon{
+  background-color:rgba(215, 200, 250, 0.3);
+  display: inline-block;
+  margin: 0 4px;
+  padding: 5px;
+}
+#menubar div .u{
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: Arial, Helvetica, sans-serif;
+  padding:10px 13px;
+  border-radius: 20px;
+}
+ #menubar div img{
+  width: 30px;
+}
+#menubar .second img{
+  width: 45px;
+}
+#menubar .first div{
+  position: absolute;
+  background-color: #FFF;
+  z-index: 1;
+  text-align: left;
+  padding: 10px;
+}
+#menubar .third div{
+  position: absolute;
+  right: 0%;
+  background-color: #FFF;
+  z-index: 1;
+  text-align: left;
+  padding: 10px;
+}
+#menubar div ul{
+  list-style: none;
+  padding: 0;
+  padding: 10px;
+}
+#menubar div ul li{
+  padding: 10px;
+  margin: 5px 0;
+}
+#menubar div ul li:hover{
+  background-color: black;
+  color: white;
+}
+#menubar .first input{
+  padding: 10px;
+}
+#menubar .first .tab{
+  position:relative;
+}
+/* 
+=============================
+      BOARDS
+=============================
+ */
+
+ .dashboard div img{
+   width: 20px;
+ }
+ #boards{
+   width: 95%;
+   margin:20px auto;
+   display: grid;
+   grid-template-columns: repeat(2,1fr);
+   gap: 10px;
+   padding: 0%;
+ }
+ #boards .boardlist {
+   position: relative;
+   text-align: center;
+   background-color: #ececec;
+   list-style-type: none;
+   /* display: inline-block; */
+   height: 100px;
+   /* overflow: hidden; */
+ }
+ #boards .boardlist h2{
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%,-50%);
+   color: white;
+ }
+ #boards .boardlist b{
+   position: absolute;
+   top: 50%;
+   right: 50%;
+   transform: translate(50%,-50%);
+ }
+ #boards .boardlist .deleteBoard{
+   float: right;
+   margin: 10px;
+   background-color: transparent;
+   color: red;
+   font-weight: 900;
+ }
+.todo .deleteBoard{
+  float: right;
+  margin: 1px;
+  background-color: transparent;
+  color: red;
+  font-weight: 900;
+  border: none;
+  font-size: 10px;
+}
+ /* 
+=============================
+      MODAL
+=============================
+ */
+ #modal{
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  background:rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 1;
+}
+ #modal .modal{
+   width: 85%;
+   margin: auto;
+   position: absolute;
+   top: 50%;
+   right: 50%;
+   transform: translate(50%,-50%);
+ }
+ #modal .modal #img{
+   position: relative;
+   width: 100%;
+   height: 180px;
+   /* filter: brightness(60%); */
+ }
+ #modal .modal .title input{
+   padding: 6px;
+   border: none;
+   background-color: rgba(255, 255, 255, 0);
+   font-size: 16px;
+   font-weight: 900;
+   display: block;
+   margin: 10px 0;
+   width: 100%;
+  color: #FFF;
+ }
+ #modal .modal .title input:focus{
+  background-color: rgba(255, 255, 255, 0.3);
+ }
+ #modal .modal .title select{
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #FFF;
+   border: none;
+   padding: 5px;
+ }
+ #modal .modal .title option{
+   color: black;
+ }
+ #modal .background .color, #modal .background span img{
+  display: inline-block;
+  margin: 10px 5px;
+  width: 50px;
+  height: 50px;
+ }
+ #modal .new button{
+   padding: 8px;
+   margin: 10px;
+   border: none;
+ }
+ .listModal{
+  height: 100vh;
+  position: absolute;
+  background:rgba(0, 0, 0, 0.5);
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  z-index: 1;
+ }
+.listModal div{
+  transform: translate(5%,5%);
+ }
+ .listModal textarea{
+   display: block;
+   width: 155px;
+   padding: 10px;
+   border-radius: 5px;
+   font-size: 18px;
+ }
+ .listModal .listContent button, .listModal .moveOption button{
+   background-color: rgb(24, 189, 24);
+   color: #FFF;
+   padding: 10px 15px;
+   margin: 10px 10px 0 0;
+   border-radius: 5px;
+ }
+ .listModal .moveOption{
+  transform: translate(-65%,80%);
+   background-color: #FFF;
+   text-align: center;
+   padding: 10px;
+   color: grey;
+   border-radius: 5px;
+ }
+ .listModal .moveOption select, .listModal .moveOption input{
+   padding: 10px;
+   margin:10px;
+   font-size: 16px;
+ }
+ .listModal .moveOption input{
+   width: 100px;
+ }
+ .listOption ul{
+   width: 120px;
+ }
+ .listOption ul li{
+   width: 120px;
+   border-radius: 5px;
+ }
+ /* 
+============================
+      WORKSPACE
+============================ 
+*/
+#workspacebar button{
+  padding: 10px;
+  border: none;
+  margin: 5px;
+  color: #FFF;
+  background-color: #bebebe;
+  cursor: pointer;
+}
+.workspacelist .todo{
+  width: 300px;
+  margin:1em auto 0 auto;
+  padding: 10px 0;
+  background-color: #ececec;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+.workspacelist .todo b{
+  margin: 0 20px;
+  color: rgb(63, 63, 63);
+}
+.workspacelist .todo b:nth-child(2),.workspacelist .todo .add .more{
+  float: right;
+  padding: 0px 10px 5px 10px;
+  font-weight: bold;
+}
+.workspacelist .todo b:nth-child(2):hover,.workspacelist .todo .add .more:hover{
+  background-color: #D8D8D8;
+}
+.workspacelist .todo span{
+  display: block;
+  margin: 20px 20px 0px 20px;
+  font-size: 16px;
+  color: gray;
+}
+.workspacelist .todo ul li span{
+  display: inline-block;
+  margin:0;
+  font-size: 17px;
+  color: rgb(109, 109, 109);  
+}
+.workspacelist .todo .add textarea{
+  width: 270px;
+  padding: 8px;
+  background-color: #FFF;
+  display: block;
+  margin: auto;
+  border: none;
+}
+.workspacelist .todo ul{
+  padding: 0;
+  width: 270px;
+  margin:20px auto;
+}
+.workspacelist .todo  li{
+  background-color: #FFF;
+  padding: 10px 0 10px 10px;
+  margin: 5px 0;
+  list-style-type: none;
+
+}
+.workspacelist .todo .add button{
+  margin: 10px;
+  padding: 8px;
+  border: none;
+  font-size: 16px;
+}
+.workspacelist .todo .add .addcard{
+
+  background-color: rgb(24, 189, 24);
+  color: #FFF;
+}
+@media (min-width:600px){
+
+  #login{
+    background-color: #FFF;
+    width: 60%;
+    padding: 30px;
+    box-shadow: 2px 2px 6px 2px #D8D8D8;
+  }  
+  .workspacelist .todo{
+    margin:1em 20px;
+  }
+  .listModal textarea{
+    width: 200px;
+  }
+  .listModal div{
+    transform: translate(10%,30%);
+   }
+  .listModal .moveOption{
+    transform: translate(0%,0%);
+   }
+   #modal .modal{
+    width: 50%;
+  }
+}
+@media (min-width:768px){
+  #page1{
+    background-image: url('./Components/Images/login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }  
+  .workspacelist .todo{
+    width: 350px;
+    margin:1em 20px;
+  }
+  #modal .modal{
+    width: 40%;
+  }
+  #boards{
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+
+}
+@media (min-width:1200px){
+  #login{
+    width: 30%;
+  }  
+  #boards{
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+  }
+  #modal .modal{
+    width: 30%;
+  }
+}

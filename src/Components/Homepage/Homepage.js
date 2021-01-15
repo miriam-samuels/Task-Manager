@@ -6,6 +6,7 @@ import Workflow from './Workflow'
 import { useAuth } from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom'
 import Plan from './Plan'
+import Footer from './Footer'
 
 function Homepage() {
     const { currentUser } = useAuth()
@@ -31,6 +32,9 @@ function Homepage() {
             </section>
             <section id="plan">
                 <Plan />
+            </section>
+            <section id="footer">
+                <Footer />
             </section>
         </div>
     )
