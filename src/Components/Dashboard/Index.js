@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Menubar from './Menubar'
 import Boards from './Dashboard'
 import User from '../Images/user.svg'
+// import { useAuth } from '../Context/AuthContext'
 
-function Index() {
+function Index({changeTheme}) {
     return (
-        <div className="dashboard">
-            <Menubar/>
+        <div className="dashboard" >
+            <Menubar changeTheme={changeTheme}/>
             <div className="personalBoard">
-                <h3><img src={User} alt="pic" />Personal Boards</h3>
+                <h3><img src={User} alt="pic" />    Personal Boards</h3>
                 <Boards/>
             </div>
             <div className="trelloBoard">

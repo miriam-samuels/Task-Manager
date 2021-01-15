@@ -1,12 +1,18 @@
 import React from 'react'
-import Background1 from '../Images/house2.jpg';
-import Background2 from '../Images/house3.jpg';
+import Background1 from '../Images/bg3.jpg';
+import Background2 from '../Images/bg4.jpg';
 import Background3 from '../Images/house4.jpg';
-import Background4 from '../Images/house5.jpg';
 import Background5 from '../Images/blue.jpg';
 import Background6 from '../Images/goldenrod.jpg';
 import Background7 from '../Images/green.jpg';
 import Background8 from '../Images/marron.jpg';
+import Background9 from '../Images/bg.jpg';
+import Background10 from '../Images/bg1.jpg';
+import Background11 from '../Images/bg2.jpg';
+import Background12 from '../Images/bg5.jpg';
+import Background13 from '../Images/bg6.jpg';
+import Background14 from '../Images/bg7.jpg';
+import Background15 from '../Images/bg8.jpg';
 function Modal({ styles,title,handleChange,handleSubmit,visibility,handleVisibility,toggle,handleBg }) {
 
     const background = (e) => {
@@ -17,7 +23,7 @@ function Modal({ styles,title,handleChange,handleSubmit,visibility,handleVisibil
         <div id="modal" style={styles}>
             <div className="modal">
                 <div>
-                    <img src={Background3} id="img" alt="pic" />
+                    <img src={Background1} id="img" alt="pic" />
                     <div className="title">
                         <input type="text" placeholder="Add board title" value={title} onChange={handleChange}/>
                         <select value={visibility} onChange={handleVisibility}>
@@ -29,9 +35,15 @@ function Modal({ styles,title,handleChange,handleSubmit,visibility,handleVisibil
                 <div className="background">
                     <span><img src={Background1} alt="pic" onClick={background} /> </span>
                     <span><img src={Background2} alt="pic" onClick={background} /> </span>
+                    <span><img src={Background12} alt="pic" onClick={background} /> </span>
+                    <span><img src={Background13} alt="pic" onClick={background} /> </span>
+                    <span><img src={Background14} alt="pic" onClick={background} /> </span>
+                    <span><img src={Background15} alt="pic" onClick={background} /> </span>
                     <span><img src={Background3} alt="pic" onClick={background} /> </span>
-                    <span><img src={Background4} alt="pic" onClick={background} /> </span>
-                    <span ><img src={Background5} alt="pic" onClick={background} /></span>
+                    <span><img src={Background9} alt="pic" onClick={background} /></span>
+                    <span><img src={Background10} alt="pic" onClick={background} /></span>
+                    <span><img src={Background11} alt="pic" onClick={background} /></span>
+                    <span><img src={Background5} alt="pic" onClick={background} /></span>
                     <span><img src={Background6} alt="pic" onClick={background} /></span>
                     <span><img src={Background7} alt="pic" onClick={background} /></span>
                     <span><img src={Background8} alt="pic" onClick={background} /></span>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import Logo from '../Images/trello-logo-blue.svg';
+import Logo from '../Images/trello-logo-blue.png';
 // import firebase from 'firebase/app';
 import { useAuth } from '../Context/AuthContext';
 const Login = () => {

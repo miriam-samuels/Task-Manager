@@ -43,12 +43,24 @@ export const AuthProvider = ({ children }) => {
         return unsubscribe
     }
     )
+    const theme = {
+        light : {
+            backroundColor:"white"
+        },
+        dark : {
+            backgroundColor:"black",
+            color:"#1474c0"
+        }
+    }
     const value = {
         currentUser,
+        theme,
         createUser,
         signIn,
         signOut,
         passwordReset,
+        emailUpdate,
+        passwordUpdate,
     }
     return (
         <FirebaseContext.Provider value={value}>

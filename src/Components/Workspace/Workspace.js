@@ -4,7 +4,7 @@ import Menubar from '../Dashboard/Menubar'
 import { db } from '../Firebase/Firebase';
 import Workspacebar from './Workspacebar'
 import Workspacelist from './Workspacelist'
-import Background3 from '../Images/house4.jpg';
+import Background1 from '../Images/bg3.jpg';
 
 function Workspace() {
     const [bg, setbg] = useState("")
@@ -32,11 +32,12 @@ function Workspace() {
     }, [id])
     const styles = {
         height: '100vh',
-        backgroundImage: `url(${bg}) , url(${Background3})`, 
+        backgroundImage: `url(${bg}) , url(${Background1})`, 
         backgroundSize: "cover",
+        backgroundPosition: "center"
     }
     return (
-        <div style={styles}>
+        <div style={styles} id="workspace">
             <Menubar />
             <Workspacebar title={title} visibility={visibility} timestamp={timestamp} />
             <Workspacelist id={id} />
