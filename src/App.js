@@ -15,20 +15,22 @@ import { db } from './Components/Firebase/Firebase';
 
 const App = () => {
     const [themeCheck, setthemeCheck] = useState(false);
-    const [themeSet, setthemeSet] = useState(false)
+    const [themeSet, setthemeSet] = useState("")
     const { theme } = useAuth()
+
     const changeTheme = () => {
-        setthemeSet(themeSet => !themeSet)
         db.collection('status').doc('xzCColgS8ftOetfeCKhH').update({
-            theme: themeSet
+            theme: !themeCheck
         })
+        setthemeSet("theme set")
     }
     useEffect(() => {
         const status = db.collection('status').doc('xzCColgS8ftOetfeCKhH').get().then(doc => {
             setthemeCheck(doc.data().theme)
-        },[themeSet])
+            setthemeSet("theme gotten")
+        })
         return status
-    })
+    },[themeSet])
     return (
         <div className="app" style={themeCheck ? theme.light : theme.dark}>
             <BrowserRouter>

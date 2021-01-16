@@ -13,22 +13,25 @@ function Boards() {
     const [background, setbackground] = useState("")
 
     useEffect(() => {
-        const docRef = db.collection('boards').get().then((snapshot) => {
-            setboards(
-                snapshot.docs.map(doc => {
-                    return {
-                        id: doc.id,
-                        title: doc.data().title,
-                        timestamp: doc.data().timestamp,
-                        visibility: doc.data().visibility,
-                        background:doc.data().background,
-                        todo: doc.data().Todo,
-                        doing: doc.data().Doing,
-                        done: doc.data().Done,
-                    }
-                }))
+        let unmounted = false
+        db.collection('boards').get().then((snapshot) => {
+            if (!unmounted) {
+                setboards(
+                    snapshot.docs.map(doc => {
+                        return {
+                            id: doc.id,
+                            title: doc.data().title,
+                            timestamp: doc.data().timestamp,
+                            visibility: doc.data().visibility,
+                            background:doc.data().background,
+                            todo: doc.data().Todo,
+                            doing: doc.data().Doing,
+                            done: doc.data().Done,
+                        }
+                    })) 
+            }
         })
-        return docRef
+        return () => { unmounted = true };
     },[boards])
 
 

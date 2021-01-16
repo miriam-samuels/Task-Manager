@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import firebase from 'firebase/app';
 import { db } from '../Firebase/Firebase';
 import { useRouteMatch } from 'react-router-dom';
 
 
-const ListModal = ({ val, option1, option2, deleteItem, show, toggle, present }) => {
+const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, present }) => {
     const [showMove, setshowMove] = useState(false);
     const [edits, setedits] = useState([])
+    const [tex, settex] = useState(val)
+
+    useEffect(() => {
+        let unmounted = false;
+        if (!unmounted) {
+            db.collection('boards').doc(id).get().then(doc => {
+                setedits(doc.data()[present])
+            })
+        }
+        return () => { unmounted = true };
+    })
     const {
         params: { id },
     } = useRouteMatch('/workspace/:id');
@@ -16,32 +27,30 @@ const ListModal = ({ val, option1, option2, deleteItem, show, toggle, present })
     const moveCard = () => {
         setshowMove(current => !current)
     }
-    // const saveEdits = () => {
-        // let text = document.getElementById('text').value
-        // db.collection('boards').doc(id).get().then(doc => {
-        //    setedits(doc.data().todo)
-        // })
-        // edits.splice(0,1,"hello")
-        // console.log(edits)
-        // db.collection('boards').doc(id).update({
-        //     todo : edits
-        // })
-    // }
+
+    const saveEdits = () => {
+        edits.splice(Index,1,tex)
+        db.collection('boards').doc(id).update({
+            [present] : edits
+        })
+        toggle()
+    }
     return (
         <div className="listModal" style={styles}>
             <div className="listContent">
-                <textarea rows="6" defaultValue={val} id="text"></textarea>
-                {/* <button onClick={saveEdits}>Save</button> */}
+                <textarea rows="6" value={tex} onChange={(e) => settex(e.currentTarget.value)}/>
+                <button onClick={saveEdits}>Save</button>
                 <button onClick={toggle}>Cancel</button>
             </div>
             <div className="listOption">
                 <ul>
+                    <li>Set timeline</li>
                     <li onClick={moveCard}>Move</li>
                     <li onClick={() => { deleteItem(val); toggle() }}>Delete</li>
                 </ul>
             </div>
             <>
-                <MoveOption option1={option1} option2={option2} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
+                <MoveOption  option1={option1} option2={option2} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
             </>
         </div>
     )

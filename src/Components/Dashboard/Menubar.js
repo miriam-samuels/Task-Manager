@@ -32,9 +32,9 @@ function Menubar({ changeTheme }) {
             </div>
             <div className="third">
                 <span className="icon" onClick={toggle3}><img src={Bell} alt="pic" /></span>
-                <span className="icon u" onClick={toggle4} >{currentUser.email.slice(0,1)}</span>
+                <span className="icon u" onClick={toggle4} >{currentUser.email.slice(0, 1)}</span>
                 <Bellicon showBellicon={showBellicon} />
-                <Usericon usericon = {usericon} />
+                <Usericon usericon={usericon} />
             </div>
 
         </div>
@@ -42,7 +42,7 @@ function Menubar({ changeTheme }) {
 };
 export default Menubar
 
-function Atlassian({ showAtlassian,changeTheme }) {
+function Atlassian({ showAtlassian, changeTheme }) {
     return (
         <div className="atlassian " style={{ display: showAtlassian ? 'block' : 'none' }} >
             <h5> Theme Settings</h5>
@@ -59,18 +59,20 @@ function Trelloicon({ showTrelloicon }) {
     const [input, setinput] = useState('');
     let Data;
 
-        db.collection('boards').get().then((snapshot) => {
-             Data =  snapshot.docs.map(doc => {
-                    return doc.data().title
-                })
+    db.collection('boards').get().then((snapshot) => {
+        Data = snapshot.docs.map(doc => {
+            return doc.data().title
         })
+    })
 
     const onInputChange = (e) => {
         const val = e.target.value;
         let suggestions = [];
         if (val.length > 0) {
             const regexp = new RegExp(`^${val}`, 'i');
-            suggestions = Data.sort().filter(data => regexp.test(data));
+            if (Data) {
+                suggestions = Data.sort().filter(data => regexp.test(data));
+            }
         };
 
         setsuggestions(suggestions);
@@ -126,15 +128,15 @@ function Bellicon({ showBellicon }) {
         </div>
     );
 };
-function Usericon({usericon}) {
-    const { signOut,currentUser } = useAuth()
+function Usericon({ usericon }) {
+    const { signOut, currentUser } = useAuth()
     const history = useHistory()
     const logout = () => {
-        history.push('/')
         signOut()
+        history.push('/')
     }
 
-    return(
+    return (
         <div style={{ display: usericon ? 'block' : 'none' }}>
             <ul>
                 <li>{currentUser.email}</li>

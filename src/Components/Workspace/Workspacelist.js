@@ -16,8 +16,9 @@ function Workspacelist({ id }) {
     const [done, setdone] = useState('');
 
     useEffect(() => {
+        let unmounted = false
         db.collection("boards").doc(id).get().then(doc => {
-            if (doc.exists) {
+            if (doc.exists && !unmounted) {
                 setTodos(doc.data().todo);
                 setDoing(doc.data().doing);
                 setDone(doc.data().done)
@@ -27,6 +28,7 @@ function Workspacelist({ id }) {
         }).catch(function (error) {
             console.log("Error getting document:", error);
         });
+        return () => { unmounted = true };
     }, [Todos, doing, done, ToDo, id])
 
     const one = () => {

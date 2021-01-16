@@ -10,7 +10,7 @@ function Info() {
                 </div>
                 <div className="infoWords">
                     <h1>Information at a glance</h1>
-                    <p>Dive into the details by adding comments, attachments, due dates, and more directly to Trello cards. Collaborate on projects from beginning to end.</p>
+                    <p>Dive into the details by adding comments, attachments, due dates, and more directly to your cards. Collaborate on projects from beginning to end.</p>
                 </div>
 
             </div>

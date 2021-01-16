@@ -60,6 +60,11 @@ $color4 : rgb(196, 196, 196);
         HOMEPAGE
 ==========================
  */
+ html,body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ }
  #homepage{
   font-family: "Charlie Display",sans-serif;
   font-weight: 500;
@@ -200,10 +205,7 @@ $color4 : rgb(196, 196, 196);
         LOGIN
 ==========================
  */
- body{
-    margin: 0;
-    padding: 0;
-  }
+
   ul{
     list-style: none;
     padding: 0;
@@ -308,7 +310,9 @@ $color4 : rgb(196, 196, 196);
 =============================
  */
  .dashboard{
-  height: 100vh;
+   width: 100%;
+   min-height: 100vh;
+   height: 100%
  }
  .dashboard div img{
     width: 20px;
@@ -320,7 +324,7 @@ $color4 : rgb(196, 196, 196);
   #boards{
     @include grid(2,10px);
     width: 95%;
-    margin:20px auto;
+    margin:20px auto 0 auto;
     padding: 0%;
   }
   #boards .boardlist {
@@ -396,6 +400,10 @@ background-color: $color3;
       WORKSPACE
 ============================ 
 */
+#workspace{
+  position: relative;
+  width: 100%;
+}
 #workspacebar button{
   @include submit-button($color3,fit-content);
   margin:5px;
@@ -607,7 +615,7 @@ background-color: $color3;
   }
   @media (min-width:1280px){
     #homepage h1{
-      font-size: 60px;
+      font-size: 50px;
     }
     #homepage p,#homepage li{
       font-size: 30px;

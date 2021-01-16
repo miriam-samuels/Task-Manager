@@ -4,11 +4,14 @@ import ListModal from './listModal';
 export const Todo = ({ Todos, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
+    const [Index, setIndex] = useState(0)
+
     const toggle = () => {
         setshow(show => !show)
     }
-    const select = (item) => {
+    const select = (item, index) => {
         setselected(item)
+        setIndex(index)
     }
     return (
         <>
@@ -16,13 +19,17 @@ export const Todo = ({ Todos, deleteItem }) => {
                 {
                     Todos.map((item, index) => (
                         <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item) }}>•••</button>
+                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
                             <span>{item}</span>
                         </li>
                     ))
                 }
             </ul>
-            <ListModal val={selected} present="todo" option1='doing' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} />
+            {
+                show ?
+                    <ListModal val={selected} Index={Index} present="todo" option1='doing' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} /> :
+                    <></>
+            }
         </>
     );
 };
@@ -30,11 +37,14 @@ export const Todo = ({ Todos, deleteItem }) => {
 export const Doin = ({ Doing, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
+    const [Index, setIndex] = useState(0)
+
     const toggle = () => {
         setshow(show => !show)
     }
-    const select = (item) => {
+    const select = (item, index) => {
         setselected(item)
+        setIndex(index)
     }
     return (
         <>
@@ -42,13 +52,17 @@ export const Doin = ({ Doing, deleteItem }) => {
                 {
                     Doing.map((item, index) => (
                         <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item) }}>•••</button>
+                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
                             <span>{item}</span>
                         </li>
                     ))
                 }
             </ul>
-            <ListModal val={selected} present="doing" option1='todo' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} />
+            {
+                show ?
+                    <ListModal val={selected} Index={Index} present="doing" option1='todo' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} /> :
+                    <></>
+            }
         </>
     );
 };
@@ -56,12 +70,14 @@ export const Doin = ({ Doing, deleteItem }) => {
 export const Don = ({ Done, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
+    const [Index, setIndex] = useState(0)
 
     const toggle = () => {
         setshow(show => !show)
     }
-    const select = (item) => {
+    const select = (item, index) => {
         setselected(item)
+        setIndex(index)
     }
     return (
         <>
@@ -69,13 +85,17 @@ export const Don = ({ Done, deleteItem }) => {
                 {
                     Done.map((item, index) => (
                         <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item) }}>•••</button>
+                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
                             <span>{item}</span>
                         </li>
                     ))
                 }
             </ul>
-            <ListModal val={selected} present="done" option1="todo" option2="doing" deleteItem={deleteItem} show={show} toggle={toggle} />
+            {
+                show ?
+                    <ListModal val={selected} Index={Index} present="done" option1="todo" option2="doing" deleteItem={deleteItem} show={show} toggle={toggle} /> :
+                    <></>
+            }
 
         </>
     );

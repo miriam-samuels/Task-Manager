@@ -17,8 +17,9 @@ function Workspace() {
     } = useRouteMatch('/workspace/:id');
 
     useEffect(() => {
+        let unmounted = false
         db.collection("boards").doc(id).get().then(doc => {
-            if (doc.exists) {
+            if (doc.exists && !unmounted) {
                 setbg(doc.data().background)
                 settitle(doc.data().title)
                 setvisibility(doc.data().visibility)
@@ -29,12 +30,14 @@ function Workspace() {
         }).catch(function (error) {
             console.log("Error getting document:", error);
         });
+        return () => { unmounted = true };
     }, [id])
     const styles = {
-        height: '100vh',
+        minHeight: '100vh',
         backgroundImage: `url(${bg}) , url(${Background1})`, 
         backgroundSize: "cover",
-        backgroundPosition: "center"
+        backgroundPosition: "center",
+        height: '100%',
     }
     return (
         <div style={styles} id="workspace">
