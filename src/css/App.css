@@ -385,7 +385,7 @@ a {
 #boards {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
+  -ms-grid-columns: 1fr 1fr ;
       grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   width: 95%;
@@ -751,7 +751,7 @@ a {
   #boards {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[3];
+    -ms-grid-columns: 1fr 1fr 1fr;
         grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 0;
@@ -797,7 +797,7 @@ a {
     text-align: left;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[24];
+    -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-columns: repeat(24, 1fr);
     gap: 0;
     margin: 4em 0;
@@ -821,7 +821,7 @@ a {
   #boards {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[4];
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 0%;
