@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import firebase from 'firebase/app';
 import { db } from '../Firebase/Firebase';
 import { useRouteMatch } from 'react-router-dom';
@@ -6,8 +6,13 @@ import { useRouteMatch } from 'react-router-dom';
 
 const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, present }) => {
     const [showMove, setshowMove] = useState(false);
+    const [timeline, settimeline] = useState(false)
     const [edits, setedits] = useState([])
     const [tex, settex] = useState(val)
+
+    const {
+        params: { id },
+    } = useRouteMatch('/workspace/:id');
 
     useEffect(() => {
         let unmounted = false;
@@ -17,40 +22,44 @@ const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, pre
             })
         }
         return () => { unmounted = true };
-    })
-    const {
-        params: { id },
-    } = useRouteMatch('/workspace/:id');
+    }, [edits, present, id])
+
     const styles = {
         display: show ? 'flex' : 'none'
     }
     const moveCard = () => {
         setshowMove(current => !current)
     }
+    const expire = () => {
+        settimeline(current => !current)
+    }
 
     const saveEdits = () => {
-        edits.splice(Index,1,tex)
+        edits.splice(Index, 1, tex)
         db.collection('boards').doc(id).update({
-            [present] : edits
+            [present]: edits
         })
         toggle()
     }
     return (
         <div className="listModal" style={styles}>
             <div className="listContent">
-                <textarea rows="6" value={tex} onChange={(e) => settex(e.currentTarget.value)}/>
+                <textarea rows="6" value={tex} onChange={(e) => settex(e.currentTarget.value)} />
                 <button onClick={saveEdits}>Save</button>
                 <button onClick={toggle}>Cancel</button>
             </div>
             <div className="listOption">
                 <ul>
-                    <li>Set timeline</li>
+                    <li onClick={expire}>Set timeline</li>
                     <li onClick={moveCard}>Move</li>
                     <li onClick={() => { deleteItem(val); toggle() }}>Delete</li>
                 </ul>
             </div>
             <>
-                <MoveOption  option1={option1} option2={option2} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
+                <MoveOption option1={option1} option2={option2} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
+            </>
+            <>
+                <Timeline expire={expire} timeline={timeline} />
             </>
         </div>
     )
@@ -85,6 +94,21 @@ const MoveOption = ({ option1, option2, showMove, val, present, moveCard, toggle
             <button onClick={moveTodo}>Move</button>
         </div>
     )
+}
+const Timeline = ({ expire, timeline }) => {
+    const timestyle = {
+        display: timeline ? 'block' : 'none'
+    }
+    return (
+        <div style={timestyle} className="moveOption">
+            <h2>Set Timeline(coming soon)</h2>
+            <input type="date" />
+            <input type="time" />
+            <button>Save</button>
+            <button onClick={() => expire()}>Cancel</button>
+        </div>
+    )
+
 }
 export default ListModal
 
