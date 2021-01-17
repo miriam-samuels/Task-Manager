@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Logo from '../Images/trello-logo-blue.png';
-// import firebase from 'firebase/app';
 import { useAuth } from '../Context/AuthContext';
 const Login = () => {
     return (
@@ -17,7 +16,7 @@ function LoginForm() {
     const [error, seterror] = useState(null);
     const [hasAcct, sethasAcct] = useState(false);
     const history = useHistory()
-    const { createUser, signIn, currentUser } = useAuth()
+    const { createUser, signIn, currentUser, signInGoogleUser } = useAuth()
 
     useEffect(() => {
         if (currentUser) {
@@ -37,10 +36,9 @@ function LoginForm() {
         e.preventDefault();
 
         signIn(email, password)
-            .then(authUser => {
-                console.log(authUser);
+            .then(() => {
                 seterror(null)
-                history.push(`/dashboard/${authUser.uid}`)
+                history.push(`/dashboard/${currentUser.uid}`)
             })
             .catch(error => {
                 seterror(error)
@@ -50,16 +48,33 @@ function LoginForm() {
         e.preventDefault()
 
         createUser(email, password)
-            .then(authUser => {
+            .then(() => {
                 seterror(null)
-                // firebase.firestore().collection('accounts').doc(authUser.uid).set(authUser);
-                history.push(`/dashboard/${authUser.uid}`)
+                history.push(`/dashboard/${currentUser.uid}`)
             })
             .catch(error => {
                 seterror(error)
             })
     }
+    const googleSignIn = () => {
+        signInGoogleUser()
+        .then((result) => {
+            seterror(null)
+            history.push(`/dashboard/${currentUser.uid}`)
+            // var credential = result.credential;
+            // var token = credential.accessToken;
+            // var user = result.user;
+        })
+        .catch((error) => {
+            seterror(error)
+            // var errorCode = error.code;
+            // var errorMessage = error.message;
+            // var email = error.email;
+            // var credential = error.credential;
+            // ...
+          });
 
+    }
 
     const isInvalid = email === '' || password === '';
 
@@ -91,11 +106,8 @@ function LoginForm() {
                             </>
 
                     }
-                    {/* <p>OR</p>
-                    <button type="button">Continue with Google</button>
-                    <button type="button">Continue with Microsoft</button>
-                    <button type="button">Continue with Apple</button>
-                    <p>Log in wih SSO</p> */}
+                     <p>OR</p>
+                    <button type="button" className="others" onClick={googleSignIn}>Continue with Google</button>
                 </form>
 
                 <div>

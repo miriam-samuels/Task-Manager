@@ -45,8 +45,6 @@ html, body {
 
 #homepage #hero #menubar span button {
   background-color: #1474c0;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   color: #FFF;
   font-size: 15px;
@@ -91,16 +89,12 @@ html, body {
 .heroWords, .teamWords, .flowWords {
   width: 95%;
   margin: auto;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 10;
   grid-column: 2/12;
   grid-column-start: 2;
   grid-column-end: 12;
 }
 
 .heroImg, .teamImg, .flowImg {
-  -ms-grid-column: 13;
-  -ms-grid-column-span: 21;
   grid-column: 13/span 21;
   grid-column-start: 13;
   grid-column-end: span 21;
@@ -111,8 +105,6 @@ html, body {
 }
 
 .infoImg {
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 12;
   grid-column: 2/span 12;
   grid-column-start: 2;
   grid-column-end: span 12;
@@ -121,8 +113,6 @@ html, body {
 .infoWords {
   width: 95%;
   margin: auto;
-  -ms-grid-column: 14;
-  -ms-grid-column-span: 9;
   grid-column: 14/23;
   grid-column-start: 14;
   grid-column-end: 23;
@@ -200,15 +190,9 @@ a {
 }
 
 #page1 {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 }
 
@@ -252,6 +236,21 @@ a {
   font-size: 13px;
 }
 
+#login .login .others {
+  background-color: white;
+  width: 98%;
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  box-shadow: 1px 1px 3px 1px #D8D8D8;
+  margin-top: 0px;
+  color: gray;
+}
+
 /* 
 =============================
       MENU BAR
@@ -260,15 +259,9 @@ a {
 #menubar {
   background-color: #1474c0;
   height: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
@@ -303,11 +296,11 @@ a {
 }
 
 #menubar div .u {
+  text-align: center;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 900;
-  font-family: lucida calligraphy;
-  padding: 6px 13px;
+  padding: 6px 11px;
   border-radius: 50%;
 }
 
@@ -383,10 +376,8 @@ a {
 }
 
 #boards {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr ;
-      grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   width: 95%;
   margin: 20px auto 0 auto;
@@ -403,15 +394,9 @@ a {
   background-color: #f8f8f8;
   border: 1px solid #D8D8D8;
   border-radius: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   position: relative;
   text-align: center;
   height: 70px;
@@ -454,8 +439,7 @@ a {
   position: absolute;
   top: 50%;
   right: 50%;
-  -webkit-transform: translate(50%, -50%);
-          transform: translate(50%, -50%);
+  transform: translate(50%, -50%);
 }
 
 #modal .modal #img {
@@ -527,8 +511,6 @@ a {
 
 #workspacebar button {
   background-color: #FFFFFFa9;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   color: #FFF;
   font-size: 15px;
@@ -665,8 +647,7 @@ a {
 }
 
 .listModal div {
-  -webkit-transform: translate(5%, 5%);
-          transform: translate(5%, 5%);
+  transform: translate(5%, 5%);
 }
 
 .listModal textarea {
@@ -680,8 +661,6 @@ a {
 
 .listModal .listContent button, .listModal .moveOption button {
   background-color: #4caf50;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   color: #FFF;
   font-size: 15px;
@@ -703,8 +682,7 @@ a {
   position: absolute;
   top: 50%;
   right: 50%;
-  -webkit-transform: translate(50%, -50%);
-          transform: translate(50%, -50%);
+  transform: translate(50%, -50%);
   background-color: white;
   width: 250px;
   color: #FFF;
@@ -725,8 +703,7 @@ a {
     background-color: #FFF;
     width: 60%;
     padding: 30px;
-    -webkit-box-shadow: 2px 2px 6px 2px #D8D8D8;
-            box-shadow: 2px 2px 6px 2px #D8D8D8;
+    box-shadow: 2px 2px 6px 2px #D8D8D8;
   }
   #menubar {
     height: 70px;
@@ -743,16 +720,14 @@ a {
   }
   #menubar div .u {
     font-size: 24px;
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
   .atlassian, #menubar .third div, .trelloicon {
     top: 10%;
   }
   #boards {
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr 1fr;
-        grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 0;
   }
@@ -795,10 +770,8 @@ a {
   .hero, .team, .hinfo, .workflow {
     width: 100%;
     text-align: left;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-columns: repeat(24, 1fr);
+    grid-template-columns: repeat(24, 1fr);
     gap: 0;
     margin: 4em 0;
     padding-bottom: 5em;
@@ -819,10 +792,8 @@ a {
     width: 40%;
   }
   #boards {
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr 1fr 1fr;
-        grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 0%;
   }
@@ -830,8 +801,6 @@ a {
     width: 40%;
   }
   .workspacelist .todoCon {
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
     width: fit-content;
   }
   #homepage h1 {

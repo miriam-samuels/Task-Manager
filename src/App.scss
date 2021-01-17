@@ -238,6 +238,13 @@ $color4 : rgb(196, 196, 196);
     color: blue;
     font-size: 13px;
   }
+  #login .login .others{
+    @include submit-button(white,98%);
+    box-shadow:1px 1px 3px 1px #D8D8D8;
+    margin-top: 0px;
+    color: gray;
+
+  }
    /* 
 =============================
       MENU BAR
@@ -274,11 +281,11 @@ $color4 : rgb(196, 196, 196);
     width: 100%;
 }
  #menubar div .u{
+   text-align: center;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 900;
-    font-family: lucida calligraphy;
-    padding:6px 13px;
+    padding:6px 11px;
     border-radius: 50%;
   }
   #menubar li{
@@ -530,7 +537,7 @@ background-color: $color3;
     }
     #menubar div .u{
         font-size: 24px;
-        padding:10px 20px;
+        padding:10px 15px;
     }
     .atlassian,.trelloicon{
         top: 10%;
