@@ -49,7 +49,8 @@ function LoginForm() {
             .then(user => {
                 seterror(null)
                 db.collection('users').doc(user.user.uid).set({
-                    boards:[]
+                    boards:[],
+                    theme:false
                 })                
             })
             .catch(error => {
@@ -60,7 +61,8 @@ function LoginForm() {
         signInGoogleUser()
             .then(user => {
                 db.collection('users').doc(user.user.uid).set({
-                    boards: []
+                    boards: [],
+                    theme:false
                 })
                 seterror(null)
                 // var credential = result.credential;
