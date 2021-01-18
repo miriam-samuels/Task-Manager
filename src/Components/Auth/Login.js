@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom'
 import Logo from '../Images/trello-logo-blue.png';
 import { useAuth } from '../Context/AuthContext';
 import { db } from '../Firebase/Firebase';
+
 const Login = () => {
     return (
         <div>
@@ -16,7 +17,7 @@ function LoginForm() {
     const [error, seterror] = useState(null);
     const [hasAcct, sethasAcct] = useState(false);
     const history = useHistory()
-    const { createUser, signIn, currentUser, signInGoogleUser } = useAuth()
+    const { createUser, signIn, currentUser, signInGoogleUser, emailVerification } = useAuth()
 
     useEffect(() => {
         if (currentUser) {
@@ -49,33 +50,36 @@ function LoginForm() {
             .then(user => {
                 seterror(null)
                 db.collection('users').doc(user.user.uid).set({
-                    boards:[],
-                    theme:false
-                })                
+                    theme: false,
+                    boards: [],
+                })
+                emailVerification().then(() => {
+                    console.log("Email Sent")
+                }).catch(error => {
+                    console.log("An Error Occured")
+                });
             })
             .catch(error => {
                 seterror(error)
             })
     }
+
     const googleSignIn = () => {
         signInGoogleUser()
             .then(user => {
                 db.collection('users').doc(user.user.uid).set({
+                    theme: false,
                     boards: [],
-                    theme:false
                 })
+                emailVerification().then(() => {
+                    console.log("Email Sent")
+                }).catch(error => {
+                    console.log("An Error Occured")
+                });
                 seterror(null)
-                // var credential = result.credential;
-                // var token = credential.accessToken;
-                // var user = result.user;
             })
             .catch((error) => {
                 seterror(error)
-                // var errorCode = error.code;
-                // var errorMessage = error.message;
-                // var email = error.email;
-                // var credential = error.credential;
-                // ...
             });
 
     }

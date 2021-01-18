@@ -11,12 +11,13 @@ function Index() {
     const [themeSet, setthemeSet] = useState("")
     const { theme, currentUser } = useAuth()
     useEffect(() => {
-        const status = db.collection('users').doc(currentUser.uid).get().then(doc => {
-            setthemeCheck(doc.data().theme)
-            setthemeSet("theme gotten")
+        db.collection('users').doc(currentUser.uid).get().then(doc => {
+            if (doc.exists) {
+                setthemeCheck(doc.data().theme)
+                setthemeSet("theme gotten") 
+            }
         })
-        return status
-    }, [themeSet,currentUser.uid])
+    }, [themeSet,currentUser.uid,themeCheck])
 
     const changeTheme = () => {
         db.collection('users').doc(currentUser.uid).update({

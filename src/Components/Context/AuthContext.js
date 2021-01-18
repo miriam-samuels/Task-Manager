@@ -32,6 +32,9 @@ export const AuthProvider = ({ children }) => {
     const passwordUpdate = password => {
         return auth.currentUser.updatePassword(password);
     }
+    const emailVerification = () =>{
+        return auth.currentUser.sendEmailVerification();
+    }
     const generateId = () => {
         return Math.floor((1 + Math.random()) * 0x100000000000000)
             .toString(16)
@@ -69,6 +72,7 @@ export const AuthProvider = ({ children }) => {
         passwordReset,
         emailUpdate,
         passwordUpdate,
+        emailVerification,
         signInGoogleUser,
         generateId,
     }
