@@ -5,25 +5,31 @@ import { db } from '../Firebase/Firebase';
 import Workspacebar from './Workspacebar'
 import Workspacelist from './Workspacelist'
 import Background1 from '../Images/bg3.jpg';
+import { useAuth } from '../Context/AuthContext';
 
 function Workspace() {
     const [bg, setbg] = useState("")
     const [title, settitle] = useState('');
     const [visibility, setvisibility] = useState('private');
     const [timestamp, settimestamp] = useState("")
-
+    const { currentUser } = useAuth();
     const {
         params: { id },
     } = useRouteMatch('/workspace/:id');
 
     useEffect(() => {
         let unmounted = false
-        db.collection("boards").doc(id).get().then(doc => {
+        db.collection("users").doc(currentUser.uid).get().then(doc => {
             if (doc.exists && !unmounted) {
-                setbg(doc.data().background)
-                settitle(doc.data().title)
-                setvisibility(doc.data().visibility)
-                settimestamp(doc.data().timestamp.toDate().toDateString())
+                const arr =  doc.data().boards
+                arr.forEach(element => {
+                    if (element.id === id) {
+                        setbg(element.background)
+                        settitle(element.title)
+                        setvisibility(element.visibility)
+                        settimestamp(element.timestamp)
+            }
+                });
             } else {
                 console.log("No such document!");
             }
@@ -31,7 +37,7 @@ function Workspace() {
             console.log("Error getting document:", error);
         });
         return () => { unmounted = true };
-    }, [id])
+    }, [currentUser.uid,id])
     const styles = {
         minHeight: '100vh',
         backgroundImage: `url(${bg}) , url(${Background1})`, 

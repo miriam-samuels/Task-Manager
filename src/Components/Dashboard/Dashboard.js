@@ -3,7 +3,7 @@ import { db } from '../Firebase/Firebase'
 import firebase from 'firebase/app';
 import Modal from './Modal';
 import BoardList from './Boardlist';
-
+import { useAuth } from '../Context/AuthContext';
 
 function Boards() {
     const [showModal, setshowModal] = useState(false);
@@ -11,29 +11,17 @@ function Boards() {
     const [visibility, setvisibility] = useState('private');
     const [boards, setboards] = useState([]);
     const [background, setbackground] = useState("")
-
+    const { currentUser, generateId } = useAuth()
+    const timestamp = new Date();
     useEffect(() => {
         let unmounted = false
-        db.collection('boards').get().then((snapshot) => {
-            if (!unmounted) {
-                setboards(
-                    snapshot.docs.map(doc => {
-                        return {
-                            id: doc.id,
-                            title: doc.data().title,
-                            timestamp: doc.data().timestamp,
-                            visibility: doc.data().visibility,
-                            background:doc.data().background,
-                            todo: doc.data().Todo,
-                            doing: doc.data().Doing,
-                            done: doc.data().Done,
-                        }
-                    })) 
+        db.collection('users').doc(currentUser.uid).get().then(doc => {
+            if (doc.exists && !unmounted) {
+                setboards(doc.data().boards)
             }
         })
         return () => { unmounted = true };
-    },[boards])
-
+    },[boards,currentUser.uid,showModal])
 
 
     const toggle = () => setshowModal(current => !current);
@@ -50,14 +38,17 @@ function Boards() {
         if (title.length === 0) {
             return;
         };
-        db.collection('boards').add({
-            title: title,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp() ,
-            visibility: visibility,
-            background: background,
-            todo: [],
-            doing: [],
-            done: [],
+        db.collection('users').doc(currentUser.uid).update({
+                boards:firebase.firestore.FieldValue.arrayUnion({
+                    id: generateId(),
+                    title: title,
+                    timestamp: timestamp.toLocaleDateString(),
+                    visibility: visibility,
+                    background: background,
+                    todo: [],
+                    doing: [],
+                    done: [],
+                })
         })
         .then(() => {
             console.log("Document successfully written!");
@@ -76,7 +67,7 @@ function Boards() {
                 </li>
                 <BoardList boards={boards} />
             </ul>
-            <Modal styles={show} toggle={toggle} title={title} handleChange={handleChange} handleSubmit={handleSubmit} visibility={visibility} handleVisibility={handleVisibility} handleBg ={handleBg} />
+            <Modal styles={show} toggle={toggle} title={title} handleChange={handleChange} handleSubmit={handleSubmit} visibility={visibility} handleVisibility={handleVisibility} handleBg ={handleBg} boards={boards} />
             <div style={{ display: 'none' }}>
             </div>
         </div>

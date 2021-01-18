@@ -32,6 +32,11 @@ export const AuthProvider = ({ children }) => {
     const passwordUpdate = password => {
         return auth.currentUser.updatePassword(password);
     }
+    const generateId = () => {
+        return Math.floor((1 + Math.random()) * 0x100000000000000)
+            .toString(16)
+            .substring(1);
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -65,6 +70,7 @@ export const AuthProvider = ({ children }) => {
         emailUpdate,
         passwordUpdate,
         signInGoogleUser,
+        generateId,
     }
     return (
         <FirebaseContext.Provider value={value}>

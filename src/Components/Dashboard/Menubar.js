@@ -57,12 +57,13 @@ function Trelloicon({ showTrelloicon }) {
 
     const [suggestions, setsuggestions] = useState([]);
     const [input, setinput] = useState('');
+    const { currentUser } = useAuth()
     let Data;
 
-    db.collection('boards').get().then((snapshot) => {
-        Data = snapshot.docs.map(doc => {
-            return doc.data().title
-        })
+    db.collection('users').doc(currentUser.uid).get().then(doc => {
+        if (doc.exists) {
+            Data = doc.data().boards.map(data => data.title)
+        }
     })
 
     const onInputChange = (e) => {

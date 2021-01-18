@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Logo from '../Images/trello-logo-blue.png';
 import { useAuth } from '../Context/AuthContext';
+import { db } from '../Firebase/Firebase';
 const Login = () => {
     return (
         <div>
@@ -9,7 +10,6 @@ const Login = () => {
         </div>
     )
 }
-
 function LoginForm() {
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
@@ -38,7 +38,6 @@ function LoginForm() {
         signIn(email, password)
             .then(() => {
                 seterror(null)
-                history.push(`/dashboard/${currentUser.uid}`)
             })
             .catch(error => {
                 seterror(error)
@@ -46,11 +45,12 @@ function LoginForm() {
     }
     const handleSignup = (e) => {
         e.preventDefault()
-
         createUser(email, password)
-            .then(() => {
+            .then(user => {
                 seterror(null)
-                history.push(`/dashboard/${currentUser.uid}`)
+                db.collection('users').doc(user.user.uid).set({
+                    boards:[]
+                })                
             })
             .catch(error => {
                 seterror(error)
@@ -58,21 +58,23 @@ function LoginForm() {
     }
     const googleSignIn = () => {
         signInGoogleUser()
-        .then((result) => {
-            seterror(null)
-            history.push(`/dashboard/${currentUser.uid}`)
-            // var credential = result.credential;
-            // var token = credential.accessToken;
-            // var user = result.user;
-        })
-        .catch((error) => {
-            seterror(error)
-            // var errorCode = error.code;
-            // var errorMessage = error.message;
-            // var email = error.email;
-            // var credential = error.credential;
-            // ...
-          });
+            .then(user => {
+                db.collection('users').doc(user.user.uid).set({
+                    boards: []
+                })
+                seterror(null)
+                // var credential = result.credential;
+                // var token = credential.accessToken;
+                // var user = result.user;
+            })
+            .catch((error) => {
+                seterror(error)
+                // var errorCode = error.code;
+                // var errorMessage = error.message;
+                // var email = error.email;
+                // var credential = error.credential;
+                // ...
+            });
 
     }
 
@@ -106,7 +108,7 @@ function LoginForm() {
                             </>
 
                     }
-                     <p>OR</p>
+                    <p>OR</p>
                     <button type="button" className="others" onClick={googleSignIn}>Continue with Google</button>
                 </form>
 

@@ -672,9 +672,10 @@ a {
   margin: 10px 5px;
 }
 
-.listModal .moveOption select {
+.listModal .moveOption select, .listModal .moveOption input {
+  width: 40%;
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
   font-size: 16px;
 }
 

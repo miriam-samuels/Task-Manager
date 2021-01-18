@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../Firebase/Firebase';
 import { Todo, Doin, Don } from './List';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
+import { useAuth } from '../Context/AuthContext';
 
 function Workspacelist({ id }) {
     const [show, setshow] = useState(false);
@@ -15,13 +16,23 @@ function Workspacelist({ id }) {
     const [Done, setDone] = useState([]);//Donelist
     const [done, setdone] = useState('');
 
+    const [boards, setboards] = useState()
+
+    const { currentUser } = useAuth()
+
     useEffect(() => {
         let unmounted = false
-        db.collection("boards").doc(id).get().then(doc => {
+        db.collection("users").doc(currentUser.uid).get().then(doc => {
             if (doc.exists && !unmounted) {
-                setTodos(doc.data().todo);
-                setDoing(doc.data().doing);
-                setDone(doc.data().done)
+                const arr =  doc.data().boards
+                arr.forEach(element => {
+                    if (element.id === id) {
+                        setTodos(element.todo)
+                        setDoing(element.doing)
+                        setDone(element.done)
+            }
+                });
+            setboards(arr)
             } else {
                 console.log("No such document!");
             }
@@ -29,42 +40,90 @@ function Workspacelist({ id }) {
             console.log("Error getting document:", error);
         });
         return () => { unmounted = true };
-    }, [Todos, doing, done, ToDo, id])
+    },[boards,currentUser.uid,id])
 
     const one = () => {
-        db.collection('boards').doc(id).update({
-            todo: firebase.firestore.FieldValue.arrayUnion(ToDo)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    element.todo.splice(0,0,ToDo)
+                }
+            })
+        )
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
 
         setToDo('')
     };
     const two = () => {
-        db.collection('boards').doc(id).update({
-            doing: firebase.firestore.FieldValue.arrayUnion(doing)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    element.doing.splice(0,0,doing)
+                }
+            })
+        )
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
 
         setdoing('')
     };
     const three = () => {
-        db.collection('boards').doc(id).update({
-            done: firebase.firestore.FieldValue.arrayUnion(done)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    element.done.splice(0,0,done)
+                }
+            })
+        )
+
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
 
         setdone('')
     };
     const deleteTodo = (value) => {
-        db.collection('boards').doc(id).update({
-            todo: firebase.firestore.FieldValue.arrayRemove(value)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    const i = element.todo.indexOf(value);
+                    element.todo.splice(i,1)
+                }
+            })
+        )
+
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
     }
     const deleteDoing = (value) => {
-        db.collection('boards').doc(id).update({
-            doing: firebase.firestore.FieldValue.arrayRemove(value)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    const i = element.todo.indexOf(value);
+                    element.doing.splice(i,1)
+                }
+            })
+        )
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
     }
     const deleteDone = (value) => {
-        db.collection('boards').doc(id).update({
-            done: firebase.firestore.FieldValue.arrayRemove(value)
+        setboards(
+            boards.forEach(element =>{
+                if (element.id === id) {
+                    const i = element.todo.indexOf(value);
+                    element.done.splice(i,1)
+                }
+            })
+        )
+
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards
         })
     }
     return (

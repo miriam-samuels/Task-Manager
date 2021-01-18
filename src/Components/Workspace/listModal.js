@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import firebase from 'firebase/app';
 import { db } from '../Firebase/Firebase';
 import { useRouteMatch } from 'react-router-dom';
-
+import { useAuth } from '../Context/AuthContext';
 
 const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, present }) => {
     const [showMove, setshowMove] = useState(false);
-    const [timeline, settimeline] = useState(false)
+    const [timeline, settimeline] = useState(false);
     const [edits, setedits] = useState([])
     const [tex, settex] = useState(val)
+    const { currentUser } = useAuth()
 
     const {
         params: { id },
@@ -17,12 +17,12 @@ const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, pre
     useEffect(() => {
         let unmounted = false;
         if (!unmounted) {
-            db.collection('boards').doc(id).get().then(doc => {
-                setedits(doc.data()[present])
+            db.collection('users').doc(currentUser.uid).get().then(doc => {
+                setedits(doc.data().boards)
             })
         }
         return () => { unmounted = true };
-    }, [edits, present, id])
+    }, [edits, currentUser.uid, showMove])
 
     const styles = {
         display: show ? 'flex' : 'none'
@@ -35,9 +35,16 @@ const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, pre
     }
 
     const saveEdits = () => {
-        edits.splice(Index, 1, tex)
-        db.collection('boards').doc(id).update({
-            [present]: edits
+        setedits(
+            edits.forEach(element =>{
+                if (element.id === id) {
+                    element[present].splice(Index, 1, tex)
+                }
+            })
+        )
+
+        db.collection('users').doc(currentUser.uid).update({
+            boards: edits
         })
         toggle()
     }
@@ -50,22 +57,25 @@ const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, pre
             </div>
             <div className="listOption">
                 <ul>
-                    <li onClick={expire}>Set timeline</li>
                     <li onClick={moveCard}>Move</li>
                     <li onClick={() => { deleteItem(val); toggle() }}>Delete</li>
+                    <li onClick={expire}>Set timeline</li>
                 </ul>
             </div>
             <>
-                <MoveOption option1={option1} option2={option2} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
+                <MoveOption edits={edits} option1={option1} option2={option2} Index={Index} showMove={showMove} val={val} present={present} moveCard={moveCard} toggle={toggle} id={id} />
             </>
             <>
                 <Timeline expire={expire} timeline={timeline} />
             </>
+
         </div>
     )
 }
-const MoveOption = ({ option1, option2, showMove, val, present, moveCard, toggle, id }) => {
+const MoveOption = ({ edits, option1, option2, showMove, val, present, moveCard, toggle, id, Index }) => {
     const [moveto, setmoveto] = useState('Select')
+    const [pos, setpos] = useState(1)
+    const { currentUser } = useAuth()
 
     const moveStyles = {
         display: showMove ? 'block' : 'none'
@@ -73,12 +83,18 @@ const MoveOption = ({ option1, option2, showMove, val, present, moveCard, toggle
     const moveDestination = (e) => {
         setmoveto(e.target.value)
     }
+    const movePosition = (e) => {
+        setpos(e.target.value)
+    }
     const moveTodo = () => {
-        db.collection('boards').doc(id).update({
-            [moveto]: firebase.firestore.FieldValue.arrayUnion(val)
+        edits.forEach(element =>{
+            if (element.id === id) {
+                element[present].splice(Index,1)
+                element[moveto].splice(pos - 1,0,val)
+            }
         })
-        db.collection('boards').doc(id).update({
-            [present]: firebase.firestore.FieldValue.arrayRemove(val)
+        db.collection('users').doc(currentUser.uid).update({
+            boards: edits
         })
         moveCard()
         toggle()
@@ -90,7 +106,9 @@ const MoveOption = ({ option1, option2, showMove, val, present, moveCard, toggle
                 <option>Select</option>
                 <option>{option1}</option>
                 <option>{option2}</option>
+                <option>{present}</option>
             </select>
+            <input type="number" placeholder="position eg: 1" value={pos} onChange={movePosition} />
             <button onClick={moveTodo}>Move</button>
         </div>
     )
@@ -101,7 +119,7 @@ const Timeline = ({ expire, timeline }) => {
     }
     return (
         <div style={timestyle} className="moveOption">
-            <h2>Set Timeline(coming soon)</h2>
+            <h2>Time Card(coming soon)</h2>
             <input type="date" />
             <input type="time" />
             <button>Save</button>

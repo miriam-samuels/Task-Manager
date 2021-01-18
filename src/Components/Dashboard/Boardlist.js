@@ -2,8 +2,10 @@ import React from 'react'
 import Background1 from '../Images/bg3.jpg';
 import { useHistory } from 'react-router-dom';
 import { db } from '../Firebase/Firebase';
+import { useAuth } from '../Context/AuthContext';
 
 function BoardList({ boards }) {
+    const { currentUser } = useAuth()
     const history = useHistory()
 
 
@@ -11,7 +13,9 @@ function BoardList({ boards }) {
         history.push(`/workspace/${id}`)
     }
     const deleteBoard = (id) => {
-        db.collection('boards').doc(id).delete()
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boards.filter(elem => elem.id !== id)
+        })
         .then(() => {
             console.log("Document successfully deleted!");
         })
