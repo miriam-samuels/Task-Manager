@@ -8,7 +8,7 @@ import { useAuth } from '../Context/AuthContext';
 import { db } from '../Firebase/Firebase'
 
 
-function Menubar({ changeTheme,themeCheck }) {
+function Menubar({ changeTheme, themeCheck }) {
     const [showAtlassian, setAtlassian] = useState(false);
     const [showTrelloicon, setTrelloicon] = useState(false);
     const [showBellicon, setBellicon] = useState(false);
@@ -25,7 +25,7 @@ function Menubar({ changeTheme,themeCheck }) {
             <div className="first">
                 <span className="icon" onClick={toggle1} ><img src={Grid} alt="pic" /></span>
                 <span className="icon" onClick={toggle2}><img src={Search} alt="pic" /></span>
-                <Atlassian showAtlassian={showAtlassian} changeTheme={changeTheme} themeCheck={themeCheck}/>
+                <Atlassian showAtlassian={showAtlassian} changeTheme={changeTheme} themeCheck={themeCheck} />
                 <Trelloicon showTrelloicon={showTrelloicon} /></div>
             <div className="second">
                 <span><Link to={`/dashboard/${currentUser.uid}`}><img src={Trello} alt="pic" /></Link></span>
@@ -42,9 +42,9 @@ function Menubar({ changeTheme,themeCheck }) {
 };
 export default Menubar
 
-function Atlassian({ showAtlassian, changeTheme,themeCheck }) {
+function Atlassian({ showAtlassian, changeTheme, themeCheck }) {
 
-    const changeMode = () => themeCheck ? {__html: 'Theme 🌞'} : {__html:'Theme 🌚'}
+    const changeMode = () => themeCheck ? { __html: 'Theme 🌞' } : { __html: 'Theme 🌚' }
 
     return (
         <div className="atlassian " style={{ display: showAtlassian ? 'block' : 'none' }} >

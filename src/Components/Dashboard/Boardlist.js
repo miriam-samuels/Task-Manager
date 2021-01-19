@@ -16,18 +16,18 @@ function BoardList({ boards }) {
         db.collection('users').doc(currentUser.uid).update({
             boards: boards.filter(elem => elem.id !== id)
         })
-        .then(() => {
-            console.log("Document successfully deleted!");
-        })
-        .catch(error => {
-            console.error("Error writing document: ", error);
-        });
+            .then(() => {
+                console.log("Document successfully deleted!");
+            })
+            .catch(error => {
+                console.error("Error writing document: ", error);
+            });
     }
     return (
         <>
             {
                 boards.map((board) => (
-                    <li key={board.id} className="boardlist" style={{backgroundImage:`url(${board.background}) , url(${Background1})` , backgroundSize: "cover",backgroundPosition:"center"}} >
+                    <li key={board.id} className="boardlist" style={{ backgroundImage: `url(${board.background}) , url(${Background1})`, backgroundSize: "cover", backgroundPosition: "center" }} >
                         <button className="deleteBoard" onClick={() => deleteBoard(board.id)}>X</button>
                         <h2 onClick={() => navigate(board.id)}>{board.title}</h2>
                     </li>

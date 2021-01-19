@@ -24,15 +24,15 @@ function Workspacelist({ id }) {
         let unmounted = false
         db.collection("users").doc(currentUser.uid).get().then(doc => {
             if (doc.exists && !unmounted) {
-                const arr =  doc.data().boards
+                const arr = doc.data().boards
                 arr.forEach(element => {
                     if (element.id === id) {
                         setTodos(element.todo)
                         setDoing(element.doing)
                         setDone(element.done)
-            }
+                    }
                 });
-            setboards(arr)
+                setboards(arr)
             } else {
                 console.log("No such document!");
             }
@@ -40,13 +40,13 @@ function Workspacelist({ id }) {
             console.log("Error getting document:", error);
         });
         return () => { unmounted = true };
-    },[boards,currentUser.uid,id])
+    }, [boards, currentUser.uid, id])
 
     const one = () => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
-                    element.todo.splice(0,0,ToDo)
+                    element.todo.splice(0, 0, ToDo)
                 }
             })
         )
@@ -58,9 +58,9 @@ function Workspacelist({ id }) {
     };
     const two = () => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
-                    element.doing.splice(0,0,doing)
+                    element.doing.splice(0, 0, doing)
                 }
             })
         )
@@ -72,9 +72,9 @@ function Workspacelist({ id }) {
     };
     const three = () => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
-                    element.done.splice(0,0,done)
+                    element.done.splice(0, 0, done)
                 }
             })
         )
@@ -87,10 +87,10 @@ function Workspacelist({ id }) {
     };
     const deleteTodo = (value) => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
                     const i = element.todo.indexOf(value);
-                    element.todo.splice(i,1)
+                    element.todo.splice(i, 1)
                 }
             })
         )
@@ -101,10 +101,10 @@ function Workspacelist({ id }) {
     }
     const deleteDoing = (value) => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
                     const i = element.todo.indexOf(value);
-                    element.doing.splice(i,1)
+                    element.doing.splice(i, 1)
                 }
             })
         )
@@ -114,10 +114,10 @@ function Workspacelist({ id }) {
     }
     const deleteDone = (value) => {
         setboards(
-            boards.forEach(element =>{
+            boards.forEach(element => {
                 if (element.id === id) {
                     const i = element.todo.indexOf(value);
-                    element.done.splice(i,1)
+                    element.done.splice(i, 1)
                 }
             })
         )

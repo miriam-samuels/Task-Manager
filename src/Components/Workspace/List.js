@@ -5,7 +5,7 @@ export const Todo = ({ Todos, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
     const [Index, setIndex] = useState(0)
-    
+
     const toggle = () => {
         setshow(show => !show)
     }
@@ -38,7 +38,7 @@ export const Doin = ({ Doing, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
     const [Index, setIndex] = useState(0)
-    
+
 
     const toggle = () => {
         setshow(show => !show)
@@ -72,7 +72,7 @@ export const Don = ({ Done, deleteItem }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
     const [Index, setIndex] = useState(0)
-    
+
 
     const toggle = () => {
         setshow(show => !show)

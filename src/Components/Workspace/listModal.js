@@ -36,7 +36,7 @@ const ListModal = ({ val, Index, option1, option2, deleteItem, show, toggle, pre
 
     const saveEdits = () => {
         setedits(
-            edits.forEach(element =>{
+            edits.forEach(element => {
                 if (element.id === id) {
                     element[present].splice(Index, 1, tex)
                 }
@@ -87,10 +87,10 @@ const MoveOption = ({ edits, option1, option2, showMove, val, present, moveCard,
         setpos(e.target.value)
     }
     const moveTodo = () => {
-        edits.forEach(element =>{
+        edits.forEach(element => {
             if (element.id === id) {
-                element[present].splice(Index,1)
-                element[moveto].splice(pos - 1,0,val)
+                element[present].splice(Index, 1)
+                element[moveto].splice(pos - 1, 0, val)
             }
         })
         db.collection('users').doc(currentUser.uid).update({

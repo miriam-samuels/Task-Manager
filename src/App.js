@@ -18,7 +18,7 @@ const App = () => {
                 <Switch>
                     <Route path={ROUTES.LANDING} exact component={Login} />
                     <Route path={ROUTES.RESET} exact component={Reset} />
-                    <Route path={ROUTES.HOMEPAGE} exact component = {Homepage} />
+                    <Route path={ROUTES.HOMEPAGE} exact component={Homepage} />
                     <PrivateRoute path={ROUTES.DASHBOARD} exact component={Dashboard} />
                     <PrivateRoute path={ROUTES.WORKSPACE} exact component={Workspace} />
                     <PrivateRoute path={ROUTES.EMAILUPDATE} exact component={EmailUpdate} />

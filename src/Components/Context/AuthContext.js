@@ -9,7 +9,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setcurrentUser] = useState( )
+    const [currentUser, setcurrentUser] = useState()
 
     const createUser = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     const passwordUpdate = password => {
         return auth.currentUser.updatePassword(password);
     }
-    const emailVerification = () =>{
+    const emailVerification = () => {
         return auth.currentUser.sendEmailVerification();
     }
     const generateId = () => {
@@ -55,12 +55,12 @@ export const AuthProvider = ({ children }) => {
     }
     )
     const theme = {
-        light : {
-            backroundColor:"white"
+        light: {
+            backroundColor: "white"
         },
-        dark : {
-            backgroundColor:"black",
-            color:"#1474c0"
+        dark: {
+            backgroundColor: "black",
+            color: "#1474c0"
         }
     }
     const value = {

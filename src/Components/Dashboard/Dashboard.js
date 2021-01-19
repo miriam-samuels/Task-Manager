@@ -21,7 +21,7 @@ function Boards() {
             }
         })
         return () => { unmounted = true };
-    },[boards,currentUser.uid,showModal])
+    }, [boards, currentUser.uid, showModal])
 
 
     const toggle = () => setshowModal(current => !current);
@@ -39,23 +39,23 @@ function Boards() {
             return;
         };
         db.collection('users').doc(currentUser.uid).update({
-                boards:firebase.firestore.FieldValue.arrayUnion({
-                    id: generateId(),
-                    title: title,
-                    timestamp: timestamp.toLocaleDateString(),
-                    visibility: visibility,
-                    background: background,
-                    todo: [],
-                    doing: [],
-                    done: [],
-                })
+            boards: firebase.firestore.FieldValue.arrayUnion({
+                id: generateId(),
+                title: title,
+                timestamp: timestamp.toLocaleDateString(),
+                visibility: visibility,
+                background: background,
+                todo: [],
+                doing: [],
+                done: [],
+            })
         })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch(error => {
-            console.error("Error writing document: ", error);
-        });
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch(error => {
+                console.error("Error writing document: ", error);
+            });
         settitle('');
         setshowModal(current => !current);
     }
@@ -67,7 +67,7 @@ function Boards() {
                 </li>
                 <BoardList boards={boards} />
             </ul>
-            <Modal styles={show} toggle={toggle} title={title} handleChange={handleChange} handleSubmit={handleSubmit} visibility={visibility} handleVisibility={handleVisibility} handleBg ={handleBg} boards={boards} />
+            <Modal styles={show} toggle={toggle} title={title} handleChange={handleChange} handleSubmit={handleSubmit} visibility={visibility} handleVisibility={handleVisibility} handleBg={handleBg} boards={boards} />
             <div style={{ display: 'none' }}>
             </div>
         </div>

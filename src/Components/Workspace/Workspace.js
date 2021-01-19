@@ -21,14 +21,14 @@ function Workspace() {
         let unmounted = false
         db.collection("users").doc(currentUser.uid).get().then(doc => {
             if (doc.exists && !unmounted) {
-                const arr =  doc.data().boards
+                const arr = doc.data().boards
                 arr.forEach(element => {
                     if (element.id === id) {
                         setbg(element.background)
                         settitle(element.title)
                         setvisibility(element.visibility)
                         settimestamp(element.timestamp)
-            }
+                    }
                 });
             } else {
                 console.log("No such document!");
@@ -37,10 +37,10 @@ function Workspace() {
             console.log("Error getting document:", error);
         });
         return () => { unmounted = true };
-    }, [currentUser.uid,id])
+    }, [currentUser.uid, id])
     const styles = {
         minHeight: '100vh',
-        backgroundImage: `url(${bg}) , url(${Background1})`, 
+        backgroundImage: `url(${bg}) , url(${Background1})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: '100%',

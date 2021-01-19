@@ -14,10 +14,10 @@ function Index() {
         db.collection('users').doc(currentUser.uid).get().then(doc => {
             if (doc.exists) {
                 setthemeCheck(doc.data().theme)
-                setthemeSet("theme gotten") 
+                setthemeSet("theme gotten")
             }
         })
-    }, [themeSet,currentUser.uid,themeCheck])
+    }, [themeSet, currentUser.uid, themeCheck])
 
     const changeTheme = () => {
         db.collection('users').doc(currentUser.uid).update({

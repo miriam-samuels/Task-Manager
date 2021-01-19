@@ -1,19 +1,19 @@
 import React from 'react'
 
-function Theme({ themeChange, themeCheck}) {
+function Theme({ themeChange, themeCheck }) {
     const themeStyles = {
-        position:"fixed",
-        bottom:"10%",
-        right:"5%",
-        fontSize:"70px",
-        border:"none",
-        background:"transparent"
-}
+        position: "fixed",
+        bottom: "10%",
+        right: "5%",
+        fontSize: "70px",
+        border: "none",
+        background: "transparent"
+    }
 
-    const changeMode = () => themeCheck ? {__html: '🌞'} : {__html:'🌚'}
+    const changeMode = () => themeCheck ? { __html: '🌞' } : { __html: '🌚' }
     return (
         <>
-           <button onClick={themeChange} style={themeStyles} dangerouslySetInnerHTML={changeMode()}></button>
+            <button onClick={themeChange} style={themeStyles} dangerouslySetInnerHTML={changeMode()}></button>
         </>
     )
 }

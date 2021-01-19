@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Hero from './Hero'
 import Team from './Team'
 import Info from './Info'
@@ -17,10 +17,10 @@ function Homepage() {
         db.collection('status').doc("xzCColgS8ftOetfeCKhH").get().then(doc => {
             if (doc.exists) {
                 setthemeCheck(doc.data().theme)
-                setthemeSet("theme gotten") 
+                setthemeSet("theme gotten")
             }
         })
-    }, [themeSet,themeCheck])
+    }, [themeSet, themeCheck])
     const themeChange = () => {
         db.collection('status').doc("xzCColgS8ftOetfeCKhH").update({
             theme: !themeCheck
@@ -39,7 +39,7 @@ function Homepage() {
             <section id="info">
                 <Info />
             </section>
-            <section id="workflow"> 
+            <section id="workflow">
                 <Workflow />
             </section>
             <section id="plan">
@@ -48,7 +48,7 @@ function Homepage() {
             <section id="footer">
                 <Footer />
             </section>
-            <Theme themeChange = {themeChange} themeCheck = {themeCheck} />
+            <Theme themeChange={themeChange} themeCheck={themeCheck} />
         </div>
     )
 }
