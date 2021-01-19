@@ -8,7 +8,7 @@ import { useAuth } from '../Context/AuthContext';
 import { db } from '../Firebase/Firebase'
 
 
-function Menubar({ changeTheme }) {
+function Menubar({ changeTheme,themeCheck }) {
     const [showAtlassian, setAtlassian] = useState(false);
     const [showTrelloicon, setTrelloicon] = useState(false);
     const [showBellicon, setBellicon] = useState(false);
@@ -25,7 +25,7 @@ function Menubar({ changeTheme }) {
             <div className="first">
                 <span className="icon" onClick={toggle1} ><img src={Grid} alt="pic" /></span>
                 <span className="icon" onClick={toggle2}><img src={Search} alt="pic" /></span>
-                <Atlassian showAtlassian={showAtlassian} changeTheme={changeTheme} />
+                <Atlassian showAtlassian={showAtlassian} changeTheme={changeTheme} themeCheck={themeCheck}/>
                 <Trelloicon showTrelloicon={showTrelloicon} /></div>
             <div className="second">
                 <span><Link to={`/dashboard/${currentUser.uid}`}><img src={Trello} alt="pic" /></Link></span>
@@ -42,13 +42,16 @@ function Menubar({ changeTheme }) {
 };
 export default Menubar
 
-function Atlassian({ showAtlassian, changeTheme }) {
+function Atlassian({ showAtlassian, changeTheme,themeCheck }) {
+
+    const changeMode = () => themeCheck ? {__html: 'Theme 🌞'} : {__html:'Theme 🌚'}
+
     return (
         <div className="atlassian " style={{ display: showAtlassian ? 'block' : 'none' }} >
             <h5> Theme Settings</h5>
             <ul>
                 {/* <li>Change Mode</li> */}
-                <li onClick={() => changeTheme()}>Change Theme Mode</li>
+                <li onClick={() => changeTheme()} dangerouslySetInnerHTML={changeMode()}></li>
             </ul>
         </div>
     );

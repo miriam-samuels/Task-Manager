@@ -27,7 +27,7 @@ function Index() {
     }
     return (
         <div className="dashboard" style={themeCheck ? theme.light : theme.dark}>
-            <Menubar changeTheme={changeTheme} />
+            <Menubar changeTheme={changeTheme} themeCheck={themeCheck} />
             <div className="personalBoard">
                 <h3><img src={User} alt="pic" />    Personal Boards</h3>
                 <Boards />
