@@ -15,11 +15,12 @@ import Background14 from '../Images/bg7.jpg';
 import Background15 from '../Images/bg8.jpg';
 function Modal({ styles, title, handleChange, handleSubmit, visibility, handleVisibility, toggle, handleBg, boards }) {
     let titlecheck;
+    const boardsClone = boards;
     const background = (e) => {
         document.getElementById("img").src = e.target.src;
         handleBg(e.target.src)
     }
-    boards.forEach(element => {
+    boardsClone.forEach(element => {
         if (element.title === title) {
             titlecheck = element.title
         }

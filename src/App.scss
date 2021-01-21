@@ -22,6 +22,7 @@ $color4 : rgb(196, 196, 196);
     background-color: #f8f8f8;
     border: 1px solid #D8D8D8;
     border-radius: 5px;
+    cursor: pointer;
 }
 @mixin submit-button($color,$width) {
     background-color: $color;
@@ -33,6 +34,7 @@ $color4 : rgb(196, 196, 196);
     border-radius: 8px;
     padding: 10px 15px;
     margin: 20px 5px;
+    cursor: pointer;
 }
 @mixin bg-img {
     background-size: cover;
@@ -45,7 +47,7 @@ $color4 : rgb(196, 196, 196);
   bottom: 0%;
   left: 0%;
   right: 0%;
-  background:rgba(0, 0, 0,0.5);
+  background:rgba(0, 0, 0,0.3);
   text-align: center;
   z-index: 1;
 }
@@ -102,7 +104,6 @@ $color4 : rgb(196, 196, 196);
   color: $color2;
 }
 .hero{
-  // @include grid(24,0);
   text-align: center;
   margin:0;
   padding: 5em 0;
@@ -200,6 +201,9 @@ $color4 : rgb(196, 196, 196);
   margin: 0;
   font-size: 14px;
 }
+.themebtn{
+  font-size: 50px
+}
 /* 
 ==========================
         LOGIN
@@ -237,6 +241,7 @@ $color4 : rgb(196, 196, 196);
     margin:0 6px ;
     color: blue;
     font-size: 13px;
+    cursor: pointer;
   }
   #login .login .others{
     @include submit-button(white,98%);
@@ -471,7 +476,7 @@ background-color: $color3;
 .workspacelist .todo .add .addcard{
   @include submit-button($color1,100px);
 }
-.todo .deleteBoard{
+.todo .deleteBoard,.openCard .deleteBoard{
   float: right;
   margin: 1px;
   background-color: transparent;
@@ -485,8 +490,8 @@ background-color: $color3;
   overflow-x: hidden;
   @include cover
  }
- .listModal div{
-  transform: translate(5%,5%);
+ .listModal .options{
+  transform: translate(0%,25%);
  }
  .listModal textarea{
    display: block;
@@ -496,21 +501,68 @@ background-color: $color3;
    border-radius: 5px;
    font-size: 18px;
  }
- .listModal .listContent button, .listModal .moveOption button{
+ .listModal .listContent button,.moveOption button{
    @include submit-button($color1,fit-content);
    margin: 10px 5px;
 }
- .listModal .moveOption select,.listModal .moveOption input{
-   width: 40%;
+ .moveOption select, .moveOption input{
+   width: 36%;
    padding: 10px;
    margin:5px;
    font-size: 16px;
  }
- .listModal .moveOption{
+.moveOption{
    @include abs-cen;
    @include submit-button(white,250px);
    color: gray;
+   text-align: center;
+ } 
+.openCard{
+  @include abs-cen;
+  @include submit-button(#f3f3f3,60%);
+  color: rgb(90, 90, 90);
+  text-align: left;
+  margin: 0;
  }
+.openCard .description p {
+   background-color:#D8D8D8 ;
+   padding: 10px;
+   margin: 0;
+   width: 60%;
+ }
+ .openCard .description textarea{
+   border:1px solid $color2;
+   border-radius: 0;
+   width: 60%;
+ }
+.openCard .deleteBoard {
+   font-size: 18px;
+ }
+ .openCard .description button{
+   @include submit-button(transparent,fit-content);
+   color: rgb(90, 90, 90);
+   font-size: 18px;
+ }
+ .openCard .description .save{
+   @include submit-button($color1,fit-content )
+ }
+ .listModal .listContent{
+   width: fit-content;
+ }
+ .listModal .listOption{
+   width: fit-content;
+ }
+ .listModal .listOption ul{
+   width: fit-content;
+ }
+.listModal .listOption ul li{
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #000000a7;
+  color: white;
+  border: transparent;
+  width: fit-content;
+}
   @media (min-width:600px){
     .plan{
       width: 50%;
@@ -521,6 +573,10 @@ background-color: $color3;
       width: 60%;
       padding: 30px;
       box-shadow: 2px 2px 6px 2px #D8D8D8;
+    }
+    .themebtn{
+      font-size: 60px
+    
     }
     // menubar
     #menubar{
@@ -579,6 +635,9 @@ background-color: $color3;
     }
     #homepage #hero #menubar .logo{
       width: 70%;
+    }
+    .themebtn{
+      font-size: 70px
     }
     .hero{
       width: 100%;

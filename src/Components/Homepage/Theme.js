@@ -5,7 +5,6 @@ function Theme({ themeChange, themeCheck }) {
         position: "fixed",
         bottom: "10%",
         right: "5%",
-        fontSize: "70px",
         border: "none",
         background: "transparent"
     }
@@ -13,7 +12,7 @@ function Theme({ themeChange, themeCheck }) {
     const changeMode = () => themeCheck ? { __html: '🌞' } : { __html: '🌚' }
     return (
         <>
-            <button onClick={themeChange} style={themeStyles} dangerouslySetInnerHTML={changeMode()}></button>
+            <button onClick={themeChange} style={themeStyles} dangerouslySetInnerHTML={changeMode()} className="themebtn"></button>
         </>
     )
 }
