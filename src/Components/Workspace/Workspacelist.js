@@ -1,72 +1,91 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { db } from '../Firebase/Firebase';
 import { Todo, Doin, Don } from './List';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
+import { useAuth } from '../Context/AuthContext';
 
-function Workspacelist({ id }) {
+function Workspacelist({ id, title, Todos, Doing, Done, boards }) {
     const [show, setshow] = useState(false);
     const [showDoing, setshowDoing] = useState(false);
     const [showDone, setshowDone] = useState(false);
 
-    const [Todos, setTodos] = useState([]);//Todolist
     const [ToDo, setToDo] = useState('');
-    const [Doing, setDoing] = useState([]);//Doinglist
     const [doing, setdoing] = useState('');
-    const [Done, setDone] = useState([]);//Donelist
     const [done, setdone] = useState('');
 
-    useEffect(() => {
-        let unmounted = false
-        db.collection("boards").doc(id).get().then(doc => {
-            if (doc.exists && !unmounted) {
-                setTodos(doc.data().todo);
-                setDoing(doc.data().doing);
-                setDone(doc.data().done)
-            } else {
-                console.log("No such document!");
-            }
-        }).catch(function (error) {
-            console.log("Error getting document:", error);
-        });
-        return () => { unmounted = true };
-    }, [Todos, doing, done, ToDo, id])
+    const { currentUser } = useAuth();
+
+    let disableAddTodo;
+    let disableAddDoing;
+    let disableAddDone;
+    Todos.forEach(elem => {
+        disableAddTodo = ToDo === "" || elem.name === ToDo
+    })
+    Doing.forEach(elem => {
+        disableAddDoing = doing === "" || elem.name === doing
+    })
+    Done.forEach(elem => {
+        disableAddDone = done === "" ||elem.name === done
+    })
 
     const one = () => {
-        db.collection('boards').doc(id).update({
-            todo: firebase.firestore.FieldValue.arrayUnion(ToDo)
+        const newCard = {
+            board: title,
+            name: ToDo,
+            description: "",
+            dueDate: "",
+            // comments: [],
+        }
+        const boardsClone = boards
+        boardsClone.forEach(element => {
+            if (element.id === id) {
+                element.todo.splice(0, 0, newCard);
+            }
         })
-
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boardsClone
+        })
         setToDo('')
     };
     const two = () => {
-        db.collection('boards').doc(id).update({
-            doing: firebase.firestore.FieldValue.arrayUnion(doing)
+        const newCard = {
+            board: title,
+            name: doing,
+            description: "",
+            dueDate: "",
+            // comments: [],
+        }
+        const boardsClone = boards
+        boardsClone.forEach(element => {
+            if (element.id === id) {
+                element.doing.splice(0, 0, newCard)
+            }
         })
-
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boardsClone
+        })
         setdoing('')
     };
     const three = () => {
-        db.collection('boards').doc(id).update({
-            done: firebase.firestore.FieldValue.arrayUnion(done)
+        const newCard = {
+            board: title,
+            name: done,
+            description: "",
+            dueDate: "",
+            // comments: [],
+        }
+        const boardsClone = boards
+        boardsClone.forEach(element => {
+            if (element.id === id) {
+                element.done.splice(0, 0, newCard)
+            }
         })
-
+        db.collection('users').doc(currentUser.uid).update({
+            boards: boardsClone
+        })
         setdone('')
     };
-    const deleteTodo = (value) => {
-        db.collection('boards').doc(id).update({
-            todo: firebase.firestore.FieldValue.arrayRemove(value)
-        })
-    }
-    const deleteDoing = (value) => {
-        db.collection('boards').doc(id).update({
-            doing: firebase.firestore.FieldValue.arrayRemove(value)
-        })
-    }
-    const deleteDone = (value) => {
-        db.collection('boards').doc(id).update({
-            done: firebase.firestore.FieldValue.arrayRemove(value)
-        })
-    }
+
     return (
         <div className="workspacelist" >
             <div className="todoCon">
@@ -74,12 +93,12 @@ function Workspacelist({ id }) {
                     <div>
                         <b>To Do</b>
                         <b>•••</b>
-                        <Todo Todos={Todos} deleteItem={deleteTodo} />
+                        <Todo Todos={Todos} boards={boards} />
                         <span onClick={() => { setshow(current => !current) }} style={{ display: show ? 'none' : 'block' }}>+ Add a card</span>
                     </div>
                     <div className="add" style={{ display: show ? 'block' : 'none' }}>
                         <textarea placeholder="Enter a title for this card..." value={ToDo} onChange={(e) => { setToDo(e.target.value) }} />
-                        <button className="addcard" onClick={one}>Add Card</button>
+                        <button className="addcard" onClick={one} disabled={disableAddTodo}>Add Card</button>
                         <button onClick={() => { setshow(current => !current) }}>X</button>
                         <button className="more">...</button>
                     </div>
@@ -89,12 +108,12 @@ function Workspacelist({ id }) {
                     <div>
                         <b>Doing</b>
                         <b>•••</b>
-                        <Doin Doing={Doing} deleteItem={deleteDoing} />
+                        <Doin Doing={Doing} boards={boards}/>
                         <span onClick={() => { setshowDoing(current => !current) }} style={{ display: showDoing ? 'none' : 'block' }}>+ Add a card</span>
                     </div>
                     <div className="add" style={{ display: showDoing ? 'block' : 'none' }}>
                         <textarea placeholder="Enter a title for this card..." value={doing} onChange={(e) => { setdoing(e.target.value) }} />
-                        <button className="addcard" onClick={two}>Add Card</button>
+                        <button className="addcard" onClick={two} disabled={disableAddDoing}>Add Card</button>
                         <button onClick={() => { setshowDoing(current => !current) }}>X</button>
                         <button className="more">...</button>
                     </div>
@@ -104,12 +123,12 @@ function Workspacelist({ id }) {
                     <div>
                         <b>Done</b>
                         <b>•••</b>
-                        <Don Done={Done} deleteItem={deleteDone} />
+                        <Don Done={Done} boards={boards} />
                         <span onClick={() => { setshowDone(current => !current) }} style={{ display: showDone ? 'none' : 'block' }}>+ Add a card</span>
                     </div>
                     <div className="add" style={{ display: showDone ? 'block' : 'none' }}>
                         <textarea placeholder="Enter a title for this card..." value={done} onChange={(e) => { setdone(e.target.value) }} />
-                        <button className="addcard" onClick={three}>Add Card</button>
+                        <button className="addcard" onClick={three} disabled={disableAddDone}>Add Card</button>
                         <button onClick={() => { setshowDone(current => !current) }}>X</button>
                         <button className="more">...</button>
                     </div>

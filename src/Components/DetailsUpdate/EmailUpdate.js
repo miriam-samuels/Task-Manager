@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Logo from '../Images/trello-logo-blue.png';
 import { useAuth } from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
@@ -15,14 +15,14 @@ function EmailUpdate() {
     const updateEmail = (e) => {
         e.preventDefault()
         emailUpdate(email)
-        .then( () =>{
-            history.push('/')
-            seterror(null)
-        })
-        .catch(error => {
-            seterror(error)
-        })
-    }   
+            .then(() => {
+                history.push('/')
+                seterror(null)
+            })
+            .catch(error => {
+                seterror(error)
+            })
+    }
     const isInvalid = email === '';
     return (
         <div id="page1">
