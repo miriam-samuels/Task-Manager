@@ -98,11 +98,11 @@ const OpenCard = ({ openCard, cardDetails, present, val, edits,id,Index }) => {
     }
     const saveDescription = () => {
         let newEdits = edits
-            newEdits.forEach(element => {
+            for(const element of newEdits){
                 if (element.id === id) {
                     element[present][Index].description = cardDescription
                 }
-            })
+            }
         db.collection('users').doc(currentUser.uid).update({
             boards: newEdits
         })
@@ -180,6 +180,7 @@ const MoveOption = ({ edits, option1, option2, showMove, val, present, moveCard,
         </div>
     )
 }
+
 const Timeline = ({ expire, timeline }) => {
     const timestyle = {
         display: timeline ? 'block' : 'none'
