@@ -36,11 +36,12 @@ html, body {
 }
 
 #homepage #hero #menubar .logo {
-  width: 47%;
+  width: 45%;
+  padding-left: 5px;
 }
 
 #homepage #hero #menubar .logo img {
-  width: 150px;
+  width: 130px;
 }
 
 #homepage #hero #menubar span button {
@@ -58,9 +59,19 @@ html, body {
   font-size: 16px;
 }
 
+#homepage #hero #menubar span {
+  width: 50%;
+  text-align: right;
+}
+
+#homepage #hero #menubar .sign {
+  width: fit-content;
+}
+
 #homepage #hero #menubar .sign button {
   background-color: #FFF;
   color: #1474c0;
+  width: 85px;
 }
 
 .hero, .team, .hinfo, .workflow {
