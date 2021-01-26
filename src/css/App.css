@@ -567,7 +567,7 @@ a {
 }
 
 .workspacelist .todo {
-  width: 260px;
+  width: 270px;
   height: fit-content;
   margin: 8px;
   padding: 10px;
@@ -581,10 +581,12 @@ a {
   float: right;
   border: none;
   font-size: 16px;
+  background-color: #ececec;
 }
 
 .workspacelist .todo .add .more {
   padding: 5px;
+  background-color: #dbdada;
 }
 
 .workspacelist .todo .more:hover {

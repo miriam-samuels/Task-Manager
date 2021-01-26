@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { db } from '../Firebase/Firebase';
 import Todo from './List';
 import { useAuth } from '../Context/AuthContext';
@@ -9,17 +9,12 @@ function Workspacelist({ id, title, lists, boards }) {
     const [listDetails, setlistDetails] = useState({})
     const [addList, setaddList] = useState(false)
     const [newListTitle, setnewListTitle] = useState("")
-    const [todoLists, settodoLists] = useState([])
     const [ToDo, setToDo] = useState('');
     const { currentUser } = useAuth();
 
-    let disableAddTodo;
-    let nameCheck;
-    useEffect(() => {
-        settodoLists(lists)
-    },[lists])
     const addTodo = (name) => {
         const boardsClone = boards
+        const todoLists = lists
         const newCard = {
             board: title,
             color: "",
@@ -28,13 +23,12 @@ function Workspacelist({ id, title, lists, boards }) {
             name: ToDo,
             strikedOut: false,
         }
-        settodoLists(
-            todoLists.forEach(todoList => {
-                if (todoList.name === name) {
-                    todoList.list.splice(0, 0, newCard);
-                }
-            })
-        )
+
+        todoLists.forEach(todoList => {
+            if (todoList.name === name) {
+                todoList.list.splice(0, 0, newCard);
+            }
+        })
         boardsClone.forEach(board => {
             if (board.id === id) {
                 board.lists = todoLists
@@ -47,11 +41,10 @@ function Workspacelist({ id, title, lists, boards }) {
     };
     const openDialogue = (name) => {
         const boardsClone = boards
+        const todoLists = lists
         todoLists.forEach(todoList => {
             if (todoList.name === name) {
                 todoList.isWriting = !todoList.isWriting;
-                disableAddTodo = ToDo === "" || ToDo === todoList.name
-                nameCheck = todoList.name
             }
             else {
                 todoList.isWriting = false
@@ -59,13 +52,14 @@ function Workspacelist({ id, title, lists, boards }) {
         })
         boardsClone.forEach(board => {
             if (board.id === id) {
-                board.lists = lists
+                board.lists = todoLists
             }
         })
         db.collection('users').doc(currentUser.uid).update({
             boards: boardsClone
         })
     };
+
     const addNewList = () => {
         const boardsClone = boards
         const newList = {
@@ -89,22 +83,21 @@ function Workspacelist({ id, title, lists, boards }) {
         setshow(show => !show)
         setlistDetails(todoList)
     }
-    const setp = () => {
-        if (nameCheck === ToDo) return { __html: 'Name already exists' };
-        else return { __html: '' };
-    }
-    if (todoLists) {
+
+    const disableAddTodo = ToDo === "";
+
+    if (lists) {
         return (
             <div className="workspacelist" >
                 <div className="wk">
                     <div className="todoCon">
                         {
-                            todoLists.map((todoList, index) => (
+                            lists.map((todoList, index) => (
                                 <div className="todo" key={index}>
                                     <div>
                                         <b>{todoList.name}</b>
                                         <button className="more" onClick={() => toggle(todoList)}>•••</button>
-                                        <Todo lists={todoLists} list={todoList.list} boards={boards} listName={todoList.name} />
+                                        <Todo lists={lists} list={todoList.list} boards={boards} listName={todoList.name} />
                                         <span onClick={() => openDialogue(todoList.name)} style={{ display: todoList.isWriting ? 'none' : 'block' }}>➕ Add a card</span>
                                     </div>
                                     <div className="add" style={{ display: todoList.isWriting ? 'block' : 'none' }}>
@@ -118,13 +111,12 @@ function Workspacelist({ id, title, lists, boards }) {
                         }
                         {
                             show ?
-                            <ListModal show={show} toggle={toggle} listDetails={listDetails} boards={boards} id={id} />:
-                            <></>
+                                <ListModal show={show} toggle={toggle} listDetails={listDetails} boards={boards} id={id} /> :
+                                <></>
                         }
                         {
                             addList ?
                                 <div className="todo addList">
-                                    <p dangerouslySetInnerHTML={setp()}></p>
                                     <input type="text" placeholder="Enter list title" value={newListTitle} onChange={(e) => setnewListTitle(e.target.value)} />
                                     <button onClick={addNewList}>Add List</button>
                                     <button onClick={() => setaddList(current => !current)}>X</button>

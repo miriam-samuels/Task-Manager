@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import Background1 from '../Images/bg3.jpg';
 import Background2 from '../Images/bg4.jpg';
 import Background3 from '../Images/house4.jpg';
@@ -69,4 +69,4 @@ function Modal({ styles, title, handleChange, handleSubmit, visibility, handleVi
         </div>
     )
 }
-export default Modal
+export default memo(Modal)

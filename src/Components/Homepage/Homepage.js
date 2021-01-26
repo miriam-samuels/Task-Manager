@@ -8,7 +8,7 @@ import Footer from './Footer'
 import Theme from './Theme'
 import { useAuth } from '../Context/AuthContext'
 
-const homeTheme = localStorage.getItem("theme") || false
+const homeTheme = localStorage.getItem("theme") || true
 function Homepage() {
     const [themeCheck, setthemeCheck] = useState(homeTheme);
     const { theme } = useAuth()

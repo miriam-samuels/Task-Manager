@@ -10,8 +10,8 @@ function Workspacebar({ title, visibility, timestamp }) {
                 <button>🕜 {timestamp}</button>
                 <button>🔏 {visibility}</button>
                 <button>📧 Invite</button>
-                <button>🕴️ Butler</button>
-                <button>... Show Menu</button>
+                {/* <button>🕴️ Butler</button> */}
+                {/* <button>... Show Menu</button> */}
             </div>
             <div className="content">
 

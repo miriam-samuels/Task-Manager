@@ -442,7 +442,7 @@ background-color: $color3;
   padding: 0px;
 }
 .workspacelist .todo{
-  width: 260px;
+  width: 270px;
   height: fit-content;
   margin:8px;
   padding: 10px ;
@@ -455,9 +455,11 @@ background-color: $color3;
   float: right;
   border: none;
   font-size: 16px;
+  background-color: #ececec;
 }
 .workspacelist .todo .add .more{
   padding: 5px;
+  background-color: #dbdada;
 }
 .workspacelist .todo .more:hover{
   background-color: #D8D8D8;

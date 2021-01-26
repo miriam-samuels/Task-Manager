@@ -24,16 +24,6 @@ function Workspace() {
         db.collection("users").doc(currentUser.uid).get().then(doc => {
             if (doc.exists && !unmounted) {
                 setboards(doc.data().boards)
-                const arr = boards
-                arr.forEach(element => {
-                    if (element.id === id) {
-                        setlists(element.lists)
-                        setbg(element.background)
-                        settitle(element.title)
-                        setvisibility(element.visibility)
-                        settimestamp(element.timestamp)
-                    }
-                });
             } else {
                 console.log("No such document!");
             }
@@ -41,6 +31,17 @@ function Workspace() {
             .catch(function (error) {
                 console.log("Error getting document:", error);
             });
+        if (boards) {
+            boards.forEach(element => {
+                if (element.id === id) {
+                    setlists(element.lists)
+                    setbg(element.background)
+                    settitle(element.title)
+                    setvisibility(element.visibility)
+                    settimestamp(element.timestamp)
+                }
+            });
+        }
         return () => { unmounted = true };
     }, [currentUser.uid, id, boards])
 
@@ -51,7 +52,7 @@ function Workspace() {
         backgroundPosition: "center",
         height: '100%',
     }
-    
+
     return (
         <div style={styles} id="workspace">
             <Menubar />
