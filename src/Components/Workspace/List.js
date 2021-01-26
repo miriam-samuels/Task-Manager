@@ -1,102 +1,40 @@
-import React, { useState } from 'react'
-import ListModal from './listModal';
+import React, { useState, memo } from 'react'
+import CardModal from './cardModal';
 
-export const Todo = ({ Todos, deleteItem }) => {
+const Todo = ({ lists,list,boards,listName }) => {
     const [show, setshow] = useState(false);
     const [selected, setselected] = useState("")
     const [Index, setIndex] = useState(0)
-
-    const toggle = () => {
+    const toggle = ()  => {
         setshow(show => !show)
     }
     const select = (item, index) => {
-        setselected(item)
-        setIndex(index)
+        setselected(item);
+        setIndex(index);
     }
     return (
         <>
             <ul>
                 {
-                    Todos.map((item, index) => (
+                    list.map((item, index) => (
                         <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
-                            <span>{item}</span>
+                            <button className="deleteBoard" onClick={() => {toggle();select(item, index)}}>•••</button>
+                            {
+                                item.strikedOut ? 
+                                <span><del>{item.name}</del></span>:
+                                <span>{item.name}</span>
+                            }
                         </li>
                     ))
                 }
             </ul>
             {
                 show ?
-                    <ListModal val={selected} Index={Index} present="todo" option1='doing' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} /> :
+                    <CardModal val={selected} boards={boards} Index={Index} lists={lists} list={list} present={listName} show={show} toggle={toggle} /> :
                     <></>
             }
         </>
     );
 };
 
-export const Doin = ({ Doing, deleteItem }) => {
-    const [show, setshow] = useState(false);
-    const [selected, setselected] = useState("")
-    const [Index, setIndex] = useState(0)
-
-    const toggle = () => {
-        setshow(show => !show)
-    }
-    const select = (item, index) => {
-        setselected(item)
-        setIndex(index)
-    }
-    return (
-        <>
-            <ul>
-                {
-                    Doing.map((item, index) => (
-                        <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
-                            <span>{item}</span>
-                        </li>
-                    ))
-                }
-            </ul>
-            {
-                show ?
-                    <ListModal val={selected} Index={Index} present="doing" option1='todo' option2="done" deleteItem={deleteItem} show={show} toggle={toggle} /> :
-                    <></>
-            }
-        </>
-    );
-};
-
-export const Don = ({ Done, deleteItem }) => {
-    const [show, setshow] = useState(false);
-    const [selected, setselected] = useState("")
-    const [Index, setIndex] = useState(0)
-
-    const toggle = () => {
-        setshow(show => !show)
-    }
-    const select = (item, index) => {
-        setselected(item)
-        setIndex(index)
-    }
-    return (
-        <>
-            <ul>
-                {
-                    Done.map((item, index) => (
-                        <li key={index}>
-                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
-                            <span>{item}</span>
-                        </li>
-                    ))
-                }
-            </ul>
-            {
-                show ?
-                    <ListModal val={selected} Index={Index} present="done" option1="todo" option2="doing" deleteItem={deleteItem} show={show} toggle={toggle} /> :
-                    <></>
-            }
-
-        </>
-    );
-};
+export default memo(Todo)

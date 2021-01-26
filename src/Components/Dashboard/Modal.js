@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import Background1 from '../Images/bg3.jpg';
 import Background2 from '../Images/bg4.jpg';
 import Background3 from '../Images/house4.jpg';
@@ -13,19 +13,32 @@ import Background12 from '../Images/bg5.jpg';
 import Background13 from '../Images/bg6.jpg';
 import Background14 from '../Images/bg7.jpg';
 import Background15 from '../Images/bg8.jpg';
-function Modal({ styles,title,handleChange,handleSubmit,visibility,handleVisibility,toggle,handleBg }) {
-
+function Modal({ styles, title, handleChange, handleSubmit, visibility, handleVisibility, toggle, handleBg, boards }) {
+    let titlecheck;
+    const boardsClone = boards;
     const background = (e) => {
         document.getElementById("img").src = e.target.src;
         handleBg(e.target.src)
     }
+    boardsClone.forEach(element => {
+        if (element.title === title) {
+            titlecheck = element.title
+        }
+    });
+    const setp = () => {
+        if (titlecheck === title) return { __html: 'Name already exists' };
+        else return { __html: '' };
+    }
+    const checkboards = title === titlecheck || title === ""
+
     return (
         <div id="modal" style={styles}>
             <div className="modal">
                 <div>
                     <img src={Background1} id="img" alt="pic" />
                     <div className="title">
-                        <input type="text" placeholder="Add board title" value={title} onChange={handleChange}/>
+                        <input type="text" placeholder="Add board title" value={title} onChange={handleChange} />
+                        <p dangerouslySetInnerHTML={setp()} />
                         <select value={visibility} onChange={handleVisibility}>
                             <option>Private</option>
                             <option>Public</option>
@@ -49,11 +62,11 @@ function Modal({ styles,title,handleChange,handleSubmit,visibility,handleVisibil
                     <span><img src={Background8} alt="pic" onClick={background} /></span>
                 </div>
                 <div className="new">
-                    <button onClick={handleSubmit}>Create Board</button>
+                    <button disabled={checkboards} onClick={handleSubmit}>Create Board</button>
                     <button onClick={toggle}>Cancel</button>
                 </div>
             </div>
         </div>
     )
 }
-export default React.memo(Modal)
+export default memo(Modal)

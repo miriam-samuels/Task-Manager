@@ -9,10 +9,13 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setcurrentUser] = useState( )
+    const [currentUser, setcurrentUser] = useState()
 
     const createUser = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password);
+    }
+    const signInMethods = (email) => {
+        return auth.fetchSignInMethodsForEmail(email);
     }
     const signInGoogleUser = () => {
         return auth.signInWithPopup(provider)
@@ -32,6 +35,14 @@ export const AuthProvider = ({ children }) => {
     const passwordUpdate = password => {
         return auth.currentUser.updatePassword(password);
     }
+    const emailVerification = () => {
+        return auth.currentUser.sendEmailVerification();
+    }
+    const generateId = () => {
+        return Math.floor((1 + Math.random()) * 0x100000000000000)
+            .toString(16)
+            .substring(1);
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -47,12 +58,12 @@ export const AuthProvider = ({ children }) => {
     }
     )
     const theme = {
-        light : {
-            backroundColor:"white"
+        light: {
+            backroundColor: "white"
         },
-        dark : {
-            backgroundColor:"black",
-            color:"#1474c0"
+        dark: {
+            backgroundColor: "black",
+            color: "#1474c0"
         }
     }
     const value = {
@@ -64,7 +75,10 @@ export const AuthProvider = ({ children }) => {
         passwordReset,
         emailUpdate,
         passwordUpdate,
+        emailVerification,
         signInGoogleUser,
+        signInMethods,
+        generateId,
     }
     return (
         <FirebaseContext.Provider value={value}>
