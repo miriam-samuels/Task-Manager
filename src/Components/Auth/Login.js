@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Logo from '../Images/trello-logo-blue.png';
 import { useAuth } from '../Context/AuthContext';
@@ -32,6 +32,7 @@ function LoginForm() {
     const onChangePassword = (e) => {
         e.preventDefault()
         setpassword(e.target.value)
+        seterror(null)
     }
     const handleLogin = (e) => {
         e.preventDefault();
@@ -67,6 +68,7 @@ function LoginForm() {
     const googleSignIn = () => {
         signInGoogleUser()
             .then(user => {
+                seterror(null)
                 db.collection('users').doc(user.user.uid).set({
                     theme: false,
                     boards: [],
@@ -76,9 +78,9 @@ function LoginForm() {
                 }).catch(error => {
                     console.log("An Error Occured")
                 });
-                seterror(null)
+                history.push(`/dashboard/${user.user.uid}`)
             })
-            .catch((error) => {
+            .catch(error => {
                 seterror(error)
             });
 
@@ -126,4 +128,21 @@ function LoginForm() {
         </div>
     )
 }
-export default React.memo(Login)
+export default memo(Login)
+
+                // if (error.code === 'auth/account-exists-with-different-credential') {
+                //     const pendingCred = error.credential;
+                //     const email = error.email;
+                //     signInMethods(email)
+                //         .then(() => {
+                //             let password = prompt('Enter Password');
+                //             signIn(email, password)
+                //                 .then(result => {
+                //                     seterror(null)
+                //                     result.user.linkWithCredential(pendingCred);
+                //                 })
+                //                 .catch(error => {
+                //                     seterror(error)
+                //                 });
+                //         });
+                // };

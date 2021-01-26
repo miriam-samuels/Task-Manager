@@ -14,6 +14,9 @@ export const AuthProvider = ({ children }) => {
     const createUser = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password);
     }
+    const signInMethods = (email) => {
+        return auth.fetchSignInMethodsForEmail(email);
+    }
     const signInGoogleUser = () => {
         return auth.signInWithPopup(provider)
     }
@@ -74,6 +77,7 @@ export const AuthProvider = ({ children }) => {
         passwordUpdate,
         emailVerification,
         signInGoogleUser,
+        signInMethods,
         generateId,
     }
     return (

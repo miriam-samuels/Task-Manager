@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Background1 from '../Images/bg3.jpg';
 import { useHistory } from 'react-router-dom';
 import { db } from '../Firebase/Firebase';
@@ -21,16 +21,16 @@ function BoardList({ boards }) {
             {
                 boards.map((board) => (
                     <li key={board.id} className="boardlist" style={{ backgroundImage: `url(${board.background}) , url(${Background1})`, backgroundSize: "cover", backgroundPosition: "center" }} >
-                        <button className="deleteBoard" onClick={() => {setboardId(board.id);toggle()}}>X</button>
+                        <button className="deleteBoard" onClick={() => { setboardId(board.id); toggle() }}>X</button>
                         <h2 onClick={() => navigate(board.id)}>{board.title}</h2>
                     </li>
                 ))}
-                <DelMsg showDelMsg={showDelMsg} boardId={boardId} boards={boards} toggle={toggle}/>
+            <DelMsg showDelMsg={showDelMsg} boardId={boardId} boards={boards} toggle={toggle} />
         </>
     )
 }
 export default BoardList
-const DelMsg = ({ boards,boardId,showDelMsg,toggle }) => {
+const DelMsg = ({ boards, boardId, showDelMsg, toggle }) => {
 
     const { currentUser } = useAuth()
 
@@ -47,12 +47,13 @@ const DelMsg = ({ boards,boardId,showDelMsg,toggle }) => {
             .catch(error => {
                 console.error("Error writing document: ", error);
             });
+        toggle()
     }
-    return(
+    return (
         <div className="moveOption" style={delStyle} >
             <h2>Delete Card</h2>
             <button onClick={deleteBoard}>Delete</button>
-            <button onClick={toggle}>Cancle</button>
+            <button onClick={toggle}>Cancel</button>
         </div>
     )
 }

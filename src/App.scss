@@ -89,28 +89,19 @@ $color4 : rgb(196, 196, 196);
   top: 0%;
 }
 #homepage #hero #menubar .logo{
-  width: 45%;
-  padding-left:5px ;
+  width: 47%;
 }
 #homepage #hero #menubar .logo img{
-  width: 130px;
+  width: 150px;
 }
 #homepage #hero #menubar span button{
   @include submit-button($color2,fit-content );
   padding: 10px ;
-  font-size: 16px; 
-}
-#homepage #hero #menubar span{
-  width: 50%;
-  text-align: right;
-}
-#homepage #hero #menubar .sign{
-  width: fit-content;
+  font-size: 16px;
 }
 #homepage #hero #menubar .sign button{
   background-color: #FFF;
   color: $color2;
-  width: 85px;
 }
 .hero{
   text-align: center;
@@ -429,35 +420,46 @@ background-color: $color3;
   @include submit-button($color3,fit-content);
   margin:5px;
 }
-.workspacelist::-webkit-scrollbar{
-  display: none;
+.workspacelist .wk::-webkit-scrollbar{
+  background: transparent;
 }
 .workspacelist{
+  position: relative;
   width: 100%;
+}
+.workspacelist .wk{
   overflow-x: scroll;
+  scroll-behavior: smooth; 
+  min-height: 100vh;
+  height: 100%;
 }
 .workspacelist .todoCon{
-  width: 1199px;
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: column;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0px;
 }
 .workspacelist .todo{
-  width: 300px;
+  width: 260px;
+  height: fit-content;
   margin:8px;
   padding: 10px ;
   background-color: #ececec;
-  display: inline-block;
   vertical-align: top;
   cursor: pointer;
+  border-radius: 5px;
 }
-.workspacelist .todo b{
-  margin: 0 20px;
-  color: rgb(63, 63, 63);
-}
-.workspacelist .todo b:nth-child(2),.workspacelist .todo .add .more{
+.workspacelist .todo .more{
   float: right;
-  padding: 0px 10px 5px 10px;
-  font-weight: bold;
+  border: none;
+  font-size: 16px;
 }
-.workspacelist .todo b:nth-child(2):hover,.workspacelist .todo .add .more:hover{
+.workspacelist .todo .add .more{
+  padding: 5px;
+}
+.workspacelist .todo .more:hover{
   background-color: #D8D8D8;
 }
 .workspacelist .todo span{
@@ -478,11 +480,11 @@ background-color: $color3;
   @include input;
   background-color: #FFF;
 }
-.workspacelist .todo .add button{
+.workspacelist  .add button{
   @include submit-button($color4,46px);
   font-size: 16px;
 }
-.workspacelist .todo .add .addcard{
+.workspacelist  .add .addcard{
   @include submit-button($color1,100px);
 }
 .todo .deleteBoard,.openCard .deleteBoard{
@@ -528,21 +530,30 @@ background-color: $color3;
  } 
 .openCard{
   @include abs-cen;
-  @include submit-button(#f3f3f3,60%);
+  @include submit-button(#f3f3f3,80%);
   color: rgb(90, 90, 90);
   text-align: left;
   margin: 0;
+  padding: 0;
+ }
+ .openCard .heading{
+   background-color: white;
+   padding: 2em;
+   border-radius: 10px;
+ }
+ .openCard .description{
+   padding: 2em;
  }
 .openCard .description p {
    background-color:#D8D8D8 ;
    padding: 10px;
    margin: 0;
-   width: 60%;
+   width: 90%;
  }
  .openCard .description textarea{
    border:1px solid $color2;
    border-radius: 0;
-   width: 60%;
+   width: 80%;
  }
 .openCard .deleteBoard {
    font-size: 18px;
@@ -571,6 +582,15 @@ background-color: $color3;
   color: white;
   border: transparent;
   width: fit-content;
+}
+.addList input{
+  display: block;
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+.addList button{
+  @include submit-button($color2,fit-content);
+  margin: 5px;
 }
   @media (min-width:600px){
     .plan{
@@ -661,6 +681,25 @@ background-color: $color3;
     .infoWords{
       width: 100%;
     }
+    .openCard{
+      @include submit-button(#f3f3f3,55%);
+      color: rgb(90, 90, 90);
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+    .openCard .description p {
+      background-color:#D8D8D8 ;
+      padding: 10px;
+      margin: 0;
+      width: 70%;
+    }
+    .openCard .description textarea{
+      border:1px solid $color2;
+      border-radius: 0;
+      width: 55%;
+    }
+
   }
   @media (min-width:1200px){
     #login{
@@ -676,9 +715,7 @@ background-color: $color3;
     #modal .modal{
       width: 40%;
      }
-     .workspacelist .todoCon{
-      width: fit-content;
-    }
+
     #homepage h1{
       font-size: 40px;
     }

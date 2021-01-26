@@ -15,14 +15,14 @@ function Boards() {
     const timestamp = new Date();
     useEffect(() => {
         let unmounted = false
-        db.collection('users').doc(currentUser.uid).get().then(doc => {
+        db.collection('users').doc(currentUser.uid).get()
+        .then(doc => {
             if (doc.exists && !unmounted) {
                 setboards(doc.data().boards)
             }
         })
         return () => { unmounted = true };
-    }, [boards, currentUser.uid, showModal])
-
+    }, [boards, currentUser.uid])
 
     const toggle = () => setshowModal(current => !current);
 
@@ -45,9 +45,23 @@ function Boards() {
                 timestamp: timestamp.toLocaleDateString(),
                 visibility: visibility,
                 background: background,
-                todo: [],
-                doing: [],
-                done: [],
+                lists:[
+                    {
+                        name:"todo",
+                        list:[],
+                        isWriting:false,
+                    },
+                    {
+                        name:"doing",
+                        list:[],
+                        isWriting:false,
+                    },
+                    {
+                        name:"done",
+                        list:[],
+                        isWriting:false,
+                    },
+                ],
             })
         })
             .then(() => {

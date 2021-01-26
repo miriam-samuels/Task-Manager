@@ -1,45 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { db } from '../Firebase/Firebase';
-import { Todo, Doin, Don } from './List';
-// import firebase from 'firebase/app';
+import Todo from './List';
 import { useAuth } from '../Context/AuthContext';
+import ListModal from './ListModal';
 
-function Workspacelist({ id, title, Todos, Doing, Done, boards }) {
+function Workspacelist({ id, title, lists, boards }) {
     const [show, setshow] = useState(false);
-    const [showDoing, setshowDoing] = useState(false);
-    const [showDone, setshowDone] = useState(false);
-
+    const [listDetails, setlistDetails] = useState({})
+    const [addList, setaddList] = useState(false)
+    const [newListTitle, setnewListTitle] = useState("")
+    const [todoLists, settodoLists] = useState([])
     const [ToDo, setToDo] = useState('');
-    const [doing, setdoing] = useState('');
-    const [done, setdone] = useState('');
-
     const { currentUser } = useAuth();
 
     let disableAddTodo;
-    let disableAddDoing;
-    let disableAddDone;
-    Todos.forEach(elem => {
-        disableAddTodo = ToDo === "" || elem.name === ToDo
-    })
-    Doing.forEach(elem => {
-        disableAddDoing = doing === "" || elem.name === doing
-    })
-    Done.forEach(elem => {
-        disableAddDone = done === "" ||elem.name === done
-    })
-
-    const one = () => {
+    useEffect(() => {
+        settodoLists(lists)
+    },[lists])
+    const addTodo = (name) => {
+        const boardsClone = boards
         const newCard = {
             board: title,
-            name: ToDo,
+            color: "",
             description: "",
-            dueDate: "",
-            // comments: [],
+            dueDate: new Date(),
+            name: ToDo,
+            strikedOut: false,
         }
-        const boardsClone = boards
-        boardsClone.forEach(element => {
-            if (element.id === id) {
-                element.todo.splice(0, 0, newCard);
+        settodoLists(
+            todoLists.forEach(todoList => {
+                if (todoList.name === name) {
+                    todoList.list.splice(0, 0, newCard);
+                }
+            })
+        )
+        boardsClone.forEach(board => {
+            if (board.id === id) {
+                board.lists = todoLists
             }
         })
         db.collection('users').doc(currentUser.uid).update({
@@ -47,96 +44,102 @@ function Workspacelist({ id, title, Todos, Doing, Done, boards }) {
         })
         setToDo('')
     };
-    const two = () => {
-        const newCard = {
-            board: title,
-            name: doing,
-            description: "",
-            dueDate: "",
-            // comments: [],
-        }
+    const openDialogue = (name) => {
         const boardsClone = boards
-        boardsClone.forEach(element => {
-            if (element.id === id) {
-                element.doing.splice(0, 0, newCard)
+        todoLists.forEach(todoList => {
+            if (todoList.name === name) {
+                todoList.isWriting = !todoList.isWriting;
+                disableAddTodo = ToDo === "" || ToDo === todoList.name
+
+            }
+            else {
+                todoList.isWriting = false
+            }
+        })
+        boardsClone.forEach(board => {
+            if (board.id === id) {
+                board.lists = lists
             }
         })
         db.collection('users').doc(currentUser.uid).update({
             boards: boardsClone
         })
-        setdoing('')
     };
-    const three = () => {
-        const newCard = {
-            board: title,
-            name: done,
-            description: "",
-            dueDate: "",
-            // comments: [],
-        }
+    const addNewList = () => {
         const boardsClone = boards
-        boardsClone.forEach(element => {
-            if (element.id === id) {
-                element.done.splice(0, 0, newCard)
+        const newList = {
+            name: newListTitle,
+            list: [],
+            isWriting: false,
+        };
+        boardsClone.forEach(board => {
+            if (board.id === id) {
+                const newItem = board.lists.concat(newList)
+                board.lists = newItem
             }
         })
         db.collection('users').doc(currentUser.uid).update({
             boards: boardsClone
         })
-        setdone('')
-    };
-
-    return (
-        <div className="workspacelist" >
-            <div className="todoCon">
-                <div className="todo">
-                    <div>
-                        <b>To Do</b>
-                        <b>•••</b>
-                        <Todo Todos={Todos} boards={boards} />
-                        <span onClick={() => { setshow(current => !current) }} style={{ display: show ? 'none' : 'block' }}>+ Add a card</span>
-                    </div>
-                    <div className="add" style={{ display: show ? 'block' : 'none' }}>
-                        <textarea placeholder="Enter a title for this card..." value={ToDo} onChange={(e) => { setToDo(e.target.value) }} />
-                        <button className="addcard" onClick={one} disabled={disableAddTodo}>Add Card</button>
-                        <button onClick={() => { setshow(current => !current) }}>X</button>
-                        <button className="more">...</button>
-                    </div>
-                </div>
-
-                <div className="todo">
-                    <div>
-                        <b>Doing</b>
-                        <b>•••</b>
-                        <Doin Doing={Doing} boards={boards}/>
-                        <span onClick={() => { setshowDoing(current => !current) }} style={{ display: showDoing ? 'none' : 'block' }}>+ Add a card</span>
-                    </div>
-                    <div className="add" style={{ display: showDoing ? 'block' : 'none' }}>
-                        <textarea placeholder="Enter a title for this card..." value={doing} onChange={(e) => { setdoing(e.target.value) }} />
-                        <button className="addcard" onClick={two} disabled={disableAddDoing}>Add Card</button>
-                        <button onClick={() => { setshowDoing(current => !current) }}>X</button>
-                        <button className="more">...</button>
-                    </div>
-                </div>
-
-                <div className="todo">
-                    <div>
-                        <b>Done</b>
-                        <b>•••</b>
-                        <Don Done={Done} boards={boards} />
-                        <span onClick={() => { setshowDone(current => !current) }} style={{ display: showDone ? 'none' : 'block' }}>+ Add a card</span>
-                    </div>
-                    <div className="add" style={{ display: showDone ? 'block' : 'none' }}>
-                        <textarea placeholder="Enter a title for this card..." value={done} onChange={(e) => { setdone(e.target.value) }} />
-                        <button className="addcard" onClick={three} disabled={disableAddDone}>Add Card</button>
-                        <button onClick={() => { setshowDone(current => !current) }}>X</button>
-                        <button className="more">...</button>
+        setnewListTitle("")
+        setaddList(current => !current)
+    }
+    const toggle = (todoList) => {
+        setshow(show => !show)
+        setlistDetails(todoList)
+    }
+    if (todoLists) {
+        return (
+            <div className="workspacelist" >
+                <div className="wk">
+                    <div className="todoCon">
+                        {
+                            todoLists.map((todoList, index) => (
+                                <div className="todo" key={index}>
+                                    <div>
+                                        <b>{todoList.name}</b>
+                                        <button className="more" onClick={() => toggle(todoList)}>•••</button>
+                                        <Todo lists={todoLists} list={todoList.list} boards={boards} listDetails={todoList.name} />
+                                        <span onClick={() => openDialogue(todoList.name)} style={{ display: todoList.isWriting ? 'none' : 'block' }}>➕ Add a card</span>
+                                    </div>
+                                    <div className="add" style={{ display: todoList.isWriting ? 'block' : 'none' }}>
+                                        <textarea placeholder="Enter a title for this card..." value={ToDo} onChange={(e) => setToDo(e.currentTarget.value)} />
+                                        <button className="addcard" onClick={() => addTodo(todoList.name)} disabled={disableAddTodo}>Add Card</button>
+                                        <button onClick={() => openDialogue(todoList.name)}>X</button>
+                                        <button className="more">•••</button>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                        {
+                            show ?
+                            <ListModal show={show} toggle={toggle} listDetails={listDetails} boards={boards} id={id} />:
+                            <></>
+                        }
+                        {
+                            addList ?
+                                <div className="todo addList">
+                                    <input type="text" placeholder="Enter list title" value={newListTitle} onChange={(e) => setnewListTitle(e.target.value)} />
+                                    <button onClick={addNewList}>Add List</button>
+                                    <button onClick={() => setaddList(current => !current)}>X</button>
+                                </div> :
+                                <div className="todo" onClick={() => setaddList(current => !current)}>
+                                    ➕ Add another list
+                                </div>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    else {
+        return (
+            <h1 style={{ color: "white" }}>
+                Loading...
+            </h1>
+        )
+    }
 }
 
-export default Workspacelist
+export default memo(Workspacelist)
 

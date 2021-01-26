@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Hero from './Hero'
 import Team from './Team'
 import Info from './Info'
@@ -7,25 +7,14 @@ import Plan from './Plan'
 import Footer from './Footer'
 import Theme from './Theme'
 import { useAuth } from '../Context/AuthContext'
-import { db } from '../Firebase/Firebase'
 
+const homeTheme = localStorage.getItem("theme") || false
 function Homepage() {
-    const [themeCheck, setthemeCheck] = useState(false);
-    const [themeSet, setthemeSet] = useState("");
+    const [themeCheck, setthemeCheck] = useState(homeTheme);
     const { theme } = useAuth()
-    useEffect(() => {
-        db.collection('status').doc("xzCColgS8ftOetfeCKhH").get().then(doc => {
-            if (doc.exists) {
-                setthemeCheck(doc.data().theme)
-                setthemeSet("theme gotten")
-            }
-        })
-    }, [themeSet, themeCheck])
+    localStorage.setItem("theme", themeCheck)
     const themeChange = () => {
-        db.collection('status').doc("xzCColgS8ftOetfeCKhH").update({
-            theme: !themeCheck
-        })
-        setthemeSet("theme set")
+        setthemeCheck(current => !current)
     }
 
     return (

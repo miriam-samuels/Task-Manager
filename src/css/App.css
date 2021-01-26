@@ -36,12 +36,11 @@ html, body {
 }
 
 #homepage #hero #menubar .logo {
-  width: 45%;
-  padding-left: 5px;
+  width: 47%;
 }
 
 #homepage #hero #menubar .logo img {
-  width: 130px;
+  width: 150px;
 }
 
 #homepage #hero #menubar span button {
@@ -59,19 +58,9 @@ html, body {
   font-size: 16px;
 }
 
-#homepage #hero #menubar span {
-  width: 50%;
-  text-align: right;
-}
-
-#homepage #hero #menubar .sign {
-  width: fit-content;
-}
-
 #homepage #hero #menubar .sign button {
   background-color: #FFF;
   color: #1474c0;
-  width: 85px;
 }
 
 .hero, .team, .hinfo, .workflow {
@@ -552,41 +541,53 @@ a {
   margin: 5px;
 }
 
-.workspacelist::-webkit-scrollbar {
-  display: none;
+.workspacelist .wk::-webkit-scrollbar {
+  background: transparent;
 }
 
 .workspacelist {
+  position: relative;
   width: 100%;
+}
+
+.workspacelist .wk {
   overflow-x: scroll;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  height: 100%;
 }
 
 .workspacelist .todoCon {
-  width: 1199px;
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: column;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0px;
 }
 
 .workspacelist .todo {
-  width: 300px;
+  width: 260px;
+  height: fit-content;
   margin: 8px;
   padding: 10px;
   background-color: #ececec;
-  display: inline-block;
   vertical-align: top;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-.workspacelist .todo b {
-  margin: 0 20px;
-  color: #3f3f3f;
-}
-
-.workspacelist .todo b:nth-child(2), .workspacelist .todo .add .more {
+.workspacelist .todo .more {
   float: right;
-  padding: 0px 10px 5px 10px;
-  font-weight: bold;
+  border: none;
+  font-size: 16px;
 }
 
-.workspacelist .todo b:nth-child(2):hover, .workspacelist .todo .add .more:hover {
+.workspacelist .todo .add .more {
+  padding: 5px;
+}
+
+.workspacelist .todo .more:hover {
   background-color: #D8D8D8;
 }
 
@@ -630,7 +631,7 @@ a {
   background-color: #FFF;
 }
 
-.workspacelist .todo .add button {
+.workspacelist .add button {
   background-color: #c4c4c4;
   width: 46px;
   color: #FFF;
@@ -644,7 +645,7 @@ a {
   font-size: 16px;
 }
 
-.workspacelist .todo .add .addcard {
+.workspacelist .add .addcard {
   background-color: #4caf50;
   width: 100px;
   color: #FFF;
@@ -739,7 +740,7 @@ a {
   right: 50%;
   transform: translate(50%, -50%);
   background-color: #f3f3f3;
-  width: 60%;
+  width: 80%;
   color: #FFF;
   font-size: 15px;
   font-weight: bold;
@@ -751,19 +752,30 @@ a {
   color: #5a5a5a;
   text-align: left;
   margin: 0;
+  padding: 0;
+}
+
+.openCard .heading {
+  background-color: white;
+  padding: 2em;
+  border-radius: 10px;
+}
+
+.openCard .description {
+  padding: 2em;
 }
 
 .openCard .description p {
   background-color: #D8D8D8;
   padding: 10px;
   margin: 0;
-  width: 60%;
+  width: 90%;
 }
 
 .openCard .description textarea {
   border: 1px solid #1474c0;
   border-radius: 0;
-  width: 60%;
+  width: 80%;
 }
 
 .openCard .deleteBoard {
@@ -817,6 +829,26 @@ a {
   color: white;
   border: transparent;
   width: fit-content;
+}
+
+.addList input {
+  display: block;
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+
+.addList button {
+  background-color: #1474c0;
+  width: fit-content;
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  margin: 5px;
 }
 
 @media (min-width: 600px) {
@@ -912,6 +944,33 @@ a {
   .infoWords {
     width: 100%;
   }
+  .openCard {
+    background-color: #f3f3f3;
+    width: 55%;
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 20px 5px;
+    cursor: pointer;
+    color: #5a5a5a;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+  .openCard .description p {
+    background-color: #D8D8D8;
+    padding: 10px;
+    margin: 0;
+    width: 70%;
+  }
+  .openCard .description textarea {
+    border: 1px solid #1474c0;
+    border-radius: 0;
+    width: 55%;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -929,9 +988,6 @@ a {
   }
   #modal .modal {
     width: 40%;
-  }
-  .workspacelist .todoCon {
-    width: fit-content;
   }
   #homepage h1 {
     font-size: 40px;
