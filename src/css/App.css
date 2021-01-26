@@ -739,6 +739,7 @@ a {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  top: 40%;
   background-color: #f3f3f3;
   width: 80%;
   color: #FFF;
