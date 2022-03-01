@@ -5,7 +5,7 @@ import { auth, provider } from '../Firebase/Firebase';
 const FirebaseContext = React.createContext();
 
 export const useAuth = () => {
-    return useContext(FirebaseContext)
+    return useContext(FirebaseContext);
 }
 
 export const AuthProvider = ({ children }) => {
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
         },
         dark: {
             backgroundColor: "black",
-            color: "#1474c0"
+            color: "white"
         }
     }
     const value = {

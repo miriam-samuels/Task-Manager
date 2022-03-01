@@ -1,8 +1,8 @@
 import React, { useState, useEffect, memo } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import Logo from '../Images/trello-logo-blue.png';
+import Logo from '../Images/mitareas logo.png';
 import { useAuth } from '../Context/AuthContext';
-import { db } from '../Firebase/Firebase';
+import { db, provider } from '../Firebase/Firebase';
 
 const Login = () => {
     return (
@@ -19,71 +19,44 @@ function LoginForm() {
     const history = useHistory()
     const { createUser, signIn, currentUser, signInGoogleUser, emailVerification } = useAuth()
 
-    useEffect(() => {
-        if (currentUser) {
-            history.push(`/dashboard/${currentUser.uid}`)
-        }
-    })
+    useEffect(() => { if (currentUser) history.push(`/`) })
 
-    const onChangeEmail = (e) => {
-        e.preventDefault()
-        setemail(e.target.value)
-    }
-    const onChangePassword = (e) => {
-        e.preventDefault()
-        setpassword(e.target.value)
-        seterror(null)
-    }
+    const onChangeEmail = (e) => { e.preventDefault(); setemail(e.target.value) }
+    const onChangePassword = (e) => { e.preventDefault(); setpassword(e.target.value); seterror(null) }
+
     const handleLogin = (e) => {
         e.preventDefault();
-
         signIn(email, password)
-            .then(() => {
-                seterror(null)
-            })
-            .catch(error => {
-                seterror(error)
-            })
+            .then(() => seterror(null))
+            .catch(error => seterror(error))
     }
+
     const handleSignup = (e) => {
         e.preventDefault()
         createUser(email, password)
             .then(user => {
                 seterror(null)
-                db.collection('users').doc(user.user.uid).set({
-                    theme: false,
-                    boards: [],
-                })
-                emailVerification().then(() => {
-                    console.log("Email Sent")
-                }).catch(error => {
-                    console.log("An Error Occured")
-                });
+                db.collection('users').doc(user.user.uid).set({ theme: false, boards: [], })
+                emailVerification()
+                    .then(() => console.log("Email Sent"))
+                    .catch(() => console.log("An Error Occured"));
             })
-            .catch(error => {
-                seterror(error)
-            })
+            .catch(error => seterror(error))
     }
 
     const googleSignIn = () => {
-        signInGoogleUser()
+        signInGoogleUser(provider)
             .then(user => {
                 seterror(null)
-                db.collection('users').doc(user.user.uid).set({
-                    theme: false,
-                    boards: [],
-                })
-                emailVerification().then(() => {
-                    console.log("Email Sent")
-                }).catch(error => {
-                    console.log("An Error Occured")
-                });
-                history.push(`/dashboard/${user.user.uid}`)
+                const docref = db.collection('users').doc(user.user.uid)
+                if (docref.exists === false) {
+                    docref.set({ theme: false, boards: [], })
+                    emailVerification()
+                        .then(() => console.log("Email Sent"))
+                        .catch(error => console.log("An Error Occured"));
+                }
             })
-            .catch(error => {
-                seterror(error)
-            });
-
+            .catch(error => seterror(error));
     }
 
     const isInvalid = email === '' || password === '';
@@ -129,20 +102,3 @@ function LoginForm() {
     )
 }
 export default memo(Login)
-
-                // if (error.code === 'auth/account-exists-with-different-credential') {
-                //     const pendingCred = error.credential;
-                //     const email = error.email;
-                //     signInMethods(email)
-                //         .then(() => {
-                //             let password = prompt('Enter Password');
-                //             signIn(email, password)
-                //                 .then(result => {
-                //                     seterror(null)
-                //                     result.user.linkWithCredential(pendingCred);
-                //                 })
-                //                 .catch(error => {
-                //                     seterror(error)
-                //                 });
-                //         });
-                // };

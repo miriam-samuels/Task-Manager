@@ -9,7 +9,7 @@ function Theme({ themeChange, themeCheck }) {
         background: "transparent"
     }
 
-    const changeMode = () => themeCheck ? { __html: '🌞' } : { __html: '🌚' }
+    const changeMode = () => themeCheck ? { __html: '🌚' } : { __html: '🌞' }
     return (
         <>
             <button onClick={themeChange} style={themeStyles} dangerouslySetInnerHTML={changeMode()} className="themebtn"></button>

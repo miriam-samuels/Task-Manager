@@ -1,15 +1,23 @@
 import React from 'react'
-import Logo from '../Images/trello-logo-white.png'
-import Herobg from '../Images/hero.svg'
+// import Logo from '../Images/mimi'
+import Herobg from '../Images/banner-img1.png'
 import { Link } from 'react-router-dom'
 
 function Hero() {
+    const spanRight = {
+        position : "absolute",
+        right : "2%"
+    }
     return (
         <div>
-            <div id="menubar">
-                <span className="logo"><img src={Logo} alt="pic" /></span>
-                <span><Link to="/login"><button>Log In</button></Link></span>
-                <span className="sign"><Link to="/login"><button>Sign Up</button></Link></span>
+            <div className="menubar">
+                <span className="spanLeft">
+                    {/* <span className="logo"><img src={Logo} alt="pic" /></span> */}
+                </span>
+                <span className="spanRight" style={spanRight}>
+                    <span><Link to="/login"><button>Log In</button></Link></span>
+                    <span className="sign"><Link to="/login"><button>Sign Up</button></Link></span>
+                </span>
             </div>
             <div className="hero">
                 <div className="heroWords">

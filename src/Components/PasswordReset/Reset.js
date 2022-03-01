@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Logo from '../Images/trello-logo-blue.png';
+import Logo from '../Images/mitareas logo.png';
 import { useAuth } from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
 

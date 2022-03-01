@@ -1,8 +1,7 @@
 import React, { useState, memo } from 'react'
 import { db } from '../Firebase/Firebase';
-import Todo from './List';
 import { useAuth } from '../Context/AuthContext';
-import ListModal from './ListModal';
+import CardModal from './cardModal';
 
 function Workspacelist({ id, title, lists, boards }) {
     const [show, setshow] = useState(false);
@@ -15,74 +14,37 @@ function Workspacelist({ id, title, lists, boards }) {
     const addTodo = (name) => {
         const boardsClone = boards
         const todoLists = lists
-        const newCard = {
-            board: title,
-            color: "",
-            description: "",
-            dueDate: new Date(),
-            name: ToDo,
-            strikedOut: false,
-        }
+        const newCard = { board: title, color: "", description: "", dueDate: new Date(), name: ToDo, strikedOut: false, }
 
-        todoLists.forEach(todoList => {
-            if (todoList.name === name) {
-                todoList.list.splice(0, 0, newCard);
-            }
-        })
-        boardsClone.forEach(board => {
-            if (board.id === id) {
-                board.lists = todoLists
-            }
-        })
-        db.collection('users').doc(currentUser.uid).update({
-            boards: boardsClone
-        })
+        todoLists.forEach(todoList => { if (todoList.name === name) todoList.list.splice(0, 0, newCard) })
+        boardsClone.forEach(board => { if (board.id === id) { board.lists = todoLists } })
+        db.collection('users').doc(currentUser.uid).update({ boards: boardsClone })
         setToDo('')
     };
+
     const openDialogue = (name) => {
         const boardsClone = boards
         const todoLists = lists
         todoLists.forEach(todoList => {
-            if (todoList.name === name) {
-                todoList.isWriting = !todoList.isWriting;
-            }
-            else {
-                todoList.isWriting = false
-            }
+            if (todoList.name === name) todoList.isWriting = !todoList.isWriting;
+            else todoList.isWriting = false
         })
-        boardsClone.forEach(board => {
-            if (board.id === id) {
-                board.lists = todoLists
-            }
-        })
-        db.collection('users').doc(currentUser.uid).update({
-            boards: boardsClone
-        })
+        boardsClone.forEach(board => { if (board.id === id) { board.lists = todoLists } })
+        db.collection('users').doc(currentUser.uid).update({ boards: boardsClone })
     };
 
     const addNewList = () => {
         const boardsClone = boards
-        const newList = {
-            name: newListTitle,
-            list: [],
-            isWriting: false,
-        };
+        const newList = { name: newListTitle, list: [], isWriting: false, };
         boardsClone.forEach(board => {
-            if (board.id === id) {
-                const newItem = board.lists.concat(newList)
-                board.lists = newItem
-            }
+            if (board.id === id) { const newItem = board.lists.concat(newList); board.lists = newItem }
         })
-        db.collection('users').doc(currentUser.uid).update({
-            boards: boardsClone
-        })
+        db.collection('users').doc(currentUser.uid).update({ boards: boardsClone })
         setnewListTitle("")
         setaddList(current => !current)
     }
-    const toggle = (todoList) => {
-        setshow(show => !show)
-        setlistDetails(todoList)
-    }
+
+    const toggle = (todoList) => { setshow(show => !show); setlistDetails(todoList) }
 
     const disableAddTodo = ToDo === "";
 
@@ -109,11 +71,7 @@ function Workspacelist({ id, title, lists, boards }) {
                                 </div>
                             ))
                         }
-                        {
-                            show ?
-                                <ListModal show={show} toggle={toggle} listDetails={listDetails} boards={boards} id={id} /> :
-                                <></>
-                        }
+                        {show ? <ListModal show={show} toggle={toggle} listDetails={listDetails} boards={boards} id={id} /> : <></>}
                         {
                             addList ?
                                 <div className="todo addList">
@@ -140,4 +98,65 @@ function Workspacelist({ id, title, lists, boards }) {
 }
 
 export default memo(Workspacelist)
+
+const Todo = ({ lists, list, boards, listName }) => {
+    const [show, setshow] = useState(false);
+    const [selected, setselected] = useState("")
+    const [Index, setIndex] = useState(0)
+
+    const toggle = () => { setshow(show => !show) }
+    const select = (item, index) => { setselected(item); setIndex(index) }
+    return (
+        <>
+            <ul>
+                {
+                    list.map((item, index) => (
+                        <li key={index}>
+                            <button className="deleteBoard" onClick={() => { toggle(); select(item, index) }}>•••</button>
+                            {item.strikedOut ? <span><del>{item.name}</del></span> : <span>{item.name}</span>}
+                        </li>
+                    ))
+                }
+            </ul>
+            {
+                show ?
+                    <CardModal
+                        val={selected}
+                        boards={boards}
+                        Index={Index}
+                        lists={lists}
+                        list={list}
+                        present={listName}
+                        show={show}
+                        toggle={toggle}
+                    /> :
+                    <></>
+            }
+        </>
+    );
+};
+
+function ListModal({ show, toggle, listDetails, boards, id }) {
+    const { currentUser } = useAuth()
+    const styles = { display: show ? 'block' : 'none', top: "35%" }
+
+    const deleteBoard = () => {
+        let boardsClone = boards;
+        boardsClone.forEach(elem => {
+            if (elem.id === id) { elem.lists = elem.lists.filter(list => list.name !== listDetails.name) }
+        })
+        db.collection('users').doc(currentUser.uid).update({ boards: boardsClone })
+            .then(() => { console.log("Document successfully deleted!"); })
+            .catch(error => { console.error("Error writing document: ", error); });
+        toggle()
+    }
+    return (
+        <div className="moveOption" style={styles} >
+            <h2>Delete Card</h2>
+            <h3>Are you sure you want to delete list {listDetails.name}</h3>
+            <button onClick={deleteBoard}>Delete</button>
+            <button onClick={toggle}>Cancel</button>
+        </div>
+    )
+}
 

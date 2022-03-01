@@ -1,0 +1,797 @@
+.nav {
+  background-color: #191926;
+  padding: 0.7em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: unset;
+  flex-wrap: wrap;
+}
+
+.nav--first {
+  width: 15%;
+}
+
+.nav--second {
+  margin: auto;
+}
+
+.nav--second img {
+  width: 120px;
+}
+
+.nav--third {
+  width: 15%;
+  text-align: right;
+}
+
+.nav .icon {
+  color: white;
+  font-size: 20px;
+  margin: auto 15px;
+}
+
+.workspace--bar button {
+  background-color: #ffffff1f;
+  width: fit-content;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.workspacenav {
+  top: 0%;
+  width: 100%;
+  background-color: #19192645;
+  padding: 0.5em;
+  z-index: 999999999999999999999999999;
+  display: flex;
+  align-items: center;
+  justify-content: unset;
+  flex-wrap: wrap;
+}
+
+.workspacenav--first {
+  width: 30%;
+}
+
+.workspacenav--second {
+  margin: auto;
+}
+
+.workspacenav--second img {
+  width: 100px;
+}
+
+.workspacenav--third {
+  width: 30%;
+  text-align: right;
+}
+
+.workspacenav .icon {
+  color: white;
+  font-size: 30px;
+  margin: auto 15px;
+}
+
+.layout--wrapper {
+  padding: 2em 3em;
+  display: flex;
+  align-items: top;
+  justify-content: right;
+  flex-wrap: wrap;
+  min-height: 87vh;
+}
+
+.layout .wrapper--sidebar {
+  width: 250px;
+  border-right: 1px solid #7e7e7e;
+}
+
+.layout .wrapper--sidebar .sidebar--logo img {
+  display: block;
+  margin: 2em auto;
+}
+
+.layout .wrapper--sidebar .sidebar--items {
+  list-style: none;
+  padding: 0;
+}
+
+.layout .wrapper--sidebar .sidebar__item a {
+  display: flex;
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 10px;
+}
+
+.layout .wrapper--sidebar .sidebar__item a b {
+  font-size: 15px;
+  display: block;
+  margin-left: 10px;
+}
+
+.layout .wrapper--body {
+  width: calc(100% - 250px);
+  padding-left: 2em;
+}
+
+.layout .wrapper--main .boards {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.layout .wrapper--main .boards--list {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.layout .wrapper--main .boards--options {
+  display: none;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  color: white;
+}
+
+.layout .wrapper--main .boards--star {
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  color: white;
+}
+
+.layout .wrapper--main .boards--create {
+  background-color: #dcdcdc;
+  color: black;
+}
+
+.layout .wrapper--main .boards--list:hover .boards--options {
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#page1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#login {
+  width: 85%;
+  margin: 30px auto;
+  text-align: center;
+}
+
+#login img {
+  width: 180px;
+  display: block;
+  margin: 0.5em auto 2em auto;
+}
+
+#login .login input {
+  width: calc(100% - 10px);
+  display: block;
+  margin: 20px 5px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #f8f8f8;
+  border: 1px solid #D8D8D8;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#login .login button[type="submit"] {
+  background-color: #4caf50;
+  width: calc(100% - 10px);
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+}
+
+#login div span {
+  margin: 0 6px;
+  color: blue;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#login .login .others {
+  background-color: white;
+  width: 98%;
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px 1px #D8D8D8;
+  margin-top: 0px;
+  color: gray;
+}
+
+@media (min-width: 600px) {
+  .plan {
+    width: 50%;
+  }
+  #login {
+    background-color: #FFF;
+    width: 70%;
+    padding: 30px;
+    box-shadow: 2px 2px 6px 2px #D8D8D8;
+  }
+}
+
+@media (min-width: 768px) {
+  #page1 {
+    background-image: url(../../Components/Images/home-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  #login {
+    width: 40%;
+  }
+}
+
+.workspace {
+  padding: 0em 0.5em;
+}
+
+.workspace--wrapper {
+  display: flex;
+  align-items: top;
+  justify-content: right;
+  flex-wrap: wrap;
+  min-height: 87vh;
+}
+
+.workspace--body {
+  width: 100%;
+}
+
+.workspace--sidebar {
+  display: none;
+  padding-left: 2em;
+  width: 250px;
+  border-left: 1px solid #7e7e7e;
+}
+
+.workspace--sidebar .sidebar--logo img {
+  display: block;
+  margin: 2em auto;
+}
+
+.workspace--sidebar .sidebar--items {
+  list-style: none;
+  padding: 0;
+}
+
+.workspace--sidebar .sidebar__item {
+  display: flex;
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 10px;
+}
+
+.workspace--sidebar .sidebar__item b {
+  font-size: 15px;
+  display: block;
+  margin-right: 10px;
+}
+
+.workspacelist {
+  position: relative;
+  width: 100%;
+}
+
+.workspacelist .wk {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.workspacelist .wk::-webkit-scrollbar {
+  background: transparent;
+}
+
+.workspacelist .todoCon {
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: column;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+.workspacelist .todo {
+  width: 270px;
+  height: fit-content;
+  margin: 8px;
+  padding: 10px;
+  background-color: #ececec;
+  vertical-align: top;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.workspacelist .todo .more {
+  float: right;
+  border: none;
+  font-size: 16px;
+  background-color: #ececec;
+}
+
+.workspacelist .todo .more:hover {
+  background-color: #d8d8d8;
+}
+
+.workspacelist .todo .addCard {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: gray;
+}
+
+.workspacelist .todo .addCard .cil-plus {
+  font-size: 16px;
+  font-weight: 900;
+  vertical-align: sub;
+}
+
+.workspacelist .todo.addListBtn {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: gray;
+}
+
+.workspacelist .todo.addListBtn .cil-plus {
+  font-size: 16px;
+  font-weight: 900;
+  vertical-align: sub;
+}
+
+.workspacelist .todo .add .more {
+  padding: 5px;
+  background-color: #dbdada;
+}
+
+.workspacelist .todo .add textarea {
+  width: 100%;
+  display: block;
+  margin: 20px 5px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #f8f8f8;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+.workspacelist .todo .add label {
+  vertical-align: top;
+  padding: 0 10px;
+  color: #5a5a5a;
+}
+
+.workspacelist .todo .add .addCardBtn {
+  width: 100px;
+  background-color: #191926;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.workspacelist .todo .add .closeCardBtn {
+  background-color: transparent;
+  color: #5a5a5a;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+}
+
+.workspacelist .todo .openCardBtn {
+  float: right;
+  margin: 1px;
+  background-color: transparent;
+  color: #191926;
+  font-weight: 900;
+  border: none;
+  font-size: 14px;
+  display: none;
+}
+
+.workspacelist .todo ul {
+  padding: 0;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.workspacelist .todo li {
+  width: 100%;
+  display: block;
+  margin: 20px auto;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #f8f8f8;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.workspacelist .todo li:hover .openCardBtn {
+  display: inline-block;
+}
+
+.workspacelist .todo .deleteBoard,
+.workspacelist .todo .openCard .deleteBoard {
+  float: right;
+  margin: 1px;
+  background-color: transparent;
+  color: red;
+  font-weight: 900;
+  border: none;
+  font-size: 10px;
+}
+
+.listModal {
+  width: 100%;
+  height: 80vh;
+  overflow-x: hidden;
+  position: absolute;
+  top: -5%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 1;
+}
+
+.listModal textarea {
+  display: block;
+  width: 155px;
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.listModal .listContent button,
+.listModal .listContent .moveOption button {
+  background-color: #191926;
+  width: fit-content;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+.listModal .moveOption select,
+.listModal .moveOption input {
+  width: 36%;
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+.listModal .moveOption {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: white;
+  width: 250px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  color: gray;
+  text-align: center;
+}
+
+.openCard {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f3f3f3;
+  width: 60%;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  color: #5a5a5a;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.openCard .heading {
+  display: flex;
+  align-items: top;
+  justify-content: right;
+  flex-wrap: wrap;
+  background-color: transparent;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.openCard .heading i {
+  font-size: 2em;
+  padding-right: 10px;
+}
+
+.openCard .heading h4 {
+  margin-bottom: 0;
+  color: #161515;
+  font-weight: 600;
+}
+
+.openCard .heading em {
+  font-size: 13px;
+}
+
+.openCard .description {
+  padding: 0 1em 1em 1em;
+}
+
+.openCard .description .heading {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 0.6em;
+}
+
+.openCard .description .heading h6 {
+  margin-bottom: 0;
+  color: #161515;
+  font-weight: 600;
+}
+
+.openCard .description p {
+  background-color: #e4e4e4;
+  padding: 10px;
+  margin: 0;
+  width: 90%;
+  font-weight: 400;
+}
+
+.openCard .description textarea {
+  border: 1px solid #191926;
+  border-radius: 0;
+  width: 80%;
+}
+
+.openCard .description button {
+  background-color: transparent;
+  width: fit-content;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  color: #5a5a5a;
+  font-size: 18px;
+}
+
+.openCard .description .save {
+  background-color: #191926;
+  width: fit-content;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+}
+
+.openCard .closeOpenedCard {
+  float: right;
+  border: none;
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: #161515;
+}
+
+.listModal .listContent {
+  width: fit-content;
+}
+
+.listModal .listOption {
+  width: fit-content;
+}
+
+.listModal .listOption ul {
+  width: fit-content;
+}
+
+.listModal .listOption ul li {
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #000000a7;
+  color: white;
+  border: transparent;
+  width: fit-content;
+}
+
+.addList input {
+  display: block;
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+
+.addList button {
+  background-color: #191926;
+  width: fit-content;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 10px 20px 0;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.modal--con {
+  height: 100vh;
+  width: 100%;
+  background-color: #00000082;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.modal--body {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  display: block;
+  width: 500px;
+  margin: auto;
+}
+
+.modal--body .background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal--body .background img {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+}
+
+.modal--body .board--header {
+  position: relative;
+}
+
+.modal--body .board--header img {
+  width: 500px;
+  height: 250px;
+  position: relative;
+  display: block;
+}
+
+.modal--body .board--details {
+  z-index: 1;
+  padding-left: 20px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.modal--body .board--details input, .modal--body .board--details select {
+  width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+  display: block;
+  margin: 1.5em 0;
+}
+
+.modal--body .board--details select {
+  width: 50%;
+  padding: 10px;
+}
+
+.modal--btns button {
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal--btns button:first-child {
+  background-color: #22c222;
+}
+
+body::-webkit-scrollbar {
+  width: 0.2em;
+  background-color: #191926;
+}
+/*# sourceMappingURL=Index.css.map */

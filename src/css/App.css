@@ -1,50 +1,31 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins';
+  outline: none;
+}
+
 /* 
 ==========================
         HOMEPAGE
 ==========================
  */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+#homepage #hero {
+  /* background-image: url("../Components/Images/banner-bg.png"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: left;
+  color: #FFFFFF;
+  padding: 10px;
 }
 
-#homepage {
-  font-family: "Charlie Display",sans-serif;
-  font-weight: 500;
+#homepage #hero .menubar .spanLeft img {
+  width: 50px;
 }
 
-#homepage h1 {
-  font-size: 30px;
-  line-height: 1.3;
-}
-
-#homepage p, #homepage li {
-  font-size: 25px;
-  line-height: 1.5;
-}
-
-#hero {
-  background-color: #1474c0;
-  color: #FFF;
-}
-
-#homepage #hero #menubar {
-  width: 100%;
-  position: fixed;
-  top: 0%;
-}
-
-#homepage #hero #menubar .logo {
-  width: 47%;
-}
-
-#homepage #hero #menubar .logo img {
-  width: 150px;
-}
-
-#homepage #hero #menubar span button {
-  background-color: #1474c0;
+#homepage #hero .menubar .spanRight button {
+  background-color: transparent;
   width: fit-content;
   color: #FFF;
   font-size: 15px;
@@ -54,28 +35,30 @@ html, body {
   padding: 10px 15px;
   margin: 20px 5px;
   cursor: pointer;
-  padding: 10px;
-  font-size: 16px;
-}
-
-#homepage #hero #menubar .sign button {
-  background-color: #FFF;
-  color: #1474c0;
-}
-
-.hero, .team, .hinfo, .workflow {
-  text-align: center;
   margin: 0;
-  padding: 5em 0;
 }
 
-.hero div img, .team div img, .hinfo div img, .workflow div img {
+#homepage #hero .menubar .spanRight .sign button {
+  background-color: #FFFFFF;
+  color: #160526;
+}
+
+#homepage #hero .hero .heroWords {
+  margin: 3.5em 0;
   width: 90%;
 }
 
-.heroWords button, .teamWords button, .flowWords button {
-  background-color: #4caf50;
-  width: 300px;
+#homepage #hero .hero .heroWords h1 {
+  font-size: 20px;
+}
+
+#homepage #hero .hero .heroWords p {
+  font-size: 13px;
+}
+
+#homepage #hero .hero .heroWords button {
+  background-color: #c6610f;
+  width: fit-content;
   color: #FFF;
   font-size: 15px;
   font-weight: bold;
@@ -84,40 +67,151 @@ html, body {
   padding: 10px 15px;
   margin: 20px 5px;
   cursor: pointer;
-  font-size: 25px;
-  padding: 15px;
 }
 
-.heroWords, .teamWords, .flowWords {
-  width: 95%;
+#homepage #hero .hero .heroImg {
+  width: 90%;
   margin: auto;
-  grid-column: 2/12;
-  grid-column-start: 2;
-  grid-column-end: 12;
+  text-align: center;
 }
 
-.heroImg, .teamImg, .flowImg {
-  grid-column: 13/span 21;
-  grid-column-start: 13;
-  grid-column-end: span 21;
+#homepage #hero .hero .heroImg img {
+  width: 90%;
 }
 
-#hero #menubar img {
-  width: 200px;
+#homepage #team {
+  margin: 2em 0;
+  padding: 10px;
 }
 
-.infoImg {
-  grid-column: 2/span 12;
-  grid-column-start: 2;
-  grid-column-end: span 12;
+#homepage #team .teamImg {
+  margin: 2em 0;
+  position: relative;
 }
 
-.infoWords {
-  width: 95%;
-  margin: auto;
-  grid-column: 14/23;
-  grid-column-start: 14;
-  grid-column-end: 23;
+#homepage #team .teamImg img {
+  width: 90%;
+  position: relative;
+  z-index: 1;
+}
+
+#homepage #team .teamImg .pillar {
+  position: absolute;
+  z-index: 0;
+  top: 0%;
+  left: -3%;
+}
+
+#homepage #plan img {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  top: -5%;
+  right: 0%;
+  width: 80%;
+}
+
+#homepage #team .teamWords h1 {
+  margin: 3px;
+}
+
+#homepage #team .teamWords hr {
+  display: block;
+  height: 5px;
+  width: 250px;
+  background-color: #c6610f;
+  border: none;
+  margin: 0;
+}
+
+#homepage #team .teamWords p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#homepage #team .teamWords button {
+  background-color: #c6610f;
+  width: fit-content;
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+}
+
+#homepage #workflow {
+  margin: 2em 0;
+  padding: 10px;
+}
+
+#homepage #workflow .workflow .flowList {
+  width: 100%;
+}
+
+#homepage #workflow .workflow .flowList figure {
+  display: inline-block;
+  width: 80%;
+  margin: 10px auto;
+  text-align: center;
+  position: relative;
+  padding: 2em 0em;
+  box-shadow: 2px 2px 3px 2px #d8ccd8;
+  vertical-align: top;
+}
+
+#homepage #workflow .workflow .flowList figure h1 {
+  font-size: 100px;
+  color: #fdefe9e3;
+  font-weight: 900;
+  margin: 3px;
+  position: absolute;
+  top: 0%;
+  left: 11%;
+  z-index: 0;
+}
+
+#homepage #workflow .workflow .flowList figure img {
+  position: relative;
+  z-index: 1;
+}
+
+#homepage #info {
+  margin: 2em 0;
+  padding: 10px;
+}
+
+#homepage #info .infoImg {
+  margin: 2em 0;
+  position: relative;
+}
+
+#homepage #info .infoImg img {
+  width: 90%;
+}
+
+#homepage #info .infoWords h1 {
+  margin: 3px;
+}
+
+#homepage #info .infoWords hr {
+  display: block;
+  height: 5px;
+  width: 290px;
+  background-color: #c6610f;
+  border: none;
+  margin: 0;
+}
+
+#homepage #info .infoWords p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#plan div {
+  position: relative;
 }
 
 .plan {
@@ -126,8 +220,21 @@ html, body {
   text-align: center;
 }
 
+#homepage #plan .planWords h1 {
+  margin: 3px 0;
+}
+
+#homepage #plan .planWords hr {
+  display: block;
+  height: 5px;
+  width: 245px;
+  background-color: #c6610f;
+  border: none;
+  margin: auto;
+}
+
 .planWords button {
-  background-color: #4caf50;
+  background-color: #c6610f;
   width: 200px;
   color: #FFF;
   font-size: 15px;
@@ -187,179 +294,7 @@ html, body {
         LOGIN
 ==========================
  */
-ul {
-  list-style: none;
-  padding: 0;
-}
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-#page1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-#login {
-  width: 85%;
-  margin: 30px auto;
-  text-align: center;
-}
-
-#login img {
-  width: 180px;
-}
-
-#login .login input {
-  width: calc(100% - 40px);
-  display: block;
-  margin: 20px 5px;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  background-color: #f8f8f8;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#login .login button[type="submit"] {
-  background-color: #4caf50;
-  width: 98%;
-  color: #FFF;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-}
-
-#login div span {
-  margin: 0 6px;
-  color: blue;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-#login .login .others {
-  background-color: white;
-  width: 98%;
-  color: #FFF;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-  box-shadow: 1px 1px 3px 1px #D8D8D8;
-  margin-top: 0px;
-  color: gray;
-}
-
-/* 
-=============================
-      MENU BAR
-=============================
- */
-#menubar {
-  background-color: #1474c0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-#menubar .first {
-  width: 35%;
-}
-
-#menubar .second {
-  width: 30%;
-  text-align: center;
-}
-
-#menubar .third {
-  width: 35%;
-  text-align: right;
-}
-
-#menubar div .icon {
-  background-color: #FFFFFFa9;
-  display: inline-block;
-  margin: 0 6px;
-  padding: 8px 10px;
-  border-radius: 10px;
-}
-
-#menubar div img {
-  width: 15px;
-}
-
-#menubar .second img {
-  width: 100%;
-}
-
-#menubar div .u {
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 900;
-  padding: 6px 11px;
-  border-radius: 50%;
-}
-
-#menubar li {
-  cursor: pointer;
-  width: calc(100% - 40px);
-  display: block;
-  margin: 20px 5px;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  background-color: #f8f8f8;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.atlassian, #menubar .third div, .trelloicon {
-  position: absolute;
-  top: 11%;
-  z-index: 1;
-  text-align: left;
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-#menubar .third div {
-  right: 2%;
-}
-
-#menubar div ul li:hover {
-  background-color: #c4c4c4;
-}
-
-#menubar .first input {
-  width: calc(100% - 40px);
-  display: block;
-  margin: 20px 5px;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  background-color: #f8f8f8;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 /* 
 =============================
@@ -438,84 +373,6 @@ a {
       MODAL
 =============================
  */
-#modal {
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  background: rgba(0, 0, 0, 0.3);
-  text-align: center;
-  z-index: 1;
-}
-
-#modal .modal {
-  width: 85%;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-}
-
-#modal .modal #img {
-  position: relative;
-  width: 100%;
-  height: 180px;
-}
-
-#modal .modal .title {
-  position: absolute;
-  text-align: left;
-  top: 5%;
-  left: 2%;
-}
-
-#modal .modal .title input {
-  width: calc(100% - 40px);
-  display: block;
-  margin: 20px 5px;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  background-color: #f8f8f8;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #FFFFFFa9;
-}
-
-#modal .modal .title select {
-  background-color: #FFFFFFa9;
-  width: 110px;
-  color: #FFF;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-#modal .modal .title option {
-  color: black;
-}
-
-#modal .background .color, #modal .background span img {
-  display: inline-block;
-  margin: 5px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid white;
-}
-
-#modal .new button {
-  padding: 8px;
-  margin: 10px;
-  border: none;
-}
 
 /* 
 ============================
@@ -551,7 +408,7 @@ a {
 }
 
 .workspacelist .wk {
-  overflow-x: scroll;
+  overflow-x: auto;
   scroll-behavior: smooth;
   min-height: 100vh;
   height: 100%;
@@ -634,7 +491,7 @@ a {
 }
 
 .workspacelist .add button {
-  background-color: #c4c4c4;
+  background-color: #FFFFFF;
   width: 46px;
   color: #FFF;
   font-size: 15px;
@@ -860,7 +717,7 @@ a {
   }
   #login {
     background-color: #FFF;
-    width: 60%;
+    width: 70%;
     padding: 30px;
     box-shadow: 2px 2px 6px 2px #D8D8D8;
   }
@@ -884,7 +741,7 @@ a {
     font-size: 24px;
     padding: 10px 15px;
   }
-  .atlassian, #menubar .third div, .trelloicon {
+  .atlassian, .trelloicon {
     top: 10%;
   }
   #boards {
@@ -907,7 +764,7 @@ a {
 
 @media (min-width: 768px) {
   #page1 {
-    background-image: url("../Components/Images/login.jpg");
+    background-image: url("../Components/Images/home-bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -915,37 +772,53 @@ a {
   #menubar .second img {
     width: 59%;
   }
-  #homepage #hero #menubar .logo img {
-    width: 200px;
-  }
   #homepage h1 {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 1.3;
   }
   #homepage p, #homepage li {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.5;
-  }
-  #homepage #hero #menubar .logo {
-    width: 70%;
   }
   .themebtn {
     font-size: 70px;
   }
-  .hero, .team, .hinfo, .workflow {
+  .hero, .hinfo, .team {
+    position: relative;
+    display: grid;
     width: 100%;
     text-align: left;
     display: grid;
-    grid-template-columns: repeat(24, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     gap: 0;
-    margin: 4em 0;
-    padding-bottom: 5em;
   }
-  .heroWords, .teamWords, .flowWords {
+  #homepage #hero .hero .heroImg, #homepage #info .infoImg img {
     width: 100%;
   }
-  .infoWords {
-    width: 100%;
+  #homepage #hero .hero .heroImg img {
+    width: 380px;
+  }
+  #homepage #info .infoImg img {
+    width: 360px;
+    height: 200px;
+  }
+  .heroWords, .teamImg, .infoWords {
+    width: 360px;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
+  #homepage #hero .hero .heroWords {
+    width: 360px;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
+  .heroImg, .teamWords, .infoImg {
+    grid-column-start: 7;
+    grid-column-end: 12;
   }
   .openCard {
     background-color: #f3f3f3;
@@ -978,7 +851,7 @@ a {
 
 @media (min-width: 1200px) {
   #login {
-    width: 28%;
+    width: 40%;
   }
   #menubar .second img {
     width: 40%;
@@ -993,10 +866,10 @@ a {
     width: 40%;
   }
   #homepage h1 {
-    font-size: 40px;
+    font-size: 35px;
   }
   #homepage p, #homepage li {
-    font-size: 25px;
+    font-size: 20px;
   }
   .plan {
     width: 42%;
@@ -1005,17 +878,189 @@ a {
 
 @media (min-width: 1280px) {
   #homepage h1 {
-    font-size: 50px;
+    font-size: 45px;
   }
   #homepage p, #homepage li {
-    font-size: 30px;
-  }
-  #homepage #hero #menubar .logo {
-    width: 80%;
-  }
-  #homepage #hero #menubar span button {
-    padding: 10px 20px;
     font-size: 25px;
   }
 }
 /*# sourceMappingURL=App.css.map */
+
+
+/*
+
+Tooplate 2113 Earth
+
+https://www.tooplate.com/view/2113-earth
+
+*/
+
+@keyframes seq-preloader {
+  50% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 0;
+  }
+}
+
+.seq-preloader {
+  background: white;
+  visibility: visible;
+  opacity: 1;
+  position: absolute;
+  z-index: 99999999;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.seq-preloader.seq-preloaded {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s .5s, opacity .5s;
+}
+
+.seq-preload-indicator {
+  overflow: visible;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.seq-preload-circle {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  fill: #7a7a7a;
+  opacity: 0;
+  animation: seq-preloader 1.25s infinite;
+}
+
+.seq-preload-circle-2 {
+  animation-delay: .15s;
+}
+
+.seq-preload-circle-3 {
+  animation-delay: .3s;
+}
+
+.seq-preload-indicator-fallback {
+  width: 42px;
+  overflow: visible;
+}
+
+.seq-preload-indicator-fallback .seq-preload-circle {
+  width: 8px;
+  height:8px;
+  background-color: #f4f4f4;
+  border-radius: 100%;
+  opacity: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.seq-preload-indicator-fallback .seq-preload-circle-2 {
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 12px;
+  height: 12px;
+}
+
+.seq-preload-indicator-fallback .seq-preload-circle-3 {
+  width: 16px;
+  height: 16px;
+}
+
+
+/* MAIN CSS */
+
+@-webkit-keyframes fill {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+}
+@keyframes fill {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  }
+}
+@-webkit-keyframes fillColour {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #333;
+  }
+}
+@keyframes fillColour {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #333;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+#homepage {
+  overflow: hidden;
+}
+
+.slides {
+  width: 500vw;
+  height: 100vh;
+  -webkit-transition: -webkit-transform 2s ease;
+  transition: -webkit-transform 2s ease;
+  transition: transform 2s ease;
+  transition: transform 2s ease, -webkit-transform 2s ease;
+}
+.slides .slide {
+  height: 100vh;
+  width: 100vw;
+  float: left;
+  text-align: center;
+  background-size: cover;
+}
+.slides .hero-bg {
+background-image: url('../Components/Images/home-bg.jpg');
+display: flex;
+align-items: center;
+justify-content: center;
+}

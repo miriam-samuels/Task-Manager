@@ -1,0 +1,84 @@
+.layout{
+    &--wrapper{
+        padding: 2em 3em;
+        @include flex(right,top);
+        min-height: 87vh;
+
+    }
+    & .wrapper{
+        &--sidebar{
+            width: 250px;
+            border-right: 1px solid $dark_border;
+            & .sidebar{
+                &--logo{
+                    & img{
+                        display: block;
+                        margin:2em auto;
+                    }
+                }
+                &--items{
+                    @include list;
+                }
+                &__item a{
+                    display: flex;
+                    font-size: 20px;
+                    padding: 10px 0;
+                    margin: 10px;
+                    & b{
+                        font-size: 15px;
+                        display: block;
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+        &--body{
+            width: calc(100% - 250px);
+            padding-left: 2em ;
+        }
+        &--main{
+            & .boards{
+                @include flex(left,center);
+                &--list{
+                    position: relative;
+                    width: 200px;
+                    height: 100px;
+                    border-radius: 5px;
+                    margin: 10px;
+                    cursor: pointer;
+                    color: white;
+                    font-weight: bold;
+                    @include flex(center,center);
+                }
+ 
+                &--options{
+                    display: none;
+                    position: absolute;
+                    top:3%;
+                    right:3%;
+                    background-color:transparent;
+                    padding: 0;
+                    border: none;
+                    color: white;
+                }
+                &--star{
+                    position: absolute;
+                    bottom:3%;
+                    left:3%;
+                    background-color:transparent;
+                    padding: 0;
+                    border: none;
+                    color: white;
+                }
+                &--create{
+                    background-color: $gray_500;
+                    color: black;
+                }
+                &--list:hover .boards--options{
+                    display: block;
+                }
+            }
+        }
+    }
+
+}
