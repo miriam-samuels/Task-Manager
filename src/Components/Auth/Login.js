@@ -19,7 +19,7 @@ function LoginForm() {
     const history = useHistory()
     const { createUser, signIn, currentUser, signInGoogleUser, emailVerification } = useAuth()
 
-    useEffect(() => { if (currentUser) history.push(`/`) })
+    useEffect(() => { if (currentUser) history.push(`/main/${currentUser.uid}`) })
 
     const onChangeEmail = (e) => { e.preventDefault(); setemail(e.target.value) }
     const onChangePassword = (e) => { e.preventDefault(); setpassword(e.target.value); seterror(null) }

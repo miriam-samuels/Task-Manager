@@ -55,8 +55,7 @@ export const AuthProvider = ({ children }) => {
             }
         })
         return unsubscribe
-    }
-    )
+    },[])
     const theme = {
         light: {
             backroundColor: "white"

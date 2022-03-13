@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './Components/Auth/Login'
 import * as ROUTES from './Components/Routes/Routes'
-import './css/App.css';
+// import './css/App.css';
 import './styles/css/Index.css';
 import PrivateRoute from './Components/Routes/PrivateRoute';
 import Reset from './Components/PasswordReset/Reset';

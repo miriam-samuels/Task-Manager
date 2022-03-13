@@ -24,7 +24,7 @@ function Header({ changeTheme, themeCheck }) {
         <div className="nav">
             <div className="nav--first">
                 <span className="icon" onClick={toggle2} ><i className="cil-search"></i></span>
-                {/* <Search showSearchNav={showSearchNav} /> */}
+                <Search showSearchNav={showSearchNav} />
             </div>
             <div className="nav--second">
                 <span><Link to={`/main/${currentUser.uid}`}><img src={LogoWhite} alt="pic" /></Link></span>
@@ -58,7 +58,7 @@ function Atlassian({ showAtlassian, changeTheme, themeCheck }) {
 function Search({ showSearchNav }) {
     const [suggestions, setsuggestions] = useState([]);
     const [input, setinput] = useState('');
-    const [datalist, setdatalist] = useState()
+    const [datalist, setdatalist] = useState(null)
     const { currentUser } = useAuth()
 
     useEffect(() => { getBoardsList() }, [])
@@ -75,11 +75,11 @@ function Search({ showSearchNav }) {
         if (val.length > 0) if (datalist) setsuggestions(datalist.sort().filter(data => data.includes(val)))
         setinput(val);
     };
+    const selected = (val) => { setinput(val); setsuggestions([]); }
     const renderSuggestions = () => {
         if (suggestions.length === 0) return null;
         else return <ul> {suggestions.map((suggestion, index) => <li key={index} onClick={() => selected(suggestion)}>{suggestion}</li>)} </ul>
     };
-    const selected = (val) => setinput(val); setsuggestions([]);
 
     return (
         <div className="trelloicon " style={{ display: showSearchNav ? 'block' : 'none' }}>
