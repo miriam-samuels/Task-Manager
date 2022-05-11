@@ -48,7 +48,7 @@ function Workspace(props) {
                                 <div className="todo" key={index}>
                                     <div>
                                         <b>{list.name}</b>
-                                        <button className="more" >•••</button>
+                                        {/* <button className="more" >•••</button> */}
                                         <Card lists={board.lists} list={list} cards={list.cards} board={board} boards={boards} setboards={setboards} />
                                         <span className="addCard" style={{ display: list.isWriting ? 'none' : 'block' }} onClick={() => toggleTextArea(list.name)}><i className='cil-plus'></i> Add a card</span>
                                     </div>

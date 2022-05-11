@@ -1,385 +1,429 @@
 .workspace {
-  padding: 0em 0.5em;
-  &--wrapper {
-    @include flex(right, top);
-    min-height: 87vh;
-  }
-  &--body {
-    width: 100%;
-  }
-  &--sidebar {
-    display: none;
-    padding-left: 2em;
-    width: 250px;
-    border-left: 1px solid $dark_border;
-    & .sidebar {
-      &--logo {
-        & img {
-          display: block;
-          margin: 2em auto;
-        }
-      }
-      &--items {
-        @include list;
-      }
-      &__item {
-        display: flex;
-        font-size: 20px;
-        padding: 10px 0;
-        margin: 10px;
-        & b {
-          font-size: 15px;
-          display: block;
-          margin-right: 10px;
-        }
-      }
-    }
-  }
+	padding: 0em 0.5em;
+	&--wrapper {
+		@include flex(right, top);
+		min-height: 87vh;
+	}
+	&--body {
+		width: 100%;
+	}
+	&--sidebar {
+		display: none;
+		padding-left: 2em;
+		width: 250px;
+		border-left: 1px solid $dark_border;
+		& .sidebar {
+			&--logo {
+				& img {
+					display: block;
+					margin: 2em auto;
+				}
+			}
+			&--items {
+				@include list;
+			}
+			&__item {
+				display: flex;
+				font-size: 20px;
+				padding: 10px 0;
+				margin: 10px;
+				& b {
+					font-size: 15px;
+					display: block;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
 }
 .workspacelist {
-  position: relative;
-  width: 100%;
-  & .wk {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    min-height: 100vh;
-    height: 100%;
-    &::-webkit-scrollbar {
-      background: transparent;
-    }
-  }
-  & .todoCon {
-    display: grid;
-    gap: 10px;
-    grid-auto-flow: column;
-    margin: auto;
-    box-sizing: border-box;
-    padding: 0px;
-  }
-  & .todo {
-    width: 270px;
-    height: fit-content;
-    margin: 8px;
-    padding: 10px;
-    background-color: #ececec;
-    vertical-align: top;
-    cursor: pointer;
-    border-radius: 5px;
-    & .more {
-      float: right;
-      border: none;
-      font-size: 16px;
-      background-color: #ececec;
-      &:hover {
-        background-color: #d8d8d8;
-      }
-    }
-    & .addCard {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: gray;
-      & .cil-plus {
-        font-size: 16px;
-        font-weight: 900;
-        vertical-align: sub;
-      }
-    }
-    &.addListBtn {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: gray;
-      & .cil-plus {
-        font-size: 16px;
-        font-weight: 900;
-        vertical-align: sub;
-      }
-    }
-    & .add {
-      & .more {
-        padding: 5px;
-        background-color: #dbdada;
-      }
-      & textarea {
-        width: 100%;
-        display: block;
-        margin: 20px 5px;
-        padding: 15px;
-        font-size: 15px;
-        font-weight: 500;
-        background-color: #f8f8f8;
-        border: 1px solid #d8d8d8;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #fff;
-        margin: 0 auto;
-      }
-      & label {
-        vertical-align: top;
-        padding: 0 10px;
-        color: #5a5a5a;
-      }
-      & .addCardBtn {
-        width: 100px;
-        background-color: $main_color;
-        color: white;
-        cursor: pointer;
-        font-size: 13px;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 15px;
-      }
-      & .closeCardBtn {
-        background-color: transparent;
-        color: #5a5a5a;
-        cursor: pointer;
-        font-size: 16px;
-        border: none;
-      }
-    }
-    & .openCardBtn {
-      float: right;
-      margin: 1px;
-      background-color: transparent;
-      color: $main_color;
-      font-weight: 900;
-      border: none;
-      font-size: 14px;
-      display: none;
-    }
-    & ul {
-      padding: 0;
-      width: 100%;
-      margin: 20px 0;
-    }
-    & li {
-      width: 100%;
-      display: block;
-      margin: 20px auto;
-      padding: 15px;
-      font-size: 15px;
-      font-weight: 500;
-      background-color: #f8f8f8;
-      border: 1px solid #d8d8d8;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: #fff;
-      &:hover .openCardBtn {
-        display: inline-block;
-      }
-    }
+	position: relative;
+	width: 100%;
+	& .wk {
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		min-height: 100vh;
+		height: 100%;
+		&::-webkit-scrollbar {
+			background: transparent;
+		}
+	}
+	& .todoCon {
+		display: grid;
+		gap: 10px;
+		grid-auto-flow: column;
+		margin: auto;
+		box-sizing: border-box;
+		padding: 0px;
+	}
+	& .todo {
+		width: 270px;
+		height: fit-content;
+		margin: 8px;
+		padding: 10px;
+		background-color: #ececec;
+		vertical-align: top;
+		cursor: pointer;
+		border-radius: 5px;
+		& .more {
+			float: right;
+			border: none;
+			font-size: 16px;
+			background-color: #ececec;
+			&:hover {
+				background-color: #d8d8d8;
+			}
+		}
+		& .addCard {
+			display: block;
+			font-size: 14px;
+			font-weight: 600;
+			color: gray;
+			& .cil-plus {
+				font-size: 16px;
+				font-weight: 900;
+				vertical-align: sub;
+			}
+		}
+		&.addListBtn {
+			display: block;
+			font-size: 14px;
+			font-weight: 600;
+			color: gray;
+			& .cil-plus {
+				font-size: 16px;
+				font-weight: 900;
+				vertical-align: sub;
+			}
+		}
+		& .add {
+			& .more {
+				padding: 5px;
+				background-color: #dbdada;
+			}
+			& textarea {
+				width: 100%;
+				display: block;
+				margin: 20px 5px;
+				padding: 15px;
+				font-size: 15px;
+				font-weight: 500;
+				background-color: #f8f8f8;
+				border: 1px solid #d8d8d8;
+				border-radius: 5px;
+				cursor: pointer;
+				background-color: #fff;
+				margin: 0 auto;
+			}
+			& label {
+				vertical-align: top;
+				padding: 0 10px;
+				color: #5a5a5a;
+			}
+			& .addCardBtn {
+				width: 100px;
+				background-color: $main_color;
+				color: white;
+				cursor: pointer;
+				font-size: 13px;
+				border: none;
+				border-radius: 8px;
+				padding: 10px 15px;
+			}
+			& .closeCardBtn {
+				background-color: transparent;
+				color: #5a5a5a;
+				cursor: pointer;
+				font-size: 16px;
+				border: none;
+			}
+		}
+		& .openCardBtn {
+			float: right;
+			margin: 1px;
+			background-color: transparent;
+			color: $main_color;
+			font-weight: 900;
+			border: none;
+			font-size: 14px;
+			display: none;
+		}
+		& ul {
+			padding: 0;
+			width: 100%;
+			margin: 20px 0;
+		}
+		& li {
+			width: 100%;
+			display: block;
+			margin: 20px auto;
+			padding: 15px;
+			font-size: 15px;
+			font-weight: 500;
+			background-color: #f8f8f8;
+			border: 1px solid #d8d8d8;
+			border-radius: 5px;
+			cursor: pointer;
+			background-color: #fff;
+			&:hover .openCardBtn {
+				display: inline-block;
+			}
+		}
 
-    & .deleteBoard,
-    & .openCard .deleteBoard {
-      float: right;
-      margin: 1px;
-      background-color: transparent;
-      color: red;
-      font-weight: 900;
-      border: none;
-      font-size: 10px;
-    }
-  }
+		& .deleteBoard,
+		& .openCard .deleteBoard {
+			float: right;
+			margin: 1px;
+			background-color: transparent;
+			color: red;
+			font-weight: 900;
+			border: none;
+			font-size: 10px;
+		}
+	}
 }
 
 .listModal {
-  width: 100%;
-  height:80vh;
-  overflow-x: hidden;
-  position: absolute;
-  top: -5%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  background: rgba(0, 0, 0, 0.3);
-  text-align: center;
-  z-index: 1;
+	width: 100%;
+	height: 80vh;
+	overflow-x: hidden;
+	position: absolute;
+	top: -5%;
+	bottom: 0%;
+	left: 0%;
+	right: 0%;
+	background: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	z-index: 1;
 
-  & textarea {
-    display: block;
-    width: 155px;
-    padding: 10px;
-    margin: 0 10px;
-    border-radius: 5px;
-    font-size: 18px;
-  }
-  & .listContent {
-    & button,
-    .moveOption button {
-      background-color: $main_color;
-      width: fit-content;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      margin: 20px 5px;
-      cursor: pointer;
-      margin: 10px 5px;
-    }
-  }
-  & .moveOption {
-    & select,
-    input {
-      width: 36%;
-      padding: 10px;
-      margin: 5px;
-      font-size: 16px;
-    }
-  }
+	& textarea {
+		display: block;
+		width: 155px;
+		padding: 10px;
+		margin: 0 10px;
+		border-radius: 5px;
+		font-size: 18px;
+	}
+	& .listContent {
+		& button,
+		.moveOption button {
+			background-color: $main_color;
+			width: fit-content;
+			color: #fff;
+			font-size: 15px;
+			font-weight: bold;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 15px;
+			margin: 20px 5px;
+			cursor: pointer;
+			margin: 10px 5px;
+		}
+	}
+	& .moveOption {
+		& select,
+		input {
+			width: 36%;
+			padding: 10px;
+			margin: 5px;
+			font-size: 16px;
+		}
+	}
 }
 
-.listModal .moveOption {
-  position: absolute;
-  @include flex(center, center);
-  background-color: white;
-  width: 250px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-  color: gray;
-  text-align: center;
-}
+// .listModal .moveOption {
+// 	position: absolute;
+// 	@include flex(center, center);
+// 	background-color: white;
+// 	width: 250px;
+// 	color: #fff;
+// 	font-size: 15px;
+// 	font-weight: bold;
+// 	border: none;
+// 	border-radius: 8px;
+// 	padding: 10px 15px;
+// 	margin: 20px 5px;
+// 	cursor: pointer;
+// 	color: gray;
+// 	text-align: center;
+// }
 
 .openCard {
-  position: absolute;
-  @include flex(center, center);
-  background-color: $gray_100;
-  width: 60%;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-  color: #5a5a5a;
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  & .heading {
-    @include flex(right, top);
-    background-color: transparent;
-    padding: 1em;
-    border-radius: 10px;
-    & i {
-      font-size: 2em;
-      padding-right: 10px;
-    }
-    & h4 {
-      margin-bottom: 0;
-      color: $black_500;
-      font-weight: 600;
-    }
-    & em {
-      font-size: 13px;
-    }
-  }
-  & .description {
-    padding: 0 1em 1em 1em;
-    & .heading {
-      @include flex(right, center);
-      padding: 0;
-      margin-bottom: 0.6em;
-      & h6 {
-        margin-bottom: 0;
-        color: $black_500;
-        font-weight: 600;
-      }
-    }
-    & p {
-      background-color: #e4e4e4;
-      padding: 10px;
-      margin: 0;
-      width: 90%;
-      font-weight: 400;
-    }
-    & textarea {
-      border: 1px solid $main_color;
-      border-radius: 0;
-      width: 80%;
-    }
-    & button {
-      background-color: transparent;
-      width: fit-content;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      margin: 20px 5px;
-      cursor: pointer;
-      color: #5a5a5a;
-      font-size: 18px;
-    }
-    & .save {
-      background-color: $main_color;
-      width: fit-content;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 15px;
-      margin: 20px 5px;
-      cursor: pointer;
-    }
-  }
-  & .closeOpenedCard {
-    float: right;
-    border: none;
-    background-color: transparent;
-    padding: 5px 10px;
-    font-size: 16px;
-    color: $black_500;
-  }
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50% , -50%);
+	// @include flex(center, center);
+	background-color: $gray_100;
+	width: 60%;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 15px;
+	margin: 20px 5px;
+	cursor: pointer;
+	color: #5a5a5a;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	& .heading {
+		@include flex(flex-start, top);
+		background-color: transparent;
+		padding: 1em;
+		border-radius: 10px;
+		& i {
+			font-size: 2em;
+			padding-right: 10px;
+		}
+		& h4 {
+			margin-bottom: 0;
+			color: $black_500;
+			font-weight: 600;
+		}
+		& em {
+			font-size: 13px;
+		}
+	}
+	& .description {
+		padding: 0 1em 1em 1em;
+		& .heading {
+			@include flex(flex-start, center);
+			padding: 0;
+			margin-bottom: 0.6em;
+			& h6 {
+				margin-bottom: 0;
+				color: $black_500;
+				font-weight: 600;
+			}
+		}
+		& p {
+			background-color: #e4e4e4;
+			padding: 10px;
+			margin: 0;
+			width: 90%;
+			font-weight: 400;
+		}
+		& textarea {
+			border: 1px solid $main_color;
+			border-radius: 0;
+			width: 80%;
+		}
+		& button {
+			background-color: transparent;
+			width: fit-content;
+			color: #fff;
+			font-size: 15px;
+			font-weight: bold;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 15px;
+			margin: 20px 5px;
+			cursor: pointer;
+			color: #5a5a5a;
+			font-size: 18px;
+		}
+		& .save {
+			background-color: $main_color;
+			width: fit-content;
+			color: #fff;
+			font-size: 15px;
+			font-weight: bold;
+			border: none;
+			border-radius: 5px;
+			padding: 10px 15px;
+			margin: 20px 5px;
+			cursor: pointer;
+		}
+	}
+	& .closeOpenedCard {
+		float: right;
+		border: none;
+		background-color: transparent;
+		padding: 5px 10px;
+		font-size: 16px;
+		color: $black_500;
+	}
 }
 
 .listModal .listContent {
-  width: fit-content;
+	width: fit-content;
 }
 
 .listModal .listOption {
-  width: fit-content;
+	width: fit-content;
 }
 
 .listModal .listOption ul {
-  width: fit-content;
+	width: fit-content;
 }
 
 .listModal .listOption ul li {
-  padding: 5px 10px;
-  margin: 5px;
-  background-color: #000000a7;
-  color: white;
-  border: transparent;
-  width: fit-content;
+	padding: 5px 10px;
+	margin: 5px;
+	background-color: #000000a7;
+	color: white;
+	border: transparent;
+	width: fit-content;
 }
 
 .addList input {
-  display: block;
-  width: calc(100% - 10px);
-  padding: 5px;
+	display: block;
+	width: calc(100% - 10px);
+	padding: 5px;
 }
 
 .addList button {
-  background-color: $main_color;
-  width: fit-content;
-  color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 10px 20px 0;
-  cursor: pointer;
-  margin: 5px;
+	background-color: $main_color;
+	width: fit-content;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 8px;
+	padding: 10px 15px;
+	margin: 20px 10px 20px 0;
+	cursor: pointer;
+	margin: 5px;
 }
-
+.modal-con {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	& .overlay {
+		content: '';
+		position: absolute;
+		top: -1000%;
+		right: -1000%;
+		left: -1000%;
+		bottom: -1000%;
+		background-color: rgba(0, 0, 0, 0.349);
+		z-index: 1;
+	}
+  
+	& button {
+		background-color: $main_color;
+		width: fit-content;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+		border: none;
+		border-radius: 8px;
+		padding: 10px 15px;
+		margin: 20px 5px;
+		cursor: pointer;
+		margin: 10px 5px;
+	}
+}
+.moveOption{
+  background-color: white;
+  text-align: center;
+  min-width: 300px;
+  padding: 2em 0;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  & h2{
+    font-size: 30px;
+  }
+}

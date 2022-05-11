@@ -15,7 +15,8 @@ import { useAuth } from './Components/Context/AuthContext';
 
 const App = () => {
     const { currentUser } = useAuth()
-
+    // window.addEventListener(('offline', () => alert("you're currently offline")));
+    // window.addEventListener(('online', () => alert("welcome back online")));
     return (
         <div className="app">
             <BrowserRouter>

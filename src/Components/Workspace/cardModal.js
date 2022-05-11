@@ -55,9 +55,9 @@ const CardModal = ({ val, Index, lists, cards, show, toggle, present, boards, se
                                 <li onClick={strikeCheckChangeState}>⭕ Unstrike</li> :
                                 <li onClick={strikeCheckChangeState}>🚫 Strike Out</li>
                         }
-                        <li>🎨 Assign Color</li>
+                        {/* <li>🎨 Assign Color</li> */}
                         <li onClick={deleteCard}>⛔ Delete</li>
-                        <li onClick={expire}>⏰ Set Due Date</li>
+                        {/* <li onClick={expire}>⏰ Set Due Date</li> */}
                     </ul>
                 </div>
             </div>

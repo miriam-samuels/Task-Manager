@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, provider } from '../Firebase/Firebase';
-
+import { db } from '../Firebase/Firebase';
 
 const FirebaseContext = React.createContext();
 
@@ -10,6 +10,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setcurrentUser] = useState()
+    const [themeCheck, setthemeCheck] = useState(false);
+    const [themeSet, setthemeSet] = useState("")
 
     const createUser = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password);
@@ -43,6 +45,22 @@ export const AuthProvider = ({ children }) => {
             .toString(16)
             .substring(1);
     }
+    const getTheme = () => {
+        // changeLoadingState()
+        db.collection('users').doc(currentUser?.uid).get()
+            .then(doc => {
+                // changeLoadingState()
+                if (doc.exists) { setthemeCheck(doc.data().theme); setthemeSet("theme gotten") }
+            })
+    }
+    const changeTheme = async () => {
+        console.log(themeCheck)
+        await db.collection('users').doc(currentUser?.uid).update({
+            theme: !themeCheck
+        })
+        setthemeSet("theme set")
+        setthemeCheck(current => !current)
+    }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -68,6 +86,9 @@ export const AuthProvider = ({ children }) => {
     const value = {
         currentUser,
         theme,
+        themeCheck,
+        getTheme,
+        changeTheme,
         createUser,
         signIn,
         signOut,

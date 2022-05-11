@@ -8,10 +8,12 @@
 }
 
 .nav--first {
+  position: relative;
   width: 15%;
 }
 
 .nav--second {
+  position: relative;
   margin: auto;
 }
 
@@ -20,14 +22,74 @@
 }
 
 .nav--third {
+  position: relative;
   width: 15%;
   text-align: right;
 }
 
-.nav .icon {
+.nav .icon span {
   color: white;
   font-size: 20px;
   margin: auto 15px;
+  cursor: pointer;
+}
+
+.nav .icon .header-nav {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 1em 0;
+  box-shadow: 2px 2px 5px 2px #949494;
+  border-radius: 10px;
+  z-index: 99;
+  animation-name: zoom;
+  animation-duration: 0.5s;
+}
+
+.nav .icon .header-nav li {
+  cursor: pointer;
+  font-weight: 550;
+  padding: 10px 2em;
+}
+
+.nav .icon .header-nav li:hover {
+  background-color: #191926;
+  color: white;
+}
+
+.nav .icon .header-nav li:first-child {
+  background-color: white;
+  color: black;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.nav .icon .header-nav li:hover a {
+  color: white;
+}
+
+.nav .icon:hover .header-nav {
+  display: block;
+}
+
+.nav .icon .tab-con {
+  padding: 1em 2em;
+}
+
+.nav .icon .tab-con input {
+  padding: 0.6em;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  width: 250px;
+}
+
+.nav .icon .tab-con li:first-child {
+  margin-top: 10px;
+  border: none;
+}
+
+.nav .icon .tab-con li:first-child:hover {
+  background-color: #191926;
+  color: white;
 }
 
 .workspace--bar button {
@@ -49,7 +111,6 @@
   width: 100%;
   background-color: #19192645;
   padding: 0.5em;
-  z-index: 999999999999999999999999999;
   display: flex;
   align-items: center;
   justify-content: unset;
@@ -70,13 +131,24 @@
 
 .workspacenav--third {
   width: 30%;
-  text-align: right;
+  text-align: left;
 }
 
-.workspacenav .icon {
+.workspacenav .icon span {
   color: white;
   font-size: 30px;
   margin: auto 15px;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.5);
+    opacity: 50%;
+  }
+  to {
+    transform: scale(1);
+    opacity: 100%;
+  }
 }
 
 .layout--wrapper {
@@ -276,6 +348,86 @@ a {
   #login {
     width: 40%;
   }
+}
+
+.modal--con {
+  height: 100vh;
+  width: 100%;
+  background-color: #00000082;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.modal--body {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  display: block;
+  width: 500px;
+  margin: auto;
+}
+
+.modal--body .background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal--body .background img {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+}
+
+.modal--body .board--header {
+  position: relative;
+}
+
+.modal--body .board--header img {
+  width: 500px;
+  height: 250px;
+  position: relative;
+  display: block;
+}
+
+.modal--body .board--details {
+  z-index: 1;
+  padding-left: 20px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.modal--body .board--details input, .modal--body .board--details select {
+  width: 80%;
+  padding: 20px;
+  border-radius: 5px;
+  display: block;
+  margin: 1.5em 0;
+}
+
+.modal--body .board--details select {
+  width: 50%;
+  padding: 10px;
+}
+
+.modal--btns button {
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal--btns button:first-child {
+  background-color: #22c222;
 }
 
 .workspace {
@@ -534,32 +686,11 @@ a {
   font-size: 16px;
 }
 
-.listModal .moveOption {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: white;
-  width: 250px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin: 20px 5px;
-  cursor: pointer;
-  color: gray;
-  text-align: center;
-}
-
 .openCard {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
   background-color: #f3f3f3;
   width: 60%;
   font-weight: bold;
@@ -577,7 +708,7 @@ a {
 .openCard .heading {
   display: flex;
   align-items: top;
-  justify-content: right;
+  justify-content: flex-start;
   flex-wrap: wrap;
   background-color: transparent;
   padding: 1em;
@@ -606,7 +737,7 @@ a {
 .openCard .description .heading {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: flex-start;
   flex-wrap: wrap;
   padding: 0;
   margin-bottom: 0.6em;
@@ -710,84 +841,50 @@ a {
   margin: 5px;
 }
 
-.modal--con {
-  height: 100vh;
-  width: 100%;
-  background-color: #00000082;
+.modal-con {
   position: absolute;
   top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.modal--body {
+.modal-con .overlay {
+  content: '';
   position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  display: block;
-  width: 500px;
-  margin: auto;
-}
-
-.modal--body .background {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.modal--body .background img {
-  width: 60px;
-  height: 60px;
-  margin: 5px;
-}
-
-.modal--body .board--header {
-  position: relative;
-}
-
-.modal--body .board--header img {
-  width: 500px;
-  height: 250px;
-  position: relative;
-  display: block;
-}
-
-.modal--body .board--details {
+  top: -1000%;
+  right: -1000%;
+  left: -1000%;
+  bottom: -1000%;
+  background-color: rgba(0, 0, 0, 0.349);
   z-index: 1;
-  padding-left: 20px;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
 }
 
-.modal--body .board--details input, .modal--body .board--details select {
-  width: 80%;
-  padding: 20px;
-  border-radius: 5px;
-  display: block;
-  margin: 1.5em 0;
-}
-
-.modal--body .board--details select {
-  width: 50%;
-  padding: 10px;
-}
-
-.modal--btns button {
-  padding: 10px;
-  color: white;
+.modal-con button {
+  background-color: #191926;
+  width: fit-content;
+  color: #fff;
+  font-size: 15px;
   font-weight: bold;
-  border-radius: 5px;
-  background-color: transparent;
   border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 5px;
+  cursor: pointer;
+  margin: 10px 5px;
 }
 
-.modal--btns button:first-child {
-  background-color: #22c222;
+.moveOption {
+  background-color: white;
+  text-align: center;
+  min-width: 300px;
+  padding: 2em 0;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.moveOption h2 {
+  font-size: 30px;
 }
 
 body::-webkit-scrollbar {

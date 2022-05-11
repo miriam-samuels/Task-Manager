@@ -20,27 +20,20 @@ import {
     Background14,
     Background15
 } from '../shared/Images'
+import Modal from '../shared/Modal';
 
 
 
 function Index() {
     const [boards, setboards] = useState([]);
     const [isLoading, setisLoading] = useState(false);
-    const [themeCheck, setthemeCheck] = useState(false);
-    const [themeSet, setthemeSet] = useState("")
-    const { theme, currentUser } = useAuth()
-    useEffect(() => { getBoards(); return () => getBoards() }, [])
+
+    const { theme, currentUser, themeCheck } = useAuth()
+    useEffect(() => { const subscribe = getBoards(); return subscribe }, [])
 
     const changeLoadingState = () => setisLoading(current => !current)
 
-    const getTheme = () => {
-        changeLoadingState()
-        db.collection('users').doc(currentUser.uid).get()
-            .then(doc => {
-                changeLoadingState()
-                if (doc.exists) { setthemeCheck(doc.data().theme); setthemeSet("theme gotten") }
-            })
-    }
+
 
     const getBoards = async () => {
         changeLoadingState()
@@ -48,17 +41,30 @@ function Index() {
             .then(doc => { if (doc.exists) { setboards(doc.data().boards) }; changeLoadingState() })
     }
 
-    const changeTheme = async () => {
+    const starBoard = async (id) => {
+        const data = boards.map(item => { if (item.id === id) { item.starred = !item.starred } return item })
+        setboards(data)
         await db.collection('users').doc(currentUser.uid).update({
-            theme: !themeCheck
+            boards: data
         })
-        setthemeSet("theme set")
     }
+
+
+    const starredBoards = boards.filter((item) => item.starred)
     return (
         <div className="dashboard" style={themeCheck ? theme.light : theme.light}>
-            {/* <Menubar changeTheme={changeTheme} themeCheck={themeCheck} /> */}
             <div className="personalBoard">
-                <Boards changeLoadingState={changeLoadingState} boards={boards} />
+                {
+                    starredBoards.length > 0 &&
+                    <div>
+                        <h6>Starred Boards</h6>
+                        <StarredBoards boards={starredBoards} starBoard={starBoard} />
+                    </div>
+                }
+                <div>
+                    <h6>All Boards</h6>
+                    <Boards changeLoadingState={changeLoadingState} boards={boards} setboards={setboards} starBoard={starBoard} />
+                </div>
                 <Loader isLoading={isLoading} />
             </div>
         </div>
@@ -71,7 +77,6 @@ function Boards(props) {
     const [showModal, setshowModal] = useState(false);
     const [title, settitle] = useState('');
     const [visibility, setvisibility] = useState('private');
-    const [boards, setboards] = useState([]);
     const [background, setbackground] = useState("")
     const [deleteModal, setdeleteModal] = useState(false)
 
@@ -79,7 +84,6 @@ function Boards(props) {
     const { currentUser, generateId } = useAuth()
     const timestamp = new Date();
     const history = useHistory()
-    useEffect(() => { setboards(props.boards) })
 
     const navigate = (id) => history.push(`/workspace/${id}`)
 
@@ -96,14 +100,6 @@ function Boards(props) {
 
     const handleBg = (e) => setbackground(e)
 
-    const starBoard = async (id) => {
-        setboards(boards.map(item => { if (boards.id === id) { item.starred = !item.starred } return item }))
-        console.log(boards)
-        // await db.collection('users').doc(currentUser.uid).update({
-        //     boards: boards
-        // })
-    }
-    console.log(boards)
     const handleSubmit = async () => {
         if (title.length === 0) {
             return;
@@ -132,13 +128,13 @@ function Boards(props) {
     }
     const starredStyle = {
         color: 'goldenrod'
-    }
+    } 
     return (
         <div>
             <ul className="boards">
                 <li className="boards--create boards--list" onClick={toggle}><b>Create new board</b> </li>
                 {
-                    boards.map((board) => (
+                    props.boards.map((board) => (
                         <li key={board.id} className="boards--list"
                             style={{
                                 backgroundImage: `url(${board.background}) , url(${Background1})`,
@@ -147,7 +143,7 @@ function Boards(props) {
                             }} >
                             <h5 onClick={() => navigate(board.id)}>{board.title}</h5>
                             <button className="boards--options" onClick={() => { deletetoggle(); setcurrentBoard(board.id); }}><i className='cil-pen'></i></button>
-                            <button className="boards--star" onClick={() => starBoard(board.id)}><i style={board.starred ? starredStyle : {}} className='cil-star'></i></button>
+                            <button className="boards--star" onClick={() => props.starBoard(board.id)}><i style={board.starred ? starredStyle : null} className='cil-star'></i></button>
                         </li>
                     ))}
             </ul>
@@ -160,26 +156,61 @@ function Boards(props) {
                 visibility={visibility}
                 handleVisibility={handleVisibility}
                 handleBg={handleBg}
-                boards={boards}
+                boards={props.boards}
             />
             <DeleteBoard
                 delStyle={delStyle}
                 deletetoggle={deletetoggle}
                 id={currentBoard}
-                boards={boards}
-                setboards={setboards}
+                boards={props.boards}
+                setboards={props.setboards}
             />
 
         </div>
     );
 };
 
+function StarredBoards(props) {
+
+    const [deleteModal, setdeleteModal] = useState(false)
+
+    const [currentBoard, setcurrentBoard] = useState("")
+    const { currentUser } = useAuth()
+    const history = useHistory()
+
+    const navigate = (id) => history.push(`/workspace/${id}`)
+
+    const deletetoggle = () => setdeleteModal(current => !current);
+    const starredStyle = {
+        color: 'goldenrod'
+    }
+    return (
+        <div>
+            <ul className="boards">
+                {
+                    props.boards.map((board) => (
+                        <li key={board.id} className="boards--list"
+                            style={{
+                                backgroundImage: `url(${board.background}) , url(${Background1})`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center"
+                            }} >
+                            <h5 onClick={() => navigate(board.id)}>{board.title}</h5>
+                            <button className="boards--options" onClick={() => { deletetoggle(); setcurrentBoard(board.id); }}><i className='cil-pen'></i></button>
+                            <button className="boards--star" onClick={() => props.starBoard(board.id)}><i style={board.starred ? starredStyle : null} className='cil-star'></i></button>
+                        </li>
+                    ))}
+            </ul>
+        </div>
+    )
+}
+
 function AddBoard(props) {
 
     const titlesearch = props.boards.filter(element => element.title === props.title);
     let titlecheck = titlesearch.length === 0 ? '.' : titlesearch[0].title;
     const checkboards = props.title === titlecheck || props.title === ""
-    const setFeedback = () => { if (titlecheck === props.title) return { __html: 'Board already exists' }; else return { __html: '' } };
+    const setFeedback = () => { if (titlecheck.toLowerCase() === props.title.toLowerCase()) return { __html: 'Board already exists' }; else return { __html: '' } };
 
     const background = (e) => { document.getElementById("img").src = e.target.src; props.handleBg(e.target.src); }
 
@@ -229,17 +260,23 @@ const DeleteBoard = (props) => {
     const { currentUser } = useAuth()
 
     const deleteBoard = () => {
-        props.setboards(props.boards.filter(elem => elem.id !== props.id))
-        db.collection('users').doc(currentUser.uid).update({ boards: props.boards })
+        const data = props.boards.filter(elem => elem.id !== props.id)
+        props.setboards(data)
+        console.log(props.boards)
+        db.collection('users').doc(currentUser.uid).update({ boards: data })
             .then(() => console.log("Document successfully deleted!"))
         props.deletetoggle()
     }
     return (
-        <div className="moveOption" style={props.delStyle} >
-            <h2>Delete Card</h2>
-            <button onClick={deleteBoard}>Delete</button>
-            <button onClick={props.deletetoggle}>Cancel</button>
-        </div>
+        <Modal styles={props.delStyle}>
+            <div className="moveOption" >
+                <div>
+                    <h2>Delete Board</h2>
+                    <button onClick={deleteBoard}>Delete</button>
+                    <button onClick={props.deletetoggle}>Cancel</button>
+                </div>
+            </div>
+        </Modal>
     )
 }
 

@@ -10,10 +10,11 @@ import {
     BusinessDashboard
 } from './Dashboard'
 function TheLayout() {
+
     return (
         <div className="layout">
             <div className="layout--header">
-                <header><Header /></header>
+                <header><Header/></header>
             </div>
             <div className="layout--wrapper">
                 <div className="wrapper--sidebar">

@@ -10,30 +10,28 @@ export function MainDashboard() {
 export function ProjectsDashboard() {
     return (
         <div>
-            p
-            <Index />
+            projects(coming soon)
         </div>
     )
 }
 export function TeamsDashboard() {
     return (
         <div>
-            t
-            <Index />
+            teams (coming soon)
         </div>
     )
 }
 export function PersonalDashboard() {
     return (
         <div>
-            <Index />
+            personal(coming soon)
         </div>
     )
 }
 export function BusinessDashboard() {
     return (
         <div>
-            <Index />
+            business (coming soon)
         </div>
     )
 }
