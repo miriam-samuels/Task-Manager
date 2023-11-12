@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import Logo from '../Images/trello-logo-blue.png';
+import React, { useState } from 'react'
+import Logo from '../Images/mitareas logo.png';
 import { useAuth } from '../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
@@ -15,14 +15,14 @@ function Reset() {
     const forgotPassword = (e) => {
         e.preventDefault()
         passwordReset(email)
-        .then( () =>{
-            history.push('/')
-            seterror(null)
-        })
-        .catch(error => {
-            seterror(error)
-        })
-    }   
+            .then(() => {
+                history.push('/')
+                seterror(null)
+            })
+            .catch(error => {
+                seterror(error)
+            })
+    }
     const isInvalid = email === '';
     return (
         <div id="page1">

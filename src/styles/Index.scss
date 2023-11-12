@@ -1,0 +1,13 @@
+@import './colors';
+@import './mixins';
+@import './_header.scss';
+@import './_dashboard.scss';
+@import './login';
+@import './modal';
+@import './workspace';
+
+
+body::-webkit-scrollbar{
+    width: 0.2em;
+    background-color: $main_color;
+}

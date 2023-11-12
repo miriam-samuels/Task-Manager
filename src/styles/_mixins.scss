@@ -1,0 +1,16 @@
+@mixin flex($justify,$align) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    flex-wrap: wrap;
+}
+@mixin list {
+    list-style: none;
+    padding: 0;
+}
+@mixin absoluteCentering {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+}

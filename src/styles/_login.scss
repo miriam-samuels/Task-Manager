@@ -1,0 +1,101 @@
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  #page1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  #login {
+    width: 85%;
+    margin: 30px auto;
+    text-align: center;
+  }
+  
+  #login img {
+    width: 180px;
+    display: block;
+    margin:0.5em auto 2em auto;
+  }
+  
+  #login .login input {
+    width: calc(100% - 10px);
+    display: block;
+    margin: 20px 5px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #f8f8f8;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #login .login button[type="submit"] {
+    background-color: #4caf50;
+    width: calc(100% - 10px);
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 15px;
+    margin: 20px 5px;
+    cursor: pointer;
+  }
+  
+  #login div span {
+    margin: 0 6px;
+    color: blue;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  #login .login .others {
+    background-color: white;
+    width: 98%;
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 20px 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px 1px #D8D8D8;
+    margin-top: 0px;
+    color: gray;
+  }
+  @media (min-width: 600px) {
+    .plan {
+      width: 50%;
+    }
+    #login {
+      background-color: #FFF;
+      width: 70%;
+      padding: 30px;
+      box-shadow: 2px 2px 6px 2px #D8D8D8;
+    }
+}
+  @media (min-width: 768px) {
+    #page1 {
+      background-image: url(../../Components/Images/home-bg.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }  
+  @media (min-width: 1200px) {
+    #login {
+      width: 40%;
+    }
+  }
